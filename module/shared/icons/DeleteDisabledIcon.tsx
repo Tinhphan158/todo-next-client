@@ -1,0 +1,35 @@
+import React from "react";
+
+interface DeleteDisabledIconProps {
+  size?: number;
+  className?: string;
+}
+
+export const DeleteDisabledIcon: React.FC<DeleteDisabledIconProps> = ({
+  size = 24,
+  className,
+}) => {
+  return (
+    <svg
+      width={size}
+      height={size}
+      viewBox="0 0 24 24"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+      className={className}
+    >
+      <path
+        fillRule="evenodd"
+        clipRule="evenodd"
+        d="M7.46967 7.46967C7.76256 7.17678 8.23744 7.17678 8.53033 7.46967L16.5303 15.4697C16.8232 15.7626 16.8232 16.2374 16.5303 16.5303C16.2374 16.8232 15.7626 16.8232 15.4697 16.5303L7.46967 8.53033C7.17678 8.23744 7.17678 7.76256 7.46967 7.46967Z"
+        fill="currentColor"
+      />
+      <path
+        fillRule="evenodd"
+        clipRule="evenodd"
+        d="M16.5303 7.46967C16.8232 7.76256 16.8232 8.23744 16.5303 8.53033L8.53033 16.5303C8.23744 16.8232 7.76256 16.8232 7.46967 16.5303C7.17678 16.2374 7.17678 15.7626 7.46967 15.4697L15.4697 7.46967C15.7626 7.17678 16.2374 7.17678 16.5303 7.46967Z"
+        fill="currentColor"
+      />
+    </svg>
+  );
+};
