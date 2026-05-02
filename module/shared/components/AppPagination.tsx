@@ -5,12 +5,12 @@ import { ArrowRightIcon } from "../icons/ArrowRightIcon";
 import { ArrowLeftIcon } from "../icons/ArrowLeftIcon";
 
 const paginationItemVariants = cva(
-  "min-w-10 flex items-center justify-center body-s font-medium ",
+  "flex shrink-0 items-center justify-center body-s font-medium",
   {
     variants: {
       size: {
-        L: "rounded-[8px] p-2 gap-2",
-        M: "rounded-[6px] p-1 gap-2",
+        L: "min-w-10 rounded-[8px] p-2 gap-2",
+        M: "min-w-8 rounded-[6px] p-1 gap-2",
       },
       isActive: {
         true: "border border-primary-500 text-primary-500 disabled:border-primary-300",
@@ -48,9 +48,7 @@ const AppPaginationItem = ({
   };
 
   return (
-    //TODO: find out why min-w-10 does not work here
     <button
-      style={{ minWidth: size === "L" ? "40px" : "32px" }}
       className={cn(paginationItemVariants({ size, isActive }), {
         "cursor-pointer": !disabled,
         "pointer-events-none text-neutral-200": disabled,

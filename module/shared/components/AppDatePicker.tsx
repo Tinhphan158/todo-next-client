@@ -73,11 +73,6 @@ const AppDatePicker = ({
       }
 
       onChange?.(adjustedRange);
-
-      //TODO: this is quite convoluted, may need to fix this. Bet I'll forget why value !== date here in a month
-      if (newRange.end && newRange.start && value !== value) {
-        closeDialog();
-      }
     }
   };
 
@@ -87,8 +82,13 @@ const AppDatePicker = ({
         open={isOpen}
         onOpenChange={toggleDialog}
         align="start"
+        contentClassName="w-auto min-w-0 gap-0 p-0 ring-0 rounded-[8px] overflow-hidden shadow-md"
         trigger={
-          <button disabled={disabled} className="w-full">
+          <button
+            type="button"
+            disabled={disabled}
+            className="w-full border-0 bg-transparent p-0 text-left outline-none focus-visible:ring-2 focus-visible:ring-primary-500 focus-visible:ring-offset-2 rounded-[8px] disabled:opacity-50"
+          >
             <AppDateInput
               startPlaceholder={startPlaceholder}
               endPlaceholder={endPlaceholder}

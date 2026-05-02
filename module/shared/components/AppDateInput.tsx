@@ -1,5 +1,5 @@
 import { cva } from "class-variance-authority";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { CalendarScheduleIcon } from "../icons";
 
 interface AppDateInputProps {
@@ -43,6 +43,37 @@ const isValidDateString = (value: string): boolean => {
   return parseDate(value) !== null;
 };
 
+function controlledFieldKey(
+  type: "single" | "range",
+  value: AppDateInputProps["value"],
+): string {
+  if (type === "single") {
+    return `single:${value instanceof Date ? formatDate(value) : "_"}`;
+  }
+  if (value && typeof value === "object" && !("getTime" in value)) {
+    const r = value as { start?: Date; end?: Date };
+    return `range:${r.start ? formatDate(r.start) : "_"}|${r.end ? formatDate(r.end) : "_"}`;
+  }
+  return "range:_|_";
+}
+
+function initialInputs(
+  type: "single" | "range",
+  value: AppDateInputProps["value"],
+): [string, string] {
+  if (type === "single") {
+    return [value instanceof Date ? formatDate(value) : "", ""];
+  }
+  if (value && typeof value === "object" && !("getTime" in value)) {
+    const r = value as { start?: Date; end?: Date };
+    return [
+      r.start ? formatDate(r.start) : "",
+      r.end ? formatDate(r.end) : "",
+    ];
+  }
+  return ["", ""];
+}
+
 const appDateInputVariant = cva(
   "transition-all bg-base-white rounded-[8px] border border-neutral-200 hover:border-neutral-300 flex [&_input]:placeholder:text-neutral-300 [&_input]:placeholder:body-s [&_input]:placeholder:font-medium [&_input]:body-s [&_input]:font-medium [&_input]:text-neutral-950 [&_input]:outline-none [&_input]:flex-1 items-center",
   {
@@ -69,7 +100,7 @@ const appDateInputVariant = cva(
   },
 );
 
-const AppDateInput = ({
+const AppDateInputInner = ({
   type = "single",
   value,
   startPlaceholder,
@@ -78,21 +109,12 @@ const AppDateInput = ({
   isDisabled = false,
   onChange,
 }: AppDateInputProps) => {
-  const [startInput, setStartInput] = useState("");
-  const [endInput, setEndInput] = useState("");
-
-  useEffect(() => {
-    if (type === "single" && value instanceof Date) {
-      //TODO: find a better way for this
-      //eslint-disable-next-line react-hooks/set-state-in-effect
-      setStartInput(formatDate(value));
-    } else if (type === "range" && value && !("getTime" in value)) {
-      const rangeValue = value as { start?: Date; end?: Date };
-
-      setStartInput(rangeValue.start ? formatDate(rangeValue.start) : "");
-      setEndInput(rangeValue.end ? formatDate(rangeValue.end) : "");
-    }
-  }, [value, type]);
+  const [startInput, setStartInput] = useState(
+    () => initialInputs(type, value)[0],
+  );
+  const [endInput, setEndInput] = useState(
+    () => initialInputs(type, value)[1],
+  );
 
   const handleStartChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const newValue = e.target.value;
@@ -116,7 +138,6 @@ const AppDateInput = ({
             | undefined;
 
           if (currentValue?.end) {
-            // Sort dates to ensure proper start/end order
             const sorted = [date, currentValue.end].sort(
               (a, b) => a.getTime() - b.getTime(),
             );
@@ -142,7 +163,6 @@ const AppDateInput = ({
         const currentValue = value as { start?: Date; end?: Date } | undefined;
 
         if (currentValue?.start) {
-          // Sort dates to ensure proper start/end order
           const sorted = [currentValue.start, date].sort(
             (a, b) => a.getTime() - b.getTime(),
           );
@@ -178,6 +198,12 @@ const AppDateInput = ({
       <CalendarScheduleIcon />
     </div>
   );
+};
+
+const AppDateInput = (props: AppDateInputProps) => {
+  const type = props.type ?? "single";
+  const syncKey = controlledFieldKey(type, props.value);
+  return <AppDateInputInner key={syncKey} {...props} />;
 };
 
 export default AppDateInput;

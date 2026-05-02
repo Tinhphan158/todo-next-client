@@ -13,6 +13,7 @@ export interface AppPopover {
   align?: "start" | "center" | "end";
   side?: "top" | "right" | "bottom" | "left";
   offset?: number;
+  contentClassName?: string;
   modal?: boolean;
   onOpenChange?: (open: boolean) => void;
   onFocusOutside?: () => void;
@@ -24,6 +25,7 @@ const AppPopover = ({
   align,
   side,
   offset,
+  contentClassName,
   open,
   modal,
   children,
@@ -39,6 +41,7 @@ const AppPopover = ({
         align={align}
         alignOffset={offset}
         side={side}
+        className={contentClassName}
         onFocusOutside={onFocusOutside}
       >
         {children}
