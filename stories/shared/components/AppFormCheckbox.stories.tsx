@@ -34,7 +34,7 @@ export const Default: Story = {
     return (
       <Form {...form}>
         <form
-          onSubmit={form.handleSubmit((data) => console.log(data))}
+          onSubmit={form.handleSubmit((data) => alert(JSON.stringify(data, null, 2)))}
           className="space-y-4"
         >
           <FormCheckboxField
@@ -60,7 +60,7 @@ export const WithValidation: Story = {
     return (
       <Form {...form}>
         <form
-          onSubmit={form.handleSubmit((data) => alert(JSON.stringify(data)))}
+          onSubmit={form.handleSubmit((data) => alert(JSON.stringify(data, null, 2)))}
           className="space-y-4"
         >
           <FormCheckboxField
@@ -89,7 +89,7 @@ export const WithDefaultChecked: Story = {
     return (
       <Form {...form}>
         <form
-          onSubmit={form.handleSubmit((data) => console.log(data))}
+          onSubmit={form.handleSubmit((data) => alert(JSON.stringify(data, null, 2)))}
           className="space-y-4"
         >
           <FormCheckboxField
@@ -115,7 +115,7 @@ export const Disabled: Story = {
     return (
       <Form {...form}>
         <form
-          onSubmit={form.handleSubmit((data) => console.log(data))}
+          onSubmit={form.handleSubmit((data) => alert(JSON.stringify(data, null, 2)))}
           className="space-y-4"
         >
           <FormCheckboxField
@@ -142,7 +142,7 @@ export const DeselectMode: Story = {
     return (
       <Form {...form}>
         <form
-          onSubmit={form.handleSubmit((data) => alert(JSON.stringify(data)))}
+          onSubmit={form.handleSubmit((data) => alert(JSON.stringify(data, null, 2)))}
           className="space-y-4"
         >
           <FormCheckboxField
@@ -175,7 +175,7 @@ export const MultipleCheckboxes: Story = {
     return (
       <Form {...form}>
         <form
-          onSubmit={form.handleSubmit((data) => console.log(data))}
+          onSubmit={form.handleSubmit((data) => alert(JSON.stringify(data, null, 2)))}
           className="space-y-4"
         >
           <FormCheckboxField
@@ -281,7 +281,7 @@ export const WithCustomValidation: Story = {
     return (
       <Form {...form}>
         <form
-          onSubmit={form.handleSubmit((data) => alert(JSON.stringify(data)))}
+          onSubmit={form.handleSubmit((data) => alert(JSON.stringify(data, null, 2)))}
           className="space-y-4"
         >
           <FormCheckboxField

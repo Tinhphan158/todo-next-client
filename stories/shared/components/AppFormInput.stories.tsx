@@ -35,7 +35,7 @@ export const Default: Story = {
     return (
       <Form {...form}>
         <form
-          onSubmit={form.handleSubmit((data) => console.log(data))}
+          onSubmit={form.handleSubmit((data) => alert(JSON.stringify(data, null, 2)))}
           className="space-y-4"
         >
           <FormInputFieldV2
@@ -62,7 +62,7 @@ export const WithValidation: Story = {
     return (
       <Form {...form}>
         <form
-          onSubmit={form.handleSubmit((data) => alert(JSON.stringify(data)))}
+          onSubmit={form.handleSubmit((data) => alert(JSON.stringify(data, null, 2)))}
           className="space-y-4"
         >
           <FormInputFieldV2
@@ -96,7 +96,7 @@ export const WithIcons: Story = {
     return (
       <Form {...form}>
         <form
-          onSubmit={form.handleSubmit((data) => console.log(data))}
+          onSubmit={form.handleSubmit((data) => alert(JSON.stringify(data, null, 2)))}
           className="space-y-4"
         >
           <FormInputFieldV2
@@ -125,7 +125,7 @@ export const SizeMedium: Story = {
     return (
       <Form {...form}>
         <form
-          onSubmit={form.handleSubmit((data) => console.log(data))}
+          onSubmit={form.handleSubmit((data) => alert(JSON.stringify(data, null, 2)))}
           className="space-y-4"
         >
           <FormInputFieldV2
@@ -153,7 +153,7 @@ export const PasswordField: Story = {
     return (
       <Form {...form}>
         <form
-          onSubmit={form.handleSubmit((data) => console.log(data))}
+          onSubmit={form.handleSubmit((data) => alert(JSON.stringify(data, null, 2)))}
           className="space-y-4"
         >
           <FormInputFieldV2
@@ -188,7 +188,7 @@ export const Disabled: Story = {
     return (
       <Form {...form}>
         <form
-          onSubmit={form.handleSubmit((data) => console.log(data))}
+          onSubmit={form.handleSubmit((data) => alert(JSON.stringify(data, null, 2)))}
           className="space-y-4"
         >
           <FormInputFieldV2
@@ -223,7 +223,7 @@ export const WithErrorState: Story = {
     return (
       <Form {...form}>
         <form
-          onSubmit={form.handleSubmit((data) => console.log(data))}
+          onSubmit={form.handleSubmit((data) => alert(JSON.stringify(data, null, 2)))}
           className="space-y-4"
         >
           <FormInputFieldV2
@@ -269,7 +269,7 @@ export const MultipleErrors: Story = {
     return (
       <Form {...form}>
         <form
-          onSubmit={form.handleSubmit((data) => console.log(data))}
+          onSubmit={form.handleSubmit((data) => alert(JSON.stringify(data, null, 2)))}
           className="space-y-4"
         >
           <FormInputFieldV2

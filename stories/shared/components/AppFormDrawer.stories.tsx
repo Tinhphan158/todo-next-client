@@ -190,13 +190,11 @@ export const ViewMode: Story = {
       console.log("Mode changed to:", mode);
     },
     onSubmit: async (data) => {
-      console.log("Form submitted:", data);
+      alert(JSON.stringify(data, null, 2));
     },
     onDelete: async () => {
-      console.log("Delete clicked");
-      // Simulate API call
       await new Promise((resolve) => setTimeout(resolve, 1000));
-      console.log("User deleted");
+      alert("User deleted successfully!");
     },
   },
 };
@@ -216,7 +214,7 @@ export const ViewModeWithoutDelete: Story = {
       console.log("Mode changed to:", mode);
     },
     onSubmit: async (data) => {
-      console.log("Form submitted:", data);
+      alert(JSON.stringify(data, null, 2));
     },
   },
 };
@@ -235,10 +233,8 @@ export const CreateMode: Story = {
       console.log("Mode changed to:", mode);
     },
     onSubmit: async (data) => {
-      console.log("User created:", data);
-      // Simulate API call
       await new Promise((resolve) => setTimeout(resolve, 1500));
-      alert("User created successfully!");
+      alert(JSON.stringify(data, null, 2));
     },
   },
 };
@@ -258,10 +254,8 @@ export const UpdateMode: Story = {
       console.log("Mode changed to:", mode);
     },
     onSubmit: async (data) => {
-      console.log("User updated:", data);
-      // Simulate API call
       await new Promise((resolve) => setTimeout(resolve, 1500));
-      alert("User updated successfully!");
+      alert(JSON.stringify(data, null, 2));
     },
   },
 };
@@ -286,16 +280,12 @@ export const ControlledStateWorkflow: Story = {
     };
 
     const handleSubmit = async (formData: MockFormData) => {
-      console.log("Submitting:", formData);
-      // Simulate API call
       await new Promise((resolve) => setTimeout(resolve, 1500));
       setData(formData);
-      alert(`User ${mode === "create" ? "created" : "updated"} successfully!`);
+      alert(JSON.stringify(formData, null, 2));
     };
 
     const handleDelete = async () => {
-      console.log("Deleting user");
-      // Simulate API call
       await new Promise((resolve) => setTimeout(resolve, 1000));
       setData(undefined);
       alert("User deleted successfully!");
@@ -385,10 +375,7 @@ export const DeleteWithLoading: Story = {
         onOpenChange={setOpen}
         onSubmit={async () => {}}
         onDelete={async () => {
-          console.log("Deleting...");
-          // Simulate slow API call
           await new Promise((resolve) => setTimeout(resolve, 3000));
-          console.log("Deleted!");
           alert("User deleted successfully!");
         }}
       >
@@ -412,10 +399,10 @@ export const WithCustomConfirmTitles: Story = {
     onOpenChange: () => {},
     onModeChange: () => {},
     onSubmit: async (data) => {
-      console.log("Form submitted:", data);
+      alert(JSON.stringify(data, null, 2));
     },
     onDelete: async () => {
-      console.log("Delete clicked");
+      alert("Item deleted!");
     },
   },
 };
@@ -431,7 +418,7 @@ export const EmptyForm: Story = {
     children: <MockForm />,
     onOpenChange: () => {},
     onSubmit: async (data) => {
-      console.log("User created:", data);
+      alert(JSON.stringify(data, null, 2));
     },
   },
 };
@@ -453,7 +440,7 @@ export const PrefilledForm: Story = {
     children: <MockForm />,
     onOpenChange: () => {},
     onSubmit: async (data) => {
-      console.log("User updated:", data);
+      alert(JSON.stringify(data, null, 2));
     },
   },
 };
@@ -499,13 +486,11 @@ export const ViewToUpdateTransition: Story = {
           onOpenChange={() => {}}
           onModeChange={setMode}
           onSubmit={async (data) => {
-            console.log("Submitted:", data);
             await new Promise((resolve) => setTimeout(resolve, 1000));
-            alert("Changes saved!");
+            alert(JSON.stringify(data, null, 2));
             setMode("view");
           }}
           onDelete={async () => {
-            console.log("Deleting...");
             await new Promise((resolve) => setTimeout(resolve, 1000));
             alert("User deleted!");
           }}
@@ -536,8 +521,7 @@ export const WithCustomCloseConfirmTitle: Story = {
     onOpenChange: () => {},
     onModeChange: () => {},
     onSubmit: async (data) => {
-      console.log("Form submitted:", data);
-      alert("Profile updated!");
+      alert(JSON.stringify(data, null, 2));
     },
   },
 };

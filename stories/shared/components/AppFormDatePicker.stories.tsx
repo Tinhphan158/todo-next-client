@@ -34,7 +34,7 @@ export const SingleDate: Story = {
     return (
       <Form {...form}>
         <form
-          onSubmit={form.handleSubmit((data) => console.log(data))}
+          onSubmit={form.handleSubmit((data) => alert(JSON.stringify(data, null, 2)))}
           className="space-y-4"
         >
           <FormDatePickerField
@@ -62,7 +62,7 @@ export const DateRange: Story = {
     return (
       <Form {...form}>
         <form
-          onSubmit={form.handleSubmit((data) => console.log(data))}
+          onSubmit={form.handleSubmit((data) => alert(JSON.stringify(data, null, 2)))}
           className="space-y-4"
         >
           <FormDatePickerField
@@ -91,7 +91,7 @@ export const WithValidation: Story = {
     return (
       <Form {...form}>
         <form
-          onSubmit={form.handleSubmit((data) => alert(JSON.stringify(data)))}
+          onSubmit={form.handleSubmit((data) => alert(JSON.stringify(data, null, 2)))}
           className="space-y-4"
         >
           <FormDatePickerField
@@ -122,7 +122,7 @@ export const WithHelperText: Story = {
     return (
       <Form {...form}>
         <form
-          onSubmit={form.handleSubmit((data) => console.log(data))}
+          onSubmit={form.handleSubmit((data) => alert(JSON.stringify(data, null, 2)))}
           className="space-y-4"
         >
           <FormDatePickerField
@@ -152,7 +152,7 @@ export const WithCustomPlaceholders: Story = {
     return (
       <Form {...form}>
         <form
-          onSubmit={form.handleSubmit((data) => console.log(data))}
+          onSubmit={form.handleSubmit((data) => alert(JSON.stringify(data, null, 2)))}
           className="space-y-4"
         >
           <FormDatePickerField
@@ -269,7 +269,7 @@ export const InteractiveWithExternalState: Story = {
     return (
       <Form {...form}>
         <form
-          onSubmit={form.handleSubmit((data) => console.log(data))}
+          onSubmit={form.handleSubmit((data) => alert(JSON.stringify(data, null, 2)))}
           className="space-y-4"
         >
           <FormDatePickerField

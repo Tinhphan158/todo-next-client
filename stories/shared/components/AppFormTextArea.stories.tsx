@@ -33,7 +33,7 @@ export const Default: Story = {
     return (
       <Form {...form}>
         <form
-          onSubmit={form.handleSubmit((data) => console.log(data))}
+          onSubmit={form.handleSubmit((data) => alert(JSON.stringify(data, null, 2)))}
           className="space-y-4"
         >
           <FormTextAreaField
@@ -61,7 +61,7 @@ export const WithHelperText: Story = {
     return (
       <Form {...form}>
         <form
-          onSubmit={form.handleSubmit((data) => console.log(data))}
+          onSubmit={form.handleSubmit((data) => alert(JSON.stringify(data, null, 2)))}
           className="space-y-4"
         >
           <FormTextAreaField
@@ -90,7 +90,7 @@ export const WithValidation: Story = {
     return (
       <Form {...form}>
         <form
-          onSubmit={form.handleSubmit((data) => alert(JSON.stringify(data)))}
+          onSubmit={form.handleSubmit((data) => alert(JSON.stringify(data, null, 2)))}
           className="space-y-4"
         >
           <FormTextAreaField
@@ -125,7 +125,7 @@ export const SizeLarge: Story = {
     return (
       <Form {...form}>
         <form
-          onSubmit={form.handleSubmit((data) => console.log(data))}
+          onSubmit={form.handleSubmit((data) => alert(JSON.stringify(data, null, 2)))}
           className="space-y-4"
         >
           <FormTextAreaField
@@ -154,7 +154,7 @@ export const SizeMedium: Story = {
     return (
       <Form {...form}>
         <form
-          onSubmit={form.handleSubmit((data) => console.log(data))}
+          onSubmit={form.handleSubmit((data) => alert(JSON.stringify(data, null, 2)))}
           className="space-y-4"
         >
           <FormTextAreaField
@@ -183,7 +183,7 @@ export const SizeSmall: Story = {
     return (
       <Form {...form}>
         <form
-          onSubmit={form.handleSubmit((data) => console.log(data))}
+          onSubmit={form.handleSubmit((data) => alert(JSON.stringify(data, null, 2)))}
           className="space-y-4"
         >
           <FormTextAreaField
@@ -212,7 +212,7 @@ export const Disabled: Story = {
     return (
       <Form {...form}>
         <form
-          onSubmit={form.handleSubmit((data) => console.log(data))}
+          onSubmit={form.handleSubmit((data) => alert(JSON.stringify(data, null, 2)))}
           className="space-y-4"
         >
           <FormTextAreaField

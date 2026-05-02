@@ -34,7 +34,7 @@ export const Default: Story = {
     return (
       <Form {...form}>
         <form
-          onSubmit={form.handleSubmit((data) => console.log(data))}
+          onSubmit={form.handleSubmit((data) => alert(JSON.stringify({ fileName: data.file?.name, fileSize: data.file?.size, fileType: data.file?.type }, null, 2)))}
           className="space-y-4"
         >
           <FormFileUploadField
@@ -113,7 +113,7 @@ export const WithHelperText: Story = {
     return (
       <Form {...form}>
         <form
-          onSubmit={form.handleSubmit((data) => console.log(data))}
+          onSubmit={form.handleSubmit((data) => alert(JSON.stringify({ fileName: data.file?.name, fileSize: data.file?.size, fileType: data.file?.type }, null, 2)))}
           className="space-y-4"
         >
           <FormFileUploadField
@@ -144,7 +144,7 @@ export const ImageUpload: Story = {
     return (
       <Form {...form}>
         <form
-          onSubmit={form.handleSubmit((data) => console.log(data))}
+          onSubmit={form.handleSubmit((data) => alert(JSON.stringify({ fileName: data.file?.name, fileSize: data.file?.size, fileType: data.file?.type }, null, 2)))}
           className="space-y-4"
         >
           <FormFileUploadField
@@ -183,7 +183,7 @@ export const DocumentUpload: Story = {
     return (
       <Form {...form}>
         <form
-          onSubmit={form.handleSubmit((data) => console.log(data))}
+          onSubmit={form.handleSubmit((data) => alert(JSON.stringify({ fileName: data.file?.name, fileSize: data.file?.size, fileType: data.file?.type }, null, 2)))}
           className="space-y-4"
         >
           <FormFileUploadField
@@ -283,7 +283,7 @@ export const WithPreloadedFile: Story = {
     return (
       <Form {...form}>
         <form
-          onSubmit={form.handleSubmit((data) => console.log(data))}
+          onSubmit={form.handleSubmit((data) => alert(JSON.stringify({ fileName: data.file?.name, fileSize: data.file?.size, fileType: data.file?.type }, null, 2)))}
           className="space-y-4"
         >
           <FormFileUploadField
