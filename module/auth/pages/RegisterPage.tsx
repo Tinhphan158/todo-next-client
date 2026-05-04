@@ -9,9 +9,10 @@ import {
 } from "../components/register";
 import { RegisterFormData } from "../schemas/register-schema";
 import { VerifyFormData } from "../schemas/verify-schema";
+import { STEP_REGISTER, StepRegister } from "../types";
 
 const RegisterPage = () => {
-  const [step, setStep] = useState<"register" | "verify" | "success">("verify");
+  const [step, setStep] = useState<StepRegister>(STEP_REGISTER.VERIFY);
   const [email, setEmail] = useState<string>("");
 
   const handleRegisterSubmit = async (data: RegisterFormData) => {
@@ -20,13 +21,13 @@ const RegisterPage = () => {
 
     // TODO: Send email verification code to user, handle API call and error handling
     setEmail(data.email);
-    setStep("verify");
+    setStep(STEP_REGISTER.VERIFY);
   };
 
   const handleVerifySubmit = async (data: VerifyFormData) => {
     console.log(data);
     alert(JSON.stringify(data, null, 2));
-    setStep("success");
+    setStep(STEP_REGISTER.SUCCESS);
   };
 
   const handleResendCode = async () => {
@@ -34,19 +35,19 @@ const RegisterPage = () => {
   };
 
   const handleBack = () => {
-    if (step === "verify") setStep("register");
+    if (step === STEP_REGISTER.VERIFY) setStep(STEP_REGISTER.REGISTER);
   };
 
   const renderStep = () => {
     switch (step) {
-      case "register":
+      case STEP_REGISTER.REGISTER:
         return (
           <RegisterFormContainer
             key="register-form-container"
             onSubmit={handleRegisterSubmit}
           />
         );
-      case "verify":
+      case STEP_REGISTER.VERIFY:
         return (
           <VerifyOTPRegisterFormContainer
             key="verify-otp-register-form-container"
@@ -56,7 +57,7 @@ const RegisterPage = () => {
             onResendCode={handleResendCode}
           />
         );
-      case "success":
+      case STEP_REGISTER.SUCCESS:
         return <RegisterSuccessStep key="register-success-step" />;
       default:
         return null;

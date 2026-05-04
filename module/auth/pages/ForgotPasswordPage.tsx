@@ -13,52 +13,53 @@ import {
   ForgotPasswordVerifyEmailFormData,
   VerifyFormData,
 } from "../schemas";
+import { STEP_FORGOT_PASSWORD, StepForgotPassword } from "../types";
 
 const ForgotPasswordPage = () => {
-  const [step, setStep] = useState<
-    "verify-email" | "verify-otp" | "update-password" | "success"
-  >("verify-email");
+  const [step, setStep] = useState<StepForgotPassword>(
+    STEP_FORGOT_PASSWORD.VERIFY_EMAIL,
+  );
 
   const handleSubmitEmail = async (data: ForgotPasswordVerifyEmailFormData) => {
     console.log(data);
-    setStep("verify-otp");
+    setStep(STEP_FORGOT_PASSWORD.VERIFY_OTP);
   };
   const handleSubmitOtp = async (data: VerifyFormData) => {
     console.log(data);
-    setStep("update-password");
+    setStep(STEP_FORGOT_PASSWORD.UPDATE_PASSWORD);
   };
   const handleSubmitUpdatePassword = async (
     data: ForgotPasswordNewPasswordFormData,
   ) => {
     console.log(data);
     alert("Password updated successfully");
-    setStep("success");
+    setStep(STEP_FORGOT_PASSWORD.SUCCESS);
   };
 
   const renderStep = () => {
     switch (step) {
-      case "verify-email":
+      case STEP_FORGOT_PASSWORD.VERIFY_EMAIL:
         return (
           <VerifyEmailForm
             key="verify-email-form"
             onSubmit={handleSubmitEmail}
           />
         );
-      case "verify-otp":
+      case STEP_FORGOT_PASSWORD.VERIFY_OTP:
         return (
           <VerifyOTPRecoverPasswordForm
             key="verify-otp-form"
             onSubmit={handleSubmitOtp}
           />
         );
-      case "update-password":
+      case STEP_FORGOT_PASSWORD.UPDATE_PASSWORD:
         return (
           <UpdateNewPasswordForm
             key="update-password-form"
             onSubmit={handleSubmitUpdatePassword}
           />
         );
-      case "success":
+      case STEP_FORGOT_PASSWORD.SUCCESS:
         return <UpdateSuccessStep key="update-success-step" />;
     }
   };
