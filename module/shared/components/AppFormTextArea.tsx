@@ -43,29 +43,27 @@ export const FormTextAreaField = <
       render={({ field, fieldState }) => (
         <FormItem className={cn("flex w-full flex-col gap-1", className)}>
           <FormControl>
-            <>
-              <AppTextArea
-                {...field}
-                id={id}
-                label={label}
-                helperText={helperText}
-                size={size}
-                rows={rows}
-                placeholder={placeholder}
-                disabled={disabled}
-                maxLength={maxLength}
-                error={!!fieldState.error?.message}
-                onBlur={() => {
-                  field.onBlur();
-                }}
-              />
-              {fieldState.error?.message && (
-                <AppHelperText showIcon icon={<InfoIcon />} state="error">
-                  {fieldState.error.message}
-                </AppHelperText>
-              )}
-            </>
+            <AppTextArea
+              {...field}
+              id={id}
+              label={label}
+              helperText={helperText}
+              size={size}
+              rows={rows}
+              placeholder={placeholder}
+              disabled={disabled}
+              maxLength={maxLength}
+              error={!!fieldState.error?.message}
+              onBlur={() => {
+                field.onBlur();
+              }}
+            />
           </FormControl>
+          {fieldState.error?.message && (
+            <AppHelperText showIcon icon={<InfoIcon />} state="error">
+              {fieldState.error.message}
+            </AppHelperText>
+          )}
         </FormItem>
       )}
     />

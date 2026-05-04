@@ -49,32 +49,30 @@ export const FormInputFieldPassword = <
       render={({ field, fieldState }) => (
         <FormItem className={cn("flex w-full flex-col gap-1", className)}>
           <FormControl>
-            <>
-              <AppPasswordInput
-                {...field}
-                id={id}
-                label={label}
-                labelEnd={labelEnd}
-                helperText={helperText}
-                placeholder={placeholder}
-                size={size}
-                inputSize={inputSize}
-                maxLength={maxLength}
-                disabled={disabled}
-                onFocus={onFocus}
-                error={fieldState.error?.message}
-                onBlur={() => {
-                  field.onBlur();
-                  onBlur?.();
-                }}
-              />
-              {fieldState.error?.message && (
-                <AppHelperText showIcon icon={<InfoIcon />} state="error">
-                  {fieldState.error.message}
-                </AppHelperText>
-              )}
-            </>
+            <AppPasswordInput
+              {...field}
+              id={id}
+              label={label}
+              labelEnd={labelEnd}
+              helperText={helperText}
+              placeholder={placeholder}
+              size={size}
+              inputSize={inputSize}
+              maxLength={maxLength}
+              disabled={disabled}
+              onFocus={onFocus}
+              error={fieldState.error?.message}
+              onBlur={() => {
+                field.onBlur();
+                onBlur?.();
+              }}
+            />
           </FormControl>
+          {fieldState.error?.message && (
+            <AppHelperText showIcon icon={<InfoIcon />} state="error">
+              {fieldState.error.message}
+            </AppHelperText>
+          )}
         </FormItem>
       )}
     />

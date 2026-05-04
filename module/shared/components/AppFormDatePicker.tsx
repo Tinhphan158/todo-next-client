@@ -43,27 +43,25 @@ export const FormDatePickerField = <
       {...props}
       render={({ field, fieldState }) => (
         <FormItem className={cn("flex w-full flex-col gap-1", className)}>
+          {label && <FormLabel htmlFor={id}>{label}</FormLabel>}
           <FormControl>
-            <>
-              {label && <FormLabel htmlFor={id}>{label}</FormLabel>}
-              <AppDatePicker
-                value={field.value}
-                onChange={(value) => {
-                  field.onChange(value);
-                  field.onBlur();
-                }}
-                type={type}
-                startPlaceholder={startPlaceholder}
-                endPlaceholder={endPlaceholder}
-                disabled={disabled}
-              />
-              {fieldState.error?.message && (
-                <AppHelperText showIcon icon={<InfoIcon />} state="error">
-                  {fieldState.error.message}
-                </AppHelperText>
-              )}
-            </>
+            <AppDatePicker
+              value={field.value}
+              onChange={(value) => {
+                field.onChange(value);
+                field.onBlur();
+              }}
+              type={type}
+              startPlaceholder={startPlaceholder}
+              endPlaceholder={endPlaceholder}
+              disabled={disabled}
+            />
           </FormControl>
+          {fieldState.error?.message && (
+            <AppHelperText showIcon icon={<InfoIcon />} state="error">
+              {fieldState.error.message}
+            </AppHelperText>
+          )}
         </FormItem>
       )}
     />

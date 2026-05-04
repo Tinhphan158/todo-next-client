@@ -1,11 +1,11 @@
 "use client";
 import { FormControl, FormField, FormItem } from "@/components/ui/form";
+import { cn } from "@/lib/utils";
 import React from "react";
 import { ControllerProps, FieldPath, FieldValues } from "react-hook-form";
-import { AppInputV2 } from "./AppInput";
-import { cn } from "@/lib/utils";
-import { AppHelperText } from "./AppHelperText";
 import { InfoIcon } from "../icons";
+import { AppHelperText } from "./AppHelperText";
+import { AppInputV2 } from "./AppInput";
 
 interface FormInputFieldV2Props<
   TFieldValues extends FieldValues = FieldValues,
@@ -54,37 +54,35 @@ export const FormInputFieldV2 = <
       {...props}
       render={({ field, fieldState }) => (
         <FormItem className={cn("flex w-full flex-col gap-1", className)}>
-          {/* Input field */}
           <FormControl>
-            <>
-              <AppInputV2
-                {...field}
-                id={id}
-                label={label}
-                labelEnd={labelEnd}
-                helperText={helperText}
-                type={type}
-                placeholder={placeholder}
-                size={size}
-                inputSize={inputSize}
-                startIcon={startIcon}
-                endIcon={endIcon}
-                maxLength={maxLength}
-                disabled={disabled}
-                onFocus={onFocus}
-                error={fieldState.error?.message}
-                onBlur={() => {
-                  field.onBlur();
-                  onBlur?.();
-                }}
-              />
-              {fieldState.error?.message && (
-                <AppHelperText showIcon icon={<InfoIcon />} state="error">
-                  {fieldState.error.message}
-                </AppHelperText>
-              )}
-            </>
+            <AppInputV2
+              key={`${id}-input-field`}
+              {...field}
+              id={id}
+              label={label}
+              labelEnd={labelEnd}
+              helperText={helperText}
+              type={type}
+              placeholder={placeholder}
+              size={size}
+              inputSize={inputSize}
+              startIcon={startIcon}
+              endIcon={endIcon}
+              maxLength={maxLength}
+              disabled={disabled}
+              onFocus={onFocus}
+              error={fieldState.error?.message}
+              onBlur={() => {
+                field.onBlur();
+                onBlur?.();
+              }}
+            />
           </FormControl>
+          {fieldState.error?.message && (
+            <AppHelperText showIcon icon={<InfoIcon />} state="error">
+              {fieldState.error.message}
+            </AppHelperText>
+          )}
         </FormItem>
       )}
     />

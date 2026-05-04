@@ -62,38 +62,36 @@ export const AppFormNumberInput = <
       render={({ field, fieldState }) => (
         <FormItem className={cn("flex w-full flex-col gap-1", className)}>
           <FormControl>
-            <>
-              <AppNumberInput
-                {...field}
-                label={
-                  label && <FormLabel data-error={undefined}>{label}</FormLabel>
-                }
-                helperText={helperText}
-                placeholder={placeholder}
-                size={size}
-                inputSize={inputSize}
-                startIcon={startIcon}
-                endIcon={endIcon}
-                disabled={disabled}
-                digitLimit={digitLimit}
-                allowDecimal={allowDecimal}
-                decimalPlaces={decimalPlaces}
-                showThousandSeparator={showThousandSeparator}
-                maxLength={maxLength}
-                error={fieldState.error?.message}
-                onFocus={onFocus}
-                onBlur={() => {
-                  field.onBlur();
-                  onBlur?.();
-                }}
-              />
-              {fieldState.error?.message && (
-                <AppHelperText showIcon icon={<InfoIcon />} state="error">
-                  {fieldState.error.message}
-                </AppHelperText>
-              )}
-            </>
+            <AppNumberInput
+              {...field}
+              label={
+                label && <FormLabel data-error={undefined}>{label}</FormLabel>
+              }
+              helperText={helperText}
+              placeholder={placeholder}
+              size={size}
+              inputSize={inputSize}
+              startIcon={startIcon}
+              endIcon={endIcon}
+              disabled={disabled}
+              digitLimit={digitLimit}
+              allowDecimal={allowDecimal}
+              decimalPlaces={decimalPlaces}
+              showThousandSeparator={showThousandSeparator}
+              maxLength={maxLength}
+              error={fieldState.error?.message}
+              onFocus={onFocus}
+              onBlur={() => {
+                field.onBlur();
+                onBlur?.();
+              }}
+            />
           </FormControl>
+          {fieldState.error?.message && (
+            <AppHelperText showIcon icon={<InfoIcon />} state="error">
+              {fieldState.error.message}
+            </AppHelperText>
+          )}
         </FormItem>
       )}
     />

@@ -55,31 +55,29 @@ export const FormFileUploadField = <
             </FormLabel>
           )}
           <FormControl>
-            <>
-              <AppFileUpload
-                value={field.value}
-                onChange={(value) => {
-                  field.onChange(value);
-                  field.onBlur();
-                }}
-                placeholer={placeholer}
-                accept={accept}
-                disabled={disabled}
-                uploadButtonLabel={uploadButtonLabel}
-                changeButtonLabel={changeButtonLabel}
-              />
-              {helperText && !fieldState.error?.message && (
-                <AppHelperText showIcon icon={<InfoIcon />}>
-                  {helperText}
-                </AppHelperText>
-              )}
-              {fieldState.error?.message && (
-                <AppHelperText showIcon icon={<InfoIcon />} state="error">
-                  {fieldState.error.message}
-                </AppHelperText>
-              )}
-            </>
+            <AppFileUpload
+              value={field.value}
+              onChange={(value) => {
+                field.onChange(value);
+                field.onBlur();
+              }}
+              placeholer={placeholer}
+              accept={accept}
+              disabled={disabled}
+              uploadButtonLabel={uploadButtonLabel}
+              changeButtonLabel={changeButtonLabel}
+            />
           </FormControl>
+          {helperText && !fieldState.error?.message && (
+            <AppHelperText showIcon icon={<InfoIcon />}>
+              {helperText}
+            </AppHelperText>
+          )}
+          {fieldState.error?.message && (
+            <AppHelperText showIcon icon={<InfoIcon />} state="error">
+              {fieldState.error.message}
+            </AppHelperText>
+          )}
         </FormItem>
       )}
     />

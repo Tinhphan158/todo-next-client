@@ -61,33 +61,31 @@ export const FormFrameUploadField = <
             </FormLabel>
           )}
           <FormControl className="flex-1">
-            <>
-              <AppFrameUpload
-                value={field.value}
-                onChange={(value) => {
-                  field.onChange(value);
-                  field.onBlur();
+            <AppFrameUpload
+              value={field.value}
+              onChange={(value) => {
+                field.onChange(value);
+                field.onBlur();
 
-                  if (value?.file) {
-                    onChange?.(value.file);
-                  }
-                }}
-                label={uploadLabel}
-                accept={accept}
-                uploadButtonLabel={uploadButtonLabel}
-                changeButtonLabel={changeButtonLabel}
-                aspect={aspect}
-                showDeleteButton={showDeleteButton}
-                error={!!fieldState.error?.message}
-                disabled={disabled}
-              />
-              {fieldState.error?.message && (
-                <AppHelperText showIcon icon={<InfoIcon />} state="error">
-                  {fieldState.error.message}
-                </AppHelperText>
-              )}
-            </>
+                if (value?.file) {
+                  onChange?.(value.file);
+                }
+              }}
+              label={uploadLabel}
+              accept={accept}
+              uploadButtonLabel={uploadButtonLabel}
+              changeButtonLabel={changeButtonLabel}
+              aspect={aspect}
+              showDeleteButton={showDeleteButton}
+              error={!!fieldState.error?.message}
+              disabled={disabled}
+            />
           </FormControl>
+          {fieldState.error?.message && (
+            <AppHelperText showIcon icon={<InfoIcon />} state="error">
+              {fieldState.error.message}
+            </AppHelperText>
+          )}
         </FormItem>
       )}
     />

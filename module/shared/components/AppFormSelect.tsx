@@ -43,29 +43,27 @@ export const FormSelectField = <
         <FormItem className={cn("flex w-full flex-col gap-1", className)}>
           {/* Select field */}
           <FormControl>
-            <>
-              <AppSelect
-                {...field}
-                value={
-                  valueType === "string" ? field.value : String(field.value)
-                }
-                onChange={(value) =>
-                  valueType === "string"
-                    ? field.onChange(value)
-                    : field.onChange(Number(value))
-                }
-                label={label && <FormLabel>{label}</FormLabel>}
-                placeholder={placeholder}
-                items={items}
-                disabled={disabled}
-              />
-              {fieldState.error?.message && (
-                <AppHelperText showIcon icon={<InfoIcon />} state="error">
-                  {fieldState.error.message}
-                </AppHelperText>
-              )}
-            </>
+            <AppSelect
+              {...field}
+              value={
+                valueType === "string" ? field.value : String(field.value)
+              }
+              onChange={(value) =>
+                valueType === "string"
+                  ? field.onChange(value)
+                  : field.onChange(Number(value))
+              }
+              label={label && <FormLabel>{label}</FormLabel>}
+              placeholder={placeholder}
+              items={items}
+              disabled={disabled}
+            />
           </FormControl>
+          {fieldState.error?.message && (
+            <AppHelperText showIcon icon={<InfoIcon />} state="error">
+              {fieldState.error.message}
+            </AppHelperText>
+          )}
         </FormItem>
       )}
     />

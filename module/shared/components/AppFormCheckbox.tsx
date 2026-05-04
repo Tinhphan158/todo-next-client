@@ -38,23 +38,21 @@ export const FormCheckboxField = <
         >
           {/* Checkbox field */}
           <FormControl>
-            <>
-              <AppCheckBox
-                name={field.name}
-                value={field.value}
-                onChange={field.onChange}
-                onDeselect={onDeselect}
-                label={label}
-                disabled={disabled}
-                isDeselect={isDeselect}
-              />
-              {fieldState.error?.message && (
-                <AppHelperText showIcon icon={<InfoIcon />} state="error">
-                  {fieldState.error.message}
-                </AppHelperText>
-              )}
-            </>
+            <AppCheckBox
+              name={field.name}
+              value={field.value}
+              onChange={field.onChange}
+              onDeselect={onDeselect}
+              label={label}
+              disabled={disabled}
+              isDeselect={isDeselect}
+            />
           </FormControl>
+          {fieldState.error?.message && (
+            <AppHelperText showIcon icon={<InfoIcon />} state="error">
+              {fieldState.error.message}
+            </AppHelperText>
+          )}
         </FormItem>
       )}
     />
