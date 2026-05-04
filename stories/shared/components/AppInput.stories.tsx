@@ -55,6 +55,19 @@ export const WithLabel: Story = {
   },
 };
 
+export const WithLabelEnd: Story = {
+  args: {
+    label: "Password",
+    labelEnd: (
+      <a href="#" className="text-primary-600 font-medium hover:underline">
+        Forgot?
+      </a>
+    ),
+    placeholder: "Enter your password",
+    size: "L",
+  },
+};
+
 export const WithHelperText: Story = {
   args: {
     label: "Password",

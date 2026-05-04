@@ -3,8 +3,8 @@ import { Input } from "@/components/ui/input";
 import { cn } from "@/lib/utils";
 import { cva } from "class-variance-authority";
 import React from "react";
-import { AppHelperText } from "./AppHelperText";
 import { InfoIcon } from "../icons/";
+import { AppHelperText } from "./AppHelperText";
 
 export interface AppInputV2Props extends Omit<
   React.ComponentProps<typeof Input>,
@@ -12,6 +12,7 @@ export interface AppInputV2Props extends Omit<
 > {
   size?: "L" | "M" | "S";
   label?: React.ReactNode;
+  labelEnd?: React.ReactNode;
   error?: string;
   helperText?: React.ReactNode;
   startIcon?: React.ReactNode;
@@ -69,6 +70,7 @@ export const AppInputV2 = React.forwardRef<HTMLInputElement, AppInputV2Props>(
   (
     {
       label,
+      labelEnd,
       helperText,
       size,
       inputSize = 20,
@@ -81,11 +83,18 @@ export const AppInputV2 = React.forwardRef<HTMLInputElement, AppInputV2Props>(
   ) => {
     return (
       <div className="group flex w-full flex-col gap-1">
-        {label && (
+        {(label || labelEnd) && (
           <div className="flex items-center gap-2">
-            <div className="body-s flex-1 font-medium text-neutral-700">
-              {label}
-            </div>
+            {label ? (
+              <div className="body-s min-w-0 flex-1 font-medium text-neutral-700">
+                {label}
+              </div>
+            ) : (
+              <div className="min-w-0 flex-1" aria-hidden />
+            )}
+            {labelEnd ? (
+              <div className="body-s shrink-0 text-neutral-600">{labelEnd}</div>
+            ) : null}
           </div>
         )}
 

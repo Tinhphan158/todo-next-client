@@ -87,7 +87,7 @@ const AppDatePicker = ({
           <button
             type="button"
             disabled={disabled}
-            className="w-full border-0 bg-transparent p-0 text-left outline-none focus-visible:ring-2 focus-visible:ring-primary-500 focus-visible:ring-offset-2 rounded-[8px] disabled:opacity-50"
+            className="focus-visible:ring-primary-500 w-full rounded-[8px] border-0 bg-transparent p-0 text-left outline-none focus-visible:ring-2 focus-visible:ring-offset-2 disabled:opacity-50"
           >
             <AppDateInput
               startPlaceholder={startPlaceholder}

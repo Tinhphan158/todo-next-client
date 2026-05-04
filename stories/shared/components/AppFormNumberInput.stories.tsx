@@ -35,7 +35,9 @@ export const Default: Story = {
     return (
       <Form {...form}>
         <form
-          onSubmit={form.handleSubmit((data) => alert(JSON.stringify(data, null, 2)))}
+          onSubmit={form.handleSubmit((data) =>
+            alert(JSON.stringify(data, null, 2)),
+          )}
           className="space-y-4"
         >
           <AppFormNumberInput
@@ -62,7 +64,9 @@ export const WithValidation: Story = {
     return (
       <Form {...form}>
         <form
-          onSubmit={form.handleSubmit((data) => alert(JSON.stringify(data, null, 2)))}
+          onSubmit={form.handleSubmit((data) =>
+            alert(JSON.stringify(data, null, 2)),
+          )}
           className="space-y-4"
         >
           <AppFormNumberInput
@@ -100,7 +104,9 @@ export const WithDigitLimit: Story = {
     return (
       <Form {...form}>
         <form
-          onSubmit={form.handleSubmit((data) => alert(JSON.stringify(data, null, 2)))}
+          onSubmit={form.handleSubmit((data) =>
+            alert(JSON.stringify(data, null, 2)),
+          )}
           className="space-y-4"
         >
           <AppFormNumberInput
@@ -139,7 +145,9 @@ export const WithDecimal: Story = {
     return (
       <Form {...form}>
         <form
-          onSubmit={form.handleSubmit((data) => alert(JSON.stringify(data, null, 2)))}
+          onSubmit={form.handleSubmit((data) =>
+            alert(JSON.stringify(data, null, 2)),
+          )}
           className="space-y-4"
         >
           <AppFormNumberInput
@@ -169,7 +177,9 @@ export const WithThousandSeparator: Story = {
     return (
       <Form {...form}>
         <form
-          onSubmit={form.handleSubmit((data) => alert(JSON.stringify(data, null, 2)))}
+          onSubmit={form.handleSubmit((data) =>
+            alert(JSON.stringify(data, null, 2)),
+          )}
           className="space-y-4"
         >
           <AppFormNumberInput
@@ -200,7 +210,9 @@ export const WithIcons: Story = {
     return (
       <Form {...form}>
         <form
-          onSubmit={form.handleSubmit((data) => alert(JSON.stringify(data, null, 2)))}
+          onSubmit={form.handleSubmit((data) =>
+            alert(JSON.stringify(data, null, 2)),
+          )}
           className="space-y-4"
         >
           <AppFormNumberInput
@@ -229,7 +241,9 @@ export const SizeMedium: Story = {
     return (
       <Form {...form}>
         <form
-          onSubmit={form.handleSubmit((data) => alert(JSON.stringify(data, null, 2)))}
+          onSubmit={form.handleSubmit((data) =>
+            alert(JSON.stringify(data, null, 2)),
+          )}
           className="space-y-4"
         >
           <AppFormNumberInput
@@ -257,7 +271,9 @@ export const Disabled: Story = {
     return (
       <Form {...form}>
         <form
-          onSubmit={form.handleSubmit((data) => alert(JSON.stringify(data, null, 2)))}
+          onSubmit={form.handleSubmit((data) =>
+            alert(JSON.stringify(data, null, 2)),
+          )}
           className="space-y-4"
         >
           <AppFormNumberInput
@@ -285,7 +301,9 @@ export const LongDigitLimit: Story = {
     return (
       <Form {...form}>
         <form
-          onSubmit={form.handleSubmit((data) => alert(JSON.stringify(data, null, 2)))}
+          onSubmit={form.handleSubmit((data) =>
+            alert(JSON.stringify(data, null, 2)),
+          )}
           className="space-y-4"
         >
           <AppFormNumberInput
@@ -322,7 +340,9 @@ export const AdvancedDecimalExample: Story = {
     return (
       <Form {...form}>
         <form
-          onSubmit={form.handleSubmit((data) => alert(JSON.stringify(data, null, 2)))}
+          onSubmit={form.handleSubmit((data) =>
+            alert(JSON.stringify(data, null, 2)),
+          )}
           className="space-y-4"
         >
           <AppFormNumberInput

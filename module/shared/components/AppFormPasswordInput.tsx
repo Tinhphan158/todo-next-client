@@ -13,6 +13,7 @@ interface FormInputFieldPasswordProps<
 > extends Omit<ControllerProps<TFieldValues, TName>, "render"> {
   id?: string;
   label?: React.ReactNode;
+  labelEnd?: React.ReactNode;
   helperText?: React.ReactNode;
   placeholder?: string;
   size?: "L" | "M";
@@ -30,6 +31,7 @@ export const FormInputFieldPassword = <
 >({
   id,
   label,
+  labelEnd,
   helperText,
   placeholder,
   size = "L",
@@ -52,6 +54,7 @@ export const FormInputFieldPassword = <
                 {...field}
                 id={id}
                 label={label}
+                labelEnd={labelEnd}
                 helperText={helperText}
                 placeholder={placeholder}
                 size={size}

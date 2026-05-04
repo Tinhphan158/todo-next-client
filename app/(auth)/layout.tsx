@@ -1,9 +1,9 @@
-interface AuthLayoutProps {
+import { AuthLayout } from "@/module/auth/components/AuthLayout";
+
+export default function AuthGroupLayout({
+  children,
+}: {
   children: React.ReactNode;
+}) {
+  return <AuthLayout>{children}</AuthLayout>;
 }
-
-const AuthLayout = async ({ children }: AuthLayoutProps) => {
-  return <div>{children}</div>;
-};
-
-export default AuthLayout;

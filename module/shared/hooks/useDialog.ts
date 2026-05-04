@@ -1,5 +1,5 @@
 "use client";
-import { useState, useCallback, useEffect } from "react";
+import { useCallback, useState } from "react";
 
 interface UseDialogReturn {
   isOpen: boolean;
@@ -11,11 +11,6 @@ interface UseDialogReturn {
 
 export const useDialog = (initialOpen: boolean = false): UseDialogReturn => {
   const [isOpen, setIsOpen] = useState(initialOpen);
-
-  // Sync state with prop changes
-  useEffect(() => {
-    setIsOpen(initialOpen);
-  }, [initialOpen]);
 
   const openDialog = useCallback(() => {
     setIsOpen(true);

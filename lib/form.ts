@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect } from "react";
-import { DefaultValues, FieldValues, Resolver, useForm} from "react-hook-form";
+import { DefaultValues, FieldValues, Resolver, useForm } from "react-hook-form";
 
 export interface FormState<T extends FieldValues> {
   data?: T;

@@ -1,14 +1,14 @@
-import type { Meta, StoryObj } from "@storybook/nextjs-vite";
-import AppFormDrawer from "@/module/shared/components/AppFormDrawer";
-import { useForm } from "react-hook-form";
 import { Form } from "@/components/ui/form";
-import { zodResolver } from "@hookform/resolvers/zod";
-import { z } from "zod";
+import { BaseFormProps } from "@/lib/form";
+import { AppButton } from "@/module/shared/components/AppButton";
+import AppFormDrawer from "@/module/shared/components/AppFormDrawer";
 import { FormInputFieldV2 } from "@/module/shared/components/AppFormInput";
 import { FormTextAreaField } from "@/module/shared/components/AppFormTextArea";
+import { standardSchemaResolver } from "@hookform/resolvers/standard-schema";
+import type { Meta, StoryObj } from "@storybook/nextjs-vite";
 import { useEffect, useState } from "react";
-import { AppButton } from "@/module/shared/components/AppButton";
-import { BaseFormProps } from "@/lib/form";
+import { useForm } from "react-hook-form";
+import { z } from "zod";
 
 // Mock form data type
 interface MockFormData {
@@ -32,7 +32,7 @@ const MockForm = ({
   onStateChange,
 }: BaseFormProps<MockFormData>) => {
   const form = useForm<MockFormData>({
-    resolver: zodResolver(mockFormSchema as any),
+    resolver: standardSchemaResolver(mockFormSchema),
     defaultValues: initialData || {
       name: "",
       email: "",

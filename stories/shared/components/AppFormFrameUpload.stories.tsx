@@ -34,7 +34,19 @@ export const Default: Story = {
     return (
       <Form {...form}>
         <form
-          onSubmit={form.handleSubmit((data) => alert(JSON.stringify({ fileName: data.image?.file?.name, fileSize: data.image?.file?.size, fileType: data.image?.file?.type }, null, 2)))}
+          onSubmit={form.handleSubmit((data) =>
+            alert(
+              JSON.stringify(
+                {
+                  fileName: data.image?.file?.name,
+                  fileSize: data.image?.file?.size,
+                  fileType: data.image?.file?.type,
+                },
+                null,
+                2,
+              ),
+            ),
+          )}
           className="space-y-4"
         >
           <FormFrameUploadField
@@ -117,7 +129,9 @@ export const WithHelperText: Story = {
     return (
       <Form {...form}>
         <form
-          onSubmit={form.handleSubmit((data) => alert(JSON.stringify(data, null, 2)))}
+          onSubmit={form.handleSubmit((data) =>
+            alert(JSON.stringify(data, null, 2)),
+          )}
           className="space-y-4"
         >
           <FormFrameUploadField
@@ -148,7 +162,9 @@ export const ProfilePicture: Story = {
     return (
       <Form {...form}>
         <form
-          onSubmit={form.handleSubmit((data) => alert(JSON.stringify(data, null, 2)))}
+          onSubmit={form.handleSubmit((data) =>
+            alert(JSON.stringify(data, null, 2)),
+          )}
           className="space-y-4"
         >
           <FormFrameUploadField
@@ -181,7 +197,9 @@ export const CoverImage: Story = {
     return (
       <Form {...form}>
         <form
-          onSubmit={form.handleSubmit((data) => alert(JSON.stringify(data, null, 2)))}
+          onSubmit={form.handleSubmit((data) =>
+            alert(JSON.stringify(data, null, 2)),
+          )}
           className="space-y-4"
         >
           <FormFrameUploadField
@@ -278,7 +296,9 @@ export const WithPreloadedImage: Story = {
     return (
       <Form {...form}>
         <form
-          onSubmit={form.handleSubmit((data) => alert(JSON.stringify(data, null, 2)))}
+          onSubmit={form.handleSubmit((data) =>
+            alert(JSON.stringify(data, null, 2)),
+          )}
           className="space-y-4"
         >
           <FormFrameUploadField
@@ -308,7 +328,9 @@ export const PNGOnly: Story = {
     return (
       <Form {...form}>
         <form
-          onSubmit={form.handleSubmit((data) => alert(JSON.stringify(data, null, 2)))}
+          onSubmit={form.handleSubmit((data) =>
+            alert(JSON.stringify(data, null, 2)),
+          )}
           className="space-y-4"
         >
           <FormFrameUploadField

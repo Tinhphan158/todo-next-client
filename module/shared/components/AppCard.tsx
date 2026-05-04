@@ -1,17 +1,19 @@
 "use client";
 import {
   Card,
+  CardAction,
+  CardContent,
+  CardDescription,
+  CardFooter,
   CardHeader,
   CardTitle,
-  CardDescription,
-  CardContent,
-  CardFooter,
-  CardAction,
 } from "@/components/ui/card";
-import { cn } from "@/lib/utils";
 import React from "react";
 
-export interface AppCardProps extends React.ComponentProps<"div"> {
+export interface AppCardProps extends Omit<
+  React.ComponentProps<"div">,
+  "title"
+> {
   size?: "default" | "sm";
   title?: React.ReactNode;
   description?: React.ReactNode;
@@ -64,11 +66,11 @@ export const AppCard = React.forwardRef<HTMLDivElement, AppCardProps>(
 AppCard.displayName = "AppCard";
 
 export {
-  Card as AppCardRaw,
-  CardHeader as AppCardHeader,
-  CardTitle as AppCardTitle,
-  CardDescription as AppCardDescription,
-  CardContent as AppCardContent,
-  CardFooter as AppCardFooter,
   CardAction as AppCardAction,
+  CardContent as AppCardContent,
+  CardDescription as AppCardDescription,
+  CardFooter as AppCardFooter,
+  CardHeader as AppCardHeader,
+  Card as AppCardRaw,
+  CardTitle as AppCardTitle,
 };

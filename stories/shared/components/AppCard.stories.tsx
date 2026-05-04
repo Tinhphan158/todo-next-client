@@ -141,7 +141,9 @@ export const CompleteCard: Story = {
         </div>
         <div className="flex items-center justify-between">
           <span className="text-sm text-neutral-600">Due Date</span>
-          <span className="text-sm font-bold text-neutral-950">May 15, 2026</span>
+          <span className="text-sm font-bold text-neutral-950">
+            May 15, 2026
+          </span>
         </div>
       </div>
     ),
@@ -173,14 +175,20 @@ export const ListCard: Story = {
     title: "Recent Activity",
     children: (
       <div className="divide-y divide-neutral-100">
-        {["Created new task", "Updated project settings", "Added team member", "Completed milestone"].map(
-          (item, i) => (
-            <div key={i} className="flex items-center gap-3 py-2 first:pt-0 last:pb-0">
-              <div className="h-2 w-2 rounded-full bg-primary-500" />
-              <span className="text-sm text-neutral-700">{item}</span>
-            </div>
-          ),
-        )}
+        {[
+          "Created new task",
+          "Updated project settings",
+          "Added team member",
+          "Completed milestone",
+        ].map((item, i) => (
+          <div
+            key={i}
+            className="flex items-center gap-3 py-2 first:pt-0 last:pb-0"
+          >
+            <div className="bg-primary-500 h-2 w-2 rounded-full" />
+            <span className="text-sm text-neutral-700">{item}</span>
+          </div>
+        ))}
       </div>
     ),
     footer: (

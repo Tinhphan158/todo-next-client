@@ -66,10 +66,7 @@ function initialInputs(
   }
   if (value && typeof value === "object" && !("getTime" in value)) {
     const r = value as { start?: Date; end?: Date };
-    return [
-      r.start ? formatDate(r.start) : "",
-      r.end ? formatDate(r.end) : "",
-    ];
+    return [r.start ? formatDate(r.start) : "", r.end ? formatDate(r.end) : ""];
   }
   return ["", ""];
 }
@@ -112,9 +109,7 @@ const AppDateInputInner = ({
   const [startInput, setStartInput] = useState(
     () => initialInputs(type, value)[0],
   );
-  const [endInput, setEndInput] = useState(
-    () => initialInputs(type, value)[1],
-  );
+  const [endInput, setEndInput] = useState(() => initialInputs(type, value)[1]);
 
   const handleStartChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const newValue = e.target.value;

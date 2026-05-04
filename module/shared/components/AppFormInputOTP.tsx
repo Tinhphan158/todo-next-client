@@ -1,11 +1,9 @@
 "use client";
 import { FormControl, FormField, FormItem } from "@/components/ui/form";
+import { cn } from "@/lib/utils";
 import React from "react";
 import { ControllerProps, FieldPath, FieldValues } from "react-hook-form";
 import { AppInputOTP } from "./AppInputOTP";
-import { cn } from "@/lib/utils";
-import { AppHelperText } from "./AppHelperText";
-import { InfoIcon } from "../icons";
 
 interface AppFormInputOTPProps<
   TFieldValues extends FieldValues = FieldValues,
@@ -35,25 +33,18 @@ export const AppFormInputOTP = <
     <FormField
       {...props}
       render={({ field, fieldState }) => (
-        <FormItem className={cn("flex w-full flex-col gap-1", className)}>
+        <FormItem className={cn("flex w-fit flex-col gap-1", className)}>
           <FormControl>
-            <>
-              <AppInputOTP
-                label={label}
-                helperText={helperText}
-                maxLength={maxLength}
-                value={field.value}
-                onChange={field.onChange}
-                disabled={disabled}
-                pattern={pattern}
-                error={fieldState.error?.message}
-              />
-              {fieldState.error?.message && (
-                <AppHelperText showIcon icon={<InfoIcon />} state="error">
-                  {fieldState.error.message}
-                </AppHelperText>
-              )}
-            </>
+            <AppInputOTP
+              label={label}
+              helperText={helperText}
+              maxLength={maxLength}
+              value={field.value}
+              onChange={field.onChange}
+              disabled={disabled}
+              pattern={pattern}
+              error={fieldState.error?.message}
+            />
           </FormControl>
         </FormItem>
       )}

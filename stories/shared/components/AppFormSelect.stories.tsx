@@ -53,7 +53,9 @@ export const Default: Story = {
     return (
       <Form {...form}>
         <form
-          onSubmit={form.handleSubmit((data) => alert(JSON.stringify(data, null, 2)))}
+          onSubmit={form.handleSubmit((data) =>
+            alert(JSON.stringify(data, null, 2)),
+          )}
           className="space-y-4"
         >
           <FormSelectField
@@ -81,7 +83,9 @@ export const WithValidation: Story = {
     return (
       <Form {...form}>
         <form
-          onSubmit={form.handleSubmit((data) => alert(JSON.stringify(data, null, 2)))}
+          onSubmit={form.handleSubmit((data) =>
+            alert(JSON.stringify(data, null, 2)),
+          )}
           className="space-y-4"
         >
           <FormSelectField
@@ -112,7 +116,9 @@ export const WithDefaultValue: Story = {
     return (
       <Form {...form}>
         <form
-          onSubmit={form.handleSubmit((data) => alert(JSON.stringify(data, null, 2)))}
+          onSubmit={form.handleSubmit((data) =>
+            alert(JSON.stringify(data, null, 2)),
+          )}
           className="space-y-4"
         >
           <FormSelectField
@@ -140,7 +146,9 @@ export const Disabled: Story = {
     return (
       <Form {...form}>
         <form
-          onSubmit={form.handleSubmit((data) => alert(JSON.stringify(data, null, 2)))}
+          onSubmit={form.handleSubmit((data) =>
+            alert(JSON.stringify(data, null, 2)),
+          )}
           className="space-y-4"
         >
           <FormSelectField

@@ -13,6 +13,7 @@ interface FormInputFieldV2Props<
 > extends Omit<ControllerProps<TFieldValues, TName>, "render"> {
   id?: string;
   label?: React.ReactNode;
+  labelEnd?: React.ReactNode;
   helperText?: React.ReactNode;
   placeholder?: string;
   size?: "L" | "M";
@@ -33,6 +34,7 @@ export const FormInputFieldV2 = <
 >({
   id,
   label,
+  labelEnd,
   helperText,
   placeholder,
   size = "L",
@@ -59,6 +61,7 @@ export const FormInputFieldV2 = <
                 {...field}
                 id={id}
                 label={label}
+                labelEnd={labelEnd}
                 helperText={helperText}
                 type={type}
                 placeholder={placeholder}

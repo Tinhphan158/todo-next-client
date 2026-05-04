@@ -34,7 +34,9 @@ export const Default: Story = {
     return (
       <Form {...form}>
         <form
-          onSubmit={form.handleSubmit((data) => alert(JSON.stringify(data, null, 2)))}
+          onSubmit={form.handleSubmit((data) =>
+            alert(JSON.stringify(data, null, 2)),
+          )}
           className="space-y-4"
         >
           <AppFormInputOTP
@@ -60,7 +62,9 @@ export const WithValidation: Story = {
     return (
       <Form {...form}>
         <form
-          onSubmit={form.handleSubmit((data) => alert(JSON.stringify(data, null, 2)))}
+          onSubmit={form.handleSubmit((data) =>
+            alert(JSON.stringify(data, null, 2)),
+          )}
           className="space-y-4"
         >
           <AppFormInputOTP
@@ -94,7 +98,9 @@ export const FourDigitPIN: Story = {
     return (
       <Form {...form}>
         <form
-          onSubmit={form.handleSubmit((data) => alert(JSON.stringify(data, null, 2)))}
+          onSubmit={form.handleSubmit((data) =>
+            alert(JSON.stringify(data, null, 2)),
+          )}
           className="space-y-4"
         >
           <AppFormInputOTP
@@ -135,7 +141,9 @@ export const WithErrorState: Story = {
     return (
       <Form {...form}>
         <form
-          onSubmit={form.handleSubmit((data) => alert(JSON.stringify(data, null, 2)))}
+          onSubmit={form.handleSubmit((data) =>
+            alert(JSON.stringify(data, null, 2)),
+          )}
           className="space-y-4"
         >
           <AppFormInputOTP
@@ -161,7 +169,9 @@ export const Disabled: Story = {
     return (
       <Form {...form}>
         <form
-          onSubmit={form.handleSubmit((data) => alert(JSON.stringify(data, null, 2)))}
+          onSubmit={form.handleSubmit((data) =>
+            alert(JSON.stringify(data, null, 2)),
+          )}
           className="space-y-4"
         >
           <AppFormInputOTP

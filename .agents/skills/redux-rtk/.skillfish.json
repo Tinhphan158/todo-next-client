@@ -1,0 +1,10 @@
+{
+  "version": 2,
+  "name": "redux-rtk",
+  "owner": "surfertas",
+  "repo": "claude-react-rtk",
+  "path": "plugins/react-rtk/skills/redux-rtk",
+  "branch": "main",
+  "sha": "843c10ee1c9af95005c21811b0e029a0e49007f2",
+  "source": "manual"
+}
