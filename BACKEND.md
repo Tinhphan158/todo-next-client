@@ -6,9 +6,8 @@ Backend API for todo/workspace management with NestJS + Prisma + PostgreSQL.
 
 - Authentication: OTP qua email (đăng ký / quên mật khẩu), JWT access + refresh
 - Profile management
-- Status CRUD (seed mặc định: PENDING, TODO, DONE, CANCEL)
 - Workspace management + board / danh sách task có lọc & phân trang
-- Task CRUD, task theo status, tìm kiếm, gắn label
+- Task CRUD, task theo enum `TaskStatus` (PENDING, TODO, DONE, CANCEL), tìm kiếm, gắn label
 - Dashboard thống kê
 - Notifications (lưu DB + SSE realtime)
 - Upload ảnh Cloudinary
@@ -30,7 +29,6 @@ todo-nest-be/
 │   ├── modules/
 │   │   ├── auth/              # Đăng ký, đăng nhập, OTP, refresh, logout
 │   │   ├── profile/           # GET/PATCH profile (`/profiles/me`)
-│   │   ├── status/            # CRUD trạng thái task
 │   │   ├── workspace/         # Workspace + board + tasks có filter
 │   │   ├── task/              # Task CRUD, search, list theo status
 │   │   ├── label/             # Nhãn (màu + tên), phân trang
@@ -48,12 +46,11 @@ todo-nest-be/
 |--------|--------|
 | **Account** | Người dùng: `name`, `email` (unique), `password`, `refreshToken`, `avatar`, timestamp. Quan hệ: workspaces, tasks, labels, notifications. |
 | **Workspace** | Không gian làm việc: `name`, `accountId`. Xóa workspace cascade tasks. |
-| **Status** | Trạng thái task: `name` (unique). Seed khởi động: PENDING, TODO, DONE, CANCEL. |
-| **Task** | `title`, `description`, `content`, `priority` (enum **Low \| Medium \| High**), `statusId`, `workspaceId`, `accountId`, `startTime`, `endTime`, `completedAt`, timestamp. Quan hệ: status, workspace, account, notifications; **nhiều-nhiều** với **Label**. |
+| **Task** | `title`, `description`, `content`, `priority` (enum **Low \| Medium \| High**), `status` (enum **PENDING \| TODO \| DONE \| CANCEL**), `workspaceId`, `accountId`, `startTime`, `endTime`, `completedAt`, timestamp. Quan hệ: workspace, account, notifications; **nhiều-nhiều** với **Label**. |
 | **Label** | Nhãn riêng theo user: `name`, `color`, `accountId`; gắn vào nhiều task. |
 | **Notification** | `title`, `description`, `taskId` (nullable), `accountId`, `time`, `viewed`, `type` (chuỗi, ví dụ SYSTEM, COMPLETED, OVERDUE). |
 
-Quan hệ chính: `Account 1—n Workspace / Task / Label / Notification`; `Workspace 1—n Task`; `Status 1—n Task`; `Task n—n Label`.
+Quan hệ chính: `Account 1—n Workspace / Task / Label / Notification`; `Workspace 1—n Task`; `Task n—n Label`.
 
 ## Local PostgreSQL with Docker
 
@@ -159,24 +156,13 @@ Luồng quên mật khẩu: `forgot-password` → `verify-otp` (`RESET_PASSWORD`
 
 ---
 
-### Status (`/api/statuses`)
-
-| Method | Path | Auth | Request | Response |
-|--------|------|------|---------|----------|
-| GET | `/statuses` | Bearer | — | Mảng `Status`: `{ "id", "name", "createdAt", "updatedAt" }` |
-| POST | `/statuses` | Bearer | `{ "name" }` — ≥2 ký tự, unique | Bản ghi `Status` vừa tạo |
-| PATCH | `/statuses/:id` | Bearer | `{ "name?" }` | `Status` đã cập nhật |
-| DELETE | `/statuses/:id` | Bearer | — | Bản ghi `Status` đã xóa (Prisma delete) |
-
----
-
 ### Workspace (`/api/workspaces`)
 
 | Method | Path | Auth | Request / Query | Response |
 |--------|------|------|-----------------|----------|
 | POST | `/workspaces` | Bearer | Body: `{ "name", "accountId" }` — **DTO yêu cầu** `accountId` (số nguyên); server ghi đè bằng user đăng nhập | `Workspace`: `{ "id", "name", "accountId", "createdAt", "updatedAt" }` |
 | GET | `/workspaces` | Bearer | — | Mảng `Workspace` của user |
-| GET | `/workspaces/:workspaceId/tasks/board` | Bearer | Query (tuỳ chọn): `search`, `labelIds` (mảng id), `startTimeFrom`, `startTimeTo`, `endTimeFrom`, `endTimeTo`, `priorities` (mảng `Low` \| `Medium` \| `High`) | `{ "columns": [ { "status": Status, "tasks": Task[] } ] }` — mỗi task có `status`, `labels` |
+| GET | `/workspaces/:workspaceId/tasks/board` | Bearer | Query (tuỳ chọn): `search`, `labelIds` (mảng id), `startTimeFrom`, `startTimeTo`, `endTimeFrom`, `endTimeTo`, `priorities` (mảng `Low` \| `Medium` \| `High`) | `{ "columns": [ { "status": "PENDING"\|"TODO"\|"DONE"\|"CANCEL", "tasks": Task[] } ] }` — mỗi task có field `status` (enum), `labels` |
 | GET | `/workspaces/:workspaceId/tasks` | Bearer | Phân trang: `page`, `pageSize` (10 \| 50 \| 100); cùng bộ filter như board | `{ "data": Task[], "metadata": PaginationMeta }` |
 | PATCH | `/workspaces/:id` | Bearer | `{ "name" }` | `Workspace` đã sửa |
 | DELETE | `/workspaces/:id` | Bearer | — | `Workspace` đã xóa; đồng thời cố xóa ảnh Cloudinary tham chiếu trong `content` task |
@@ -189,12 +175,12 @@ Luồng quên mật khẩu: `forgot-password` → `verify-otp` (`RESET_PASSWORD`
 
 | Method | Path | Auth | Request / Query | Response |
 |--------|------|------|-----------------|----------|
-| POST | `/task` | Bearer | Body: `{ "title", "content", "statusId", "workspaceId", "accountId", "description?", "priority?", "startTime?", "endTime?", "labelIds?" }` — `priority` ∈ `Low` \| `Medium` \| `High`; **accountId** bắt buộc theo DTO nhưng server ghi đè từ JWT | `Task` + `status`, `workspace`, `labels` |
-| GET | `/task` | Bearer | — | Mảng `Task` (kèm `status`, `workspace`, `labels`) |
-| GET | `/task/status/:statusId/list` | Bearer | — | Mảng `Task` theo `statusId`, sort `endTime` asc |
+| POST | `/task` | Bearer | Body: `{ "title", "content", "workspaceId", "accountId", "status?", "description?", "priority?", "startTime?", "endTime?", "labelIds?" }` — `status` ∈ `PENDING` \| `TODO` \| `DONE` \| `CANCEL` (mặc định **PENDING**); `priority` ∈ `Low` \| `Medium` \| `High`; **accountId** bắt buộc theo DTO nhưng server ghi đè từ JWT | `Task` (`status` là enum) + `workspace`, `labels` |
+| GET | `/task` | Bearer | — | Mảng `Task` (kèm `workspace`, `labels`) |
+| GET | `/task/status/:status/list` | Bearer | `:status` = một trong `PENDING`, `TODO`, `DONE`, `CANCEL` | Mảng `Task` theo status, sort `endTime` asc |
 | GET | `/task/search/query` | Bearer | Query: `q` (chuỗi tìm), `workspaceId?` (số) | Mảng `Task` khớp title/description/content |
-| GET | `/task/:id` | Bearer | — | `Task` + `status`, `workspace`, `notifications`, `labels` |
-| PATCH | `/task/:id` | Bearer | Partial giống create; có thể đổi `labelIds` (set toàn bộ nhãn) | `Task` + `status`, `labels`, `workspace` |
+| GET | `/task/:id` | Bearer | — | `Task` + `workspace`, `notifications`, `labels` |
+| PATCH | `/task/:id` | Bearer | Partial giống create; có thể đổi `status`, `labelIds` (set toàn bộ nhãn) | `Task` + `labels`, `workspace` |
 | DELETE | `/task/:id` | Bearer | — | Bản ghi `Task` đã xóa |
 
 ---
@@ -214,7 +200,7 @@ Luồng quên mật khẩu: `forgot-password` → `verify-otp` (`RESET_PASSWORD`
 
 | Method | Path | Auth | Response |
 |--------|------|------|----------|
-| GET | `/dashboard/me/summary` | Bearer | `{ "totalTasks", "totalWorkspaces", "overdueTasks", "dueToday", "unreadNotifications", "byStatus": [ { "statusId", "_count": { "_all": number } } ] }` |
+| GET | `/dashboard/me/summary` | Bearer | `{ "totalTasks", "totalWorkspaces", "overdueTasks", "dueToday", "unreadNotifications", "byStatus": [ { "status": "PENDING"\|"TODO"\|"DONE"\|"CANCEL", "_count": { "_all": number } } ] }` |
 
 ---
 
