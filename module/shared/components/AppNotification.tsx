@@ -1,9 +1,9 @@
 "use client";
 
+import { cva } from "class-variance-authority";
 import React from "react";
 import { toast as sonnerToast, Toaster } from "sonner";
 import { InfoIcon } from "../icons";
-import { cva } from "class-variance-authority";
 
 type NotificationType = "normal" | "success" | "warning" | "info" | "error";
 const ID = "app-notification";
@@ -39,7 +39,7 @@ const appNotificationVariants = cva(
         normal:
           "[&_[data-progress=true]]:bg-neutral-100 bg-base-white border-neutral-100 [&_svg]:text-neutral-950",
         success:
-          "[&_[data-progress=true]]:bg-positives-500 bg-positives-50 border-positives-500 [&_svg]:text-positives-500",
+          "[&_[data-progress=true]]:bg-positive-500 bg-positive-50 border-positive-500 [&_svg]:text-positive-500",
         warning:
           "[&_[data-progress=true]]:bg-warning-500 bg-warning-50 border-warning-500 [&_svg]:text-warning-500",
         info: "[&_[data-progress=true]]:bg-info-500 bg-info-50 border-info-500 [&_svg]:text-info-500",
@@ -57,7 +57,7 @@ const appNotificationProgressVariants = cva("h-[3px] absolute bottom-0", {
   variants: {
     type: {
       normal: "bg-neutral-100",
-      success: "bg-positives-500",
+      success: "bg-positive-500",
       warning: "bg-warning-500",
       info: "bg-info-500",
       error: "bg-negative-500",

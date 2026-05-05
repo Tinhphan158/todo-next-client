@@ -1,6 +1,6 @@
-import * as React from "react";
-import type { Meta, StoryObj } from "@storybook/nextjs-vite";
 import AppSelect from "@/module/shared/components/AppSelect";
+import type { Meta, StoryObj } from "@storybook/nextjs-vite";
+import * as React from "react";
 
 const meta = {
   title: "Shared/Components/AppSelect",
@@ -215,7 +215,7 @@ export const WithStatusColors: Story = {
     const statusItems = [
       {
         value: "active",
-        children: <span className="text-positives-500">Active</span>,
+        children: <span className="text-positive-500">Active</span>,
       },
       {
         value: "inactive",

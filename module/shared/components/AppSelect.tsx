@@ -56,7 +56,7 @@ export const AppSelectItem = ({
   return (
     <SelectItem
       onClick={handleClick}
-      className="body-s data-[state=checked]:text-positives-500 flex flex-col gap-2 p-3 font-medium text-neutral-950 outline-hidden hover:bg-neutral-50 data-[state=checked]:font-bold"
+      className="body-s data-[state=checked]:text-positive-500 flex flex-col gap-2 p-3 font-medium text-neutral-950 outline-hidden hover:bg-neutral-50 data-[state=checked]:font-bold"
       value={value}
     >
       {children}

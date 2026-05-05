@@ -1,9 +1,8 @@
-import * as React from "react";
-import type { Meta, StoryObj } from "@storybook/nextjs-vite";
-import AppPaginationTable from "@/module/shared/components/AppPaginationTable";
-import { AppColumn } from "@/module/shared/components/AppTable";
 import { AppButton } from "@/module/shared/components/AppButton";
 import AppEmptyState from "@/module/shared/components/AppEmptyState";
+import AppPaginationTable from "@/module/shared/components/AppPaginationTable";
+import { AppColumn } from "@/module/shared/components/AppTable";
+import type { Meta, StoryObj } from "@storybook/nextjs-vite";
 
 // Create a typed version of the component for stories
 const AppPaginationTableWithUsers = AppPaginationTable<User>;
@@ -143,7 +142,7 @@ const columns: AppColumn<User>[] = [
       <span
         className={`text-caption-s rounded-full px-2 py-1 font-medium ${
           row.status === "Active"
-            ? "bg-positives-50 text-positives-700"
+            ? "bg-positive-50 text-positive-700"
             : "bg-neutral-100 text-neutral-600"
         }`}
       >
@@ -373,7 +372,7 @@ const orderColumns: AppColumn<Order>[] = [
       const statusColors = {
         Pending: "bg-warning-50 text-warning-700",
         Shipped: "bg-info-50 text-info-700",
-        Delivered: "bg-positives-50 text-positives-700",
+        Delivered: "bg-positive-50 text-positive-700",
         Cancelled: "bg-negative-50 text-negative-700",
       };
 

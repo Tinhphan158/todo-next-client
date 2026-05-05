@@ -1,6 +1,12 @@
 "use client";
 
+import { message } from "@/module/shared/components/AppMessage";
 import { AppCard } from "@/module/shared/components/AppCard";
+import {
+  useRequestSignupOtpMutation,
+  useSignupMutation,
+  useVerifyOtpMutation,
+} from "@/store/api/authApi";
 import { useState } from "react";
 import {
   RegisterFormContainer,
@@ -12,26 +18,76 @@ import { VerifyFormData } from "../schemas/verify-schema";
 import { STEP_REGISTER, StepRegister } from "../types";
 
 const RegisterPage = () => {
-  const [step, setStep] = useState<StepRegister>(STEP_REGISTER.VERIFY);
+  const [step, setStep] = useState<StepRegister>(STEP_REGISTER.REGISTER);
   const [email, setEmail] = useState<string>("");
+  const [registerData, setRegisterData] = useState<{
+    name: string;
+    email: string;
+    password: string;
+  } | null>(null);
+
+  const [requestSignupOtp] = useRequestSignupOtpMutation();
+  const [verifyOtp] = useVerifyOtpMutation();
+  const [signup] = useSignupMutation();
 
   const handleRegisterSubmit = async (data: RegisterFormData) => {
-    console.log(data);
-    alert(JSON.stringify(data, null, 2));
+    try {
+      await requestSignupOtp({
+        name: data.name,
+        email: data.email,
+        password: data.password,
+      }).unwrap();
 
-    // TODO: Send email verification code to user, handle API call and error handling
-    setEmail(data.email);
-    setStep(STEP_REGISTER.VERIFY);
+      setRegisterData({
+        name: data.name,
+        email: data.email,
+        password: data.password,
+      });
+      setEmail(data.email);
+      setStep(STEP_REGISTER.VERIFY);
+      message({ type: "success", description: "OTP sent to your email" });
+    } catch (err: unknown) {
+      const error = err as { data?: { message?: string } };
+      message({
+        type: "error",
+        description: error.data?.message || "Failed to send OTP",
+      });
+    }
   };
 
   const handleVerifySubmit = async (data: VerifyFormData) => {
-    console.log(data);
-    alert(JSON.stringify(data, null, 2));
-    setStep(STEP_REGISTER.SUCCESS);
+    try {
+      await verifyOtp({
+        email,
+        otp: data.code,
+        purpose: "SIGNUP",
+      }).unwrap();
+
+      await signup({ email }).unwrap();
+
+      setStep(STEP_REGISTER.SUCCESS);
+      message({ type: "success", description: "Registration successful!" });
+    } catch (err: unknown) {
+      const error = err as { data?: { message?: string } };
+      message({
+        type: "error",
+        description: error.data?.message || "Verification failed",
+      });
+    }
   };
 
   const handleResendCode = async () => {
-    console.log("Resend code");
+    if (!registerData) return;
+    try {
+      await requestSignupOtp(registerData).unwrap();
+      message({ type: "success", description: "OTP resent to your email" });
+    } catch (err: unknown) {
+      const error = err as { data?: { message?: string } };
+      message({
+        type: "error",
+        description: error.data?.message || "Failed to resend OTP",
+      });
+    }
   };
 
   const handleBack = () => {

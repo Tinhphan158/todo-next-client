@@ -1,11 +1,11 @@
-import * as React from "react";
-import type { Meta, StoryObj } from "@storybook/nextjs-vite";
+import { AppButton } from "@/module/shared/components/AppButton";
+import AppEmptyState from "@/module/shared/components/AppEmptyState";
 import AppTable, {
   AppColumn,
   SortDirection,
 } from "@/module/shared/components/AppTable";
-import { AppButton } from "@/module/shared/components/AppButton";
-import AppEmptyState from "@/module/shared/components/AppEmptyState";
+import type { Meta, StoryObj } from "@storybook/nextjs-vite";
+import * as React from "react";
 
 const meta = {
   title: "Shared/Components/AppTable",
@@ -147,7 +147,7 @@ export const WithCustomRender: Story = {
           <span
             className={`text-caption-s rounded-full px-2 py-1 font-medium ${
               row.status === "Active"
-                ? "bg-positives-50 text-positives-700"
+                ? "bg-positive-50 text-positive-700"
                 : "bg-neutral-100 text-neutral-600"
             }`}
           >
@@ -375,7 +375,7 @@ export const OrdersTable: Story = {
           const statusColors = {
             Pending: "bg-warning-50 text-wanring-700",
             Shipped: "bg-info-50 text-info-700",
-            Delivered: "bg-positives-50 text-positives-700",
+            Delivered: "bg-positive-50 text-positive-700",
             Cancelled: "bg-negative-50 text-negative-700",
           };
 
@@ -613,7 +613,7 @@ export const ComplexTable: Story = {
         align: "center",
         render: (row) => {
           const statusColors = {
-            Active: "bg-positives-50 text-positives-700",
+            Active: "bg-positive-50 text-positive-700",
             "On Leave": "bg-warning-50 text-wanring-700",
             Terminated: "bg-negative-50 text-negative-700",
           };
@@ -1284,7 +1284,7 @@ export const WithStickyColumnsAndSorting: Story = {
           <span
             className={`text-caption-s rounded-full px-3 py-1 font-medium ${
               row.status === "Active"
-                ? "bg-positives-50 text-positives-700"
+                ? "bg-positive-50 text-positive-700"
                 : "bg-neutral-100 text-neutral-600"
             }`}
           >
@@ -1543,7 +1543,7 @@ export const WithSubTables: Story = {
             Pending: "bg-warning-50 text-wanring-700",
             Processing: "bg-info-50 text-info-700",
             Shipped: "bg-info-50 text-info-700",
-            Delivered: "bg-positives-50 text-positives-700",
+            Delivered: "bg-positive-50 text-positive-700",
           };
 
           return (
@@ -1699,7 +1699,7 @@ export const WithExpandableDetails: Story = {
                     <span
                       className={`text-caption-s rounded-full px-2 py-1 font-medium ${
                         task.status === "Completed"
-                          ? "bg-positives-50 text-positives-700"
+                          ? "bg-positive-50 text-positive-700"
                           : task.status === "In Progress" ||
                               task.status === "In Review"
                             ? "bg-info-50 text-info-700"
@@ -1733,7 +1733,7 @@ export const WithExpandableDetails: Story = {
                     <span
                       className={`text-caption-s rounded-full px-2 py-1 font-medium ${
                         milestone.completed
-                          ? "bg-positives-50 text-positives-700"
+                          ? "bg-positive-50 text-positive-700"
                           : "bg-neutral-100 text-neutral-600"
                       }`}
                     >
@@ -1771,7 +1771,7 @@ export const WithExpandableDetails: Story = {
         align: "center",
         render: (row) => {
           const statusColors = {
-            Active: "bg-positives-50 text-positives-700",
+            Active: "bg-positive-50 text-positive-700",
             Completed: "bg-info-50 text-info-700",
             "On Hold": "bg-warning-50 text-wanring-700",
           };
@@ -1800,7 +1800,7 @@ export const WithExpandableDetails: Story = {
           <div className="flex items-center gap-2">
             <div className="h-2 w-12 overflow-hidden rounded-full bg-neutral-100">
               <div
-                className="bg-positives-500 h-full transition-all"
+                className="bg-positive-500 h-full transition-all"
                 style={{ width: `${row.progress}%` }}
               />
             </div>

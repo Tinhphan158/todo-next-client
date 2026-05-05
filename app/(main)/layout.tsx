@@ -1,9 +1,15 @@
+import { MainAuthGate } from "@/module/shared/components/MainAuthGate";
+
 interface MainLayoutProps {
   children: React.ReactNode;
 }
 
-const MainLayout = async ({ children }: MainLayoutProps) => {
-  return <div>{children}</div>;
+const MainLayout = ({ children }: MainLayoutProps) => {
+  return (
+    <MainAuthGate>
+      <div>{children}</div>
+    </MainAuthGate>
+  );
 };
 
 export default MainLayout;
