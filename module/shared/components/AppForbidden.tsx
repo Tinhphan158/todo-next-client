@@ -24,10 +24,12 @@ const AppForbidden = ({
           {illustrationUrl && (
             <Image
               src={illustrationUrl || ""}
-              alt="Forbidden Ilustration"
+              alt="Forbidden illustration"
               width={160}
               height={160}
+              priority
               className="aspect-square w-40"
+              sizes="(max-width: 640px) 100vw, 480px"
             />
           )}
         </div>

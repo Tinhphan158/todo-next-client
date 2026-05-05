@@ -23,10 +23,12 @@ const AppNotFound = ({
           {illustrationUrl && (
             <Image
               src={illustrationUrl || ""}
-              alt="Not found Ilustration"
+              alt="Not found illustration"
               width={480}
               height={141}
-              className="h-[141.31px] w-full"
+              priority
+              className="h-auto w-full max-w-[480px]"
+              sizes="(max-width: 640px) 100vw, 480px"
             />
           )}
         </div>
