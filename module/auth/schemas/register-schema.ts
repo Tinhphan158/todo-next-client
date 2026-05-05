@@ -4,7 +4,9 @@ import { PASSWORD_MIN_LENGTH } from "../constants";
 export const useRegisterSchema = () =>
   z
     .object({
-      name: z.string().min(1, "Name is required"),
+      name: z
+        .string()
+        .min(2, "Name must be at least 2 characters"),
       email: z
         .string()
         .regex(
@@ -17,7 +19,10 @@ export const useRegisterSchema = () =>
         }, "Invalid email address"),
       password: z
         .string()
-        .min(PASSWORD_MIN_LENGTH, "Password must be at least 6 characters")
+        .min(
+          PASSWORD_MIN_LENGTH,
+          `Password must be at least ${PASSWORD_MIN_LENGTH} characters`,
+        )
         .regex(
           /(?=.*[0-9])(?=.*[a-zA-Z])/,
           "Password must contain at least one number and one letter",

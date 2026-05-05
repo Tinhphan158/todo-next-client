@@ -13,19 +13,20 @@ interface MainAuthGateProps {
 export function MainAuthGate({ children }: MainAuthGateProps) {
   const pathname = usePathname();
   const router = useRouter();
-  const accessToken = useAppSelector((s) => s.auth.accessToken);
+  const hydrated = useAppSelector((s) => s.auth.hydrated);
+  const user = useAppSelector((s) => s.auth.user);
 
   const isForbiddenPage = pathname === FORBIDDEN_PATH;
   const allowedWithoutAuth = isForbiddenPage;
 
   useEffect(() => {
-    if (allowedWithoutAuth) return;
-    if (!accessToken) {
+    if (!hydrated || allowedWithoutAuth) return;
+    if (!user) {
       router.replace("/login");
     }
-  }, [allowedWithoutAuth, accessToken, router]);
+  }, [allowedWithoutAuth, hydrated, user, router]);
 
-  if (!allowedWithoutAuth && !accessToken) {
+  if (!hydrated || (!allowedWithoutAuth && !user)) {
     return null;
   }
 

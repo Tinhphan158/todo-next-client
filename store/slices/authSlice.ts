@@ -1,52 +1,37 @@
 import { createSlice, type PayloadAction } from "@reduxjs/toolkit";
 
+export interface AuthUser {
+  id: number;
+  name: string;
+  email: string;
+  avatar: string | null;
+}
+
 interface AuthState {
-  accessToken: string | null;
-  refreshToken: string | null;
-  user: {
-    id: number;
-    name: string;
-    email: string;
-    avatar: string | null;
-  } | null;
+  user: AuthUser | null;
+  hydrated: boolean;
 }
 
 const initialState: AuthState = {
-  accessToken: null,
-  refreshToken: null,
   user: null,
+  hydrated: false,
 };
 
 const authSlice = createSlice({
   name: "auth",
   initialState,
   reducers: {
-    setCredentials: (
-      state,
-      action: PayloadAction<{
-        accessToken: string;
-        refreshToken: string;
-        user: AuthState["user"];
-      }>,
-    ) => {
-      state.accessToken = action.payload.accessToken;
-      state.refreshToken = action.payload.refreshToken;
-      state.user = action.payload.user;
+    setUser: (state, action: PayloadAction<AuthUser | null>) => {
+      state.user = action.payload;
     },
-    setTokens: (
-      state,
-      action: PayloadAction<{ accessToken: string; refreshToken: string }>,
-    ) => {
-      state.accessToken = action.payload.accessToken;
-      state.refreshToken = action.payload.refreshToken;
+    setHydrated: (state, action: PayloadAction<boolean>) => {
+      state.hydrated = action.payload;
     },
     logout: (state) => {
-      state.accessToken = null;
-      state.refreshToken = null;
       state.user = null;
     },
   },
 });
 
-export const { setCredentials, setTokens, logout } = authSlice.actions;
+export const { setUser, setHydrated, logout } = authSlice.actions;
 export default authSlice.reducer;

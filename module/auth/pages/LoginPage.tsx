@@ -2,9 +2,8 @@
 
 import { message } from "@/module/shared/components/AppMessage";
 import { AppCard } from "@/module/shared/components/AppCard";
-import { useLoginMutation } from "@/store/api/authApi";
 import { useAppDispatch } from "@/store/hooks";
-import { setCredentials } from "@/store/slices/authSlice";
+import { setUser } from "@/store/slices/authSlice";
 import { useRouter } from "next/navigation";
 import { LoginForm } from "../components/login";
 import { LoginFormData } from "../schemas/login-schema";
@@ -12,35 +11,51 @@ import { LoginFormData } from "../schemas/login-schema";
 const LoginPage = () => {
   const router = useRouter();
   const dispatch = useAppDispatch();
-  const [login] = useLoginMutation();
 
   const handleSubmit = async (data: LoginFormData) => {
     try {
-      const result = await login({
-        email: data.email,
-        password: data.password,
-      }).unwrap();
+      const res = await fetch("/api/auth/login", {
+        method: "POST",
+        credentials: "include",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          email: data.email,
+          password: data.password,
+        }),
+      });
+
+      const body = (await res.json().catch(() => ({}))) as {
+        message?: string | string[];
+        id?: number;
+        name?: string;
+        email?: string;
+        avatar?: string | null;
+      };
+
+      if (!res.ok) {
+        const msg = body.message;
+        const description = Array.isArray(msg)
+          ? msg.join(", ")
+          : msg || "Invalid email or password";
+        message({ type: "error", description });
+        return;
+      }
 
       dispatch(
-        setCredentials({
-          accessToken: result.accessToken,
-          refreshToken: result.refreshToken,
-          user: {
-            id: result.id,
-            name: result.name,
-            email: result.email,
-            avatar: result.avatar,
-          },
+        setUser({
+          id: body.id as number,
+          name: body.name as string,
+          email: body.email as string,
+          avatar: body.avatar ?? null,
         }),
       );
 
       message({ type: "success", description: "Login successful!" });
       router.push("/dashboard");
-    } catch (err: unknown) {
-      const error = err as { data?: { message?: string } };
+    } catch {
       message({
         type: "error",
-        description: error.data?.message || "Invalid email or password",
+        description: "Invalid email or password",
       });
     }
   };

@@ -1,11 +1,6 @@
 import { baseApi } from "../axios/baseApi";
-import type {
-  Account,
-  LoginResponse,
-  MessageResponse,
-  OtpPurpose,
-  TokenResponse,
-} from "../types";
+import { logout } from "../slices/authSlice";
+import type { Account, MessageResponse, OtpPurpose } from "../types";
 
 export const authApi = baseApi.injectEndpoints({
   endpoints: (builder) => ({
@@ -28,29 +23,33 @@ export const authApi = baseApi.injectEndpoints({
       }),
     }),
 
-    login: builder.mutation<LoginResponse, { email: string; password: string }>(
-      {
-        query: (body) => ({
-          url: "/auth/login",
-          method: "POST",
-          data: body,
-        }),
-      },
-    ),
-
-    refreshToken: builder.mutation<TokenResponse, { refreshToken: string }>({
-      query: (body) => ({
-        url: "/auth/refresh-token",
-        method: "POST",
-        data: body,
-      }),
-    }),
-
     logoutApi: builder.mutation<MessageResponse, void>({
-      query: () => ({
-        url: "/auth/logout",
-        method: "POST",
-      }),
+      async queryFn(_arg, { dispatch }) {
+        try {
+          const res = await fetch("/api/auth/logout", {
+            method: "POST",
+            credentials: "include",
+          });
+          const data = (await res.json()) as MessageResponse;
+          if (!res.ok) {
+            return {
+              error: {
+                status: res.status,
+                data,
+              },
+            };
+          }
+          dispatch(logout());
+          return { data };
+        } catch {
+          return {
+            error: {
+              status: 500,
+              data: { message: "Logout failed" },
+            },
+          };
+        }
+      },
     }),
 
     forgotPassword: builder.mutation<MessageResponse, { email: string }>({
@@ -88,8 +87,6 @@ export const authApi = baseApi.injectEndpoints({
 export const {
   useRequestSignupOtpMutation,
   useSignupMutation,
-  useLoginMutation,
-  useRefreshTokenMutation,
   useLogoutApiMutation,
   useForgotPasswordMutation,
   useVerifyOtpMutation,

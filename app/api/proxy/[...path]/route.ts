@@ -1,3 +1,4 @@
+import { ACCESS_TOKEN_COOKIE } from "@/lib/auth-cookies";
 import { NextRequest, NextResponse } from "next/server";
 
 const BACKEND_URL = process.env.BACKEND_URL || "http://localhost:5000";
@@ -11,7 +12,13 @@ async function proxyRequest(req: NextRequest, params: { path: string[] }) {
   });
 
   const headers = new Headers();
-  const authorization = req.headers.get("authorization");
+  let authorization = req.headers.get("authorization");
+  if (!authorization) {
+    const accessToken = req.cookies.get(ACCESS_TOKEN_COOKIE)?.value;
+    if (accessToken) {
+      authorization = `Bearer ${accessToken}`;
+    }
+  }
   if (authorization) {
     headers.set("Authorization", authorization);
   }
