@@ -1,6 +1,6 @@
 import { cn } from "@/lib/utils";
-import AppPagination from "./AppPagination";
 import AppPageSizeSelect from "./AppPageSizeSelect";
+import AppPagination from "./AppPagination";
 
 export interface AppTablePaginationProps {
   totalItems?: number;
@@ -46,13 +46,16 @@ const AppTablePagination = ({
 
   return (
     <div className="flex items-center gap-4">
-      <span
-        className={cn("body-s font-medium text-neutral-950", {
-          "text-neutral-300": disabled,
-        })}
+      <p
+        className={cn(
+          "body-s leading-none font-medium whitespace-nowrap text-neutral-950",
+          {
+            "text-neutral-300": disabled,
+          },
+        )}
       >
         {formatTotalItemTitle && formatTotalItemTitle(totalItems || 0)}
-      </span>
+      </p>
       <AppPagination
         totalPages={totalPages}
         currentPage={currentPage}

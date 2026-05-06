@@ -1,6 +1,6 @@
 "use client";
 import { cva } from "class-variance-authority";
-import { useFormatter, useTranslations } from "next-intl";
+import { useFormatter } from "next-intl";
 import { useState } from "react";
 import {
   ArrowLeftIcon,
@@ -261,15 +261,14 @@ const AppCaledarItemList = ({
   currentCalendarDate,
   onClick,
 }: AppCalendarItemListProps) => {
-  const t = useTranslations("shared.calendar.weekdays");
   const weekDates = [
-    { key: "sun", label: t("sun") },
-    { key: "mon", label: t("mon") },
-    { key: "tue", label: t("tue") },
-    { key: "wed", label: t("wed") },
-    { key: "thu", label: t("thu") },
-    { key: "fri", label: t("fri") },
-    { key: "sat", label: t("sat") },
+    { key: "sun", label: "Sun" },
+    { key: "mon", label: "Mon" },
+    { key: "tue", label: "Tue" },
+    { key: "wed", label: "Wed" },
+    { key: "thu", label: "Thu" },
+    { key: "fri", label: "Fri" },
+    { key: "sat", label: "Sat" },
   ] as const;
 
   const dates = currentCalendarDate
@@ -369,8 +368,6 @@ const AppCalendarFooter = ({
   hasToDayButton?: boolean;
   onTodayClick?: () => void;
 }) => {
-  const t = useTranslations("shared.calendar");
-
   return (
     <div className="flex justify-center rounded-b-[2px] border-t border-neutral-100 py-2">
       {hasToDayButton && (
@@ -378,7 +375,7 @@ const AppCalendarFooter = ({
           className="button-m text-primary-500 font-bold"
           onClick={onTodayClick}
         >
-          {t("today-button")}
+          Today
         </button>
       )}
     </div>
@@ -390,12 +387,10 @@ const AppCalendarRangeFooter = ({
 }: {
   onOkayClick?: () => void;
 }) => {
-  const t = useTranslations("shared.calendar");
-
   return (
     <div className="flex justify-end rounded-b-[2px] border-t border-neutral-100 py-2 pr-2">
       <AppButton onClick={onOkayClick} size="s">
-        {t("okay-button")}
+        Okay
       </AppButton>
     </div>
   );

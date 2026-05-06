@@ -32,7 +32,7 @@ const AppPageSizeSelectTrigger = ({
       {label}
       <SelectTrigger
         className={cn(
-          "group body-s bg-base-white flex h-fit items-center justify-between rounded-[8px] border border-neutral-200 font-bold text-neutral-950 hover:border-neutral-600 data-disabled:border-neutral-200 data-disabled:bg-neutral-50 data-placeholder:font-medium data-placeholder:text-neutral-500",
+          "group body-s bg-base-white flex h-fit items-center justify-between rounded-[8px] border border-neutral-200 leading-none font-bold whitespace-nowrap text-neutral-950 hover:border-neutral-600 data-disabled:border-neutral-200 data-disabled:bg-neutral-50 data-placeholder:font-medium data-placeholder:text-neutral-500 [&>span]:whitespace-nowrap",
           { "py-2 pr-2 pl-3": size === "L", "py-1 pr-1 pl-2": size === "M" },
         )}
       >

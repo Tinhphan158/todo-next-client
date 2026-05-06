@@ -21,12 +21,12 @@ export const getSidebarItems = (quantityNotification: number = 0) => [
   },
   {
     icon: <WorkspaceIcon size={squareIconSize} />,
-    title: "Workspace",
+    title: "Workspace Management",
     href: "/workspace",
   },
   {
     icon: <LabelManagementIcon size={labelIconHeight} />,
-    title: "Label",
+    title: "Label Management",
     href: "/label",
   },
   {

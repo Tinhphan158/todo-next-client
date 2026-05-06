@@ -7,7 +7,6 @@ import {
   DrawerTitle,
   DrawerTrigger,
 } from "@/components/ui/drawer";
-import { DialogClose } from "@/components/ui/dialog";
 import { DeleteDisabledIcon } from "../icons";
 
 interface AppDrawerProps {
@@ -49,16 +48,16 @@ const AppDrawer = ({
     >
       {trigger && <DrawerTrigger asChild>{trigger}</DrawerTrigger>}
       <DrawerContent
-        className="magic flex min-w-[630px] flex-col transition-transform"
+        className="magic bg-base-white flex min-w-[630px] flex-col transition-transform"
         shouldBlur={shouldBlur}
       >
-        <DrawerHeader className="bg-base-white flex items-center gap-1 border-b border-neutral-100 p-4">
+        <DrawerHeader className="bg-base-white flex flex-row items-center gap-1 border-b border-neutral-100 p-4">
           {customCloseButton || (
-            <DialogClose asChild>
+            <DrawerClose asChild>
               <button>
                 <DeleteDisabledIcon className="h-6 w-6 text-neutral-950" />
               </button>
-            </DialogClose>
+            </DrawerClose>
           )}
           <DrawerTitle className="base-l flex-1 font-bold text-neutral-950">
             {title}
@@ -67,7 +66,9 @@ const AppDrawer = ({
             <div className="flex items-center gap-3">{headerAction}</div>
           )}
         </DrawerHeader>
-        <div className="flex-1 overflow-scroll bg-neutral-50">{children}</div>
+        <div className="bg-base-white [&::-webkit-scrollbar-track]:bg-base-white flex-1 overflow-auto [scrollbar-color:var(--color-neutral-300)_var(--color-base-white)] [&::-webkit-scrollbar]:h-2 [&::-webkit-scrollbar]:w-2 [&::-webkit-scrollbar-thumb]:rounded-full [&::-webkit-scrollbar-thumb]:bg-neutral-300">
+          {children}
+        </div>
         <DrawerFooter className="bg-base-white flex items-center justify-end gap-3 border-t border-neutral-100 p-4">
           {footerAction}
         </DrawerFooter>

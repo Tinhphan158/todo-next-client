@@ -1,15 +1,14 @@
+import { BaseFormProps, FormState } from "@/lib/form";
+import AppConfirmPopover from "@/module/shared/components/AppConfirmPopover";
 import AppDrawer, {
   AppDrawerClose,
 } from "@/module/shared/components/AppDrawer";
-import AppConfirmPopover from "@/module/shared/components/AppConfirmPopover";
-import { cloneElement, useCallback, useState } from "react";
 import { DeleteDisabledIcon } from "@/module/shared/icons";
-import { useTranslations } from "next-intl";
+import { cloneElement, useCallback, useState } from "react";
 import { DefaultValues, FieldValues } from "react-hook-form";
-import { AppButton } from "./AppButton";
 import { useDialog } from "../hooks/useDialog";
+import { AppButton } from "./AppButton";
 import AppLoader from "./AppLoader";
-import { BaseFormProps, FormState } from "@/lib/form";
 
 type DrawerMode = "view" | "create" | "update";
 
@@ -68,16 +67,14 @@ const CloseDrawerButton = ({
   isFormDirty?: boolean;
   closeConfirmTitle?: string;
 }) => {
-  const t = useTranslations("shared.app-form-drawer");
-
   return isFormDirty ? (
     <AppConfirmPopover
       open={open}
       onOpenChange={onOpenChange}
       trigger={children}
-      title={closeConfirmTitle ?? t("exit-confirm-title")}
-      cancelButtonLabel={t("exit-button")}
-      confirmButtonLabel={t("save-and-exit-button")}
+      title={closeConfirmTitle ?? "Are you sure you want to exit?"}
+      cancelButtonLabel="Cancel"
+      confirmButtonLabel="Save and exit"
       formId={formId}
       align="start"
       offset={-10}
@@ -114,10 +111,8 @@ const CreateFooterAction = ({
   canCreate?: boolean;
   haveCreateConfirm?: boolean;
 }) => {
-  const t = useTranslations("shared.app-form-drawer");
-
   return (
-    <div className="flex items-center gap-3">
+    <div className="flex w-full items-center justify-end gap-3">
       <AppDrawerClose>
         <AppButton
           variant="secondary"
@@ -126,7 +121,7 @@ const CreateFooterAction = ({
           startIcon={cancelButtonStartIcon}
           endIcon={cancelButtonEndIcon}
         >
-          {t("cancel-button")}
+          Cancel
         </AppButton>
       </AppDrawerClose>
       {canCreate &&
@@ -140,12 +135,12 @@ const CreateFooterAction = ({
                 startIcon={createButtonStartIcon}
                 endIcon={createButtonEndIcon}
               >
-                {createButtonLabel ?? t("confirm-button")}
+                {createButtonLabel ?? "Confirm"}
               </AppButton>
             }
             title={createConfirmTitle}
-            cancelButtonLabel={t("no-button")}
-            confirmButtonLabel={t("yes-button")}
+            cancelButtonLabel="No"
+            confirmButtonLabel="Yes"
             formId={formId}
             confirmButtonType="submit"
           />
@@ -159,7 +154,7 @@ const CreateFooterAction = ({
             startIcon={createButtonStartIcon}
             endIcon={createButtonEndIcon}
           >
-            {createButtonLabel ?? t("confirm-button")}
+            {createButtonLabel ?? "Confirm"}
           </AppButton>
         ))}
     </div>
@@ -195,10 +190,8 @@ const UpdateFooterAction = ({
   onEditCancelClick?: () => void;
   closeConfirmTitle?: string;
 }) => {
-  const t = useTranslations("shared.app-form-drawer");
-
   return (
-    <div className="flex items-center gap-3">
+    <div className="flex w-full items-center justify-end gap-3">
       <CloseDrawerButton
         formId={formId}
         isFormDirty={isFormDirty}
@@ -212,7 +205,7 @@ const UpdateFooterAction = ({
           startIcon={cancelButtonStartIcon}
           endIcon={cancelButtonEndIcon}
         >
-          {t("cancel-button")}
+          Cancel
         </AppButton>
       </CloseDrawerButton>
 
@@ -226,12 +219,12 @@ const UpdateFooterAction = ({
               startIcon={updateButtonStartIcon}
               endIcon={updateButtonEndIcon}
             >
-              {updateButtonLabel || t("update-button")}
+              {updateButtonLabel || "Update"}
             </AppButton>
           }
           title={updateConfirmTitle}
-          cancelButtonLabel={t("no-button")}
-          confirmButtonLabel={t("yes-button")}
+          cancelButtonLabel="No"
+          confirmButtonLabel="Yes"
           formId={formId}
           confirmButtonType="submit"
         />
@@ -271,10 +264,8 @@ const ViewFooterAction = ({
   onDelete?: () => void;
   onCancel?: () => void;
 }) => {
-  const t = useTranslations("shared.app-form-drawer");
-
   return (
-    <div className="flex items-center gap-3">
+    <div className="flex w-full items-center justify-end gap-3">
       {!showDelete && (
         <AppDrawerClose>
           <AppButton
@@ -285,7 +276,7 @@ const ViewFooterAction = ({
             startIcon={cancelButtonStartIcon}
             endIcon={cancelButtonEndIcon}
           >
-            {t("cancel-button")}
+            Cancel
           </AppButton>
         </AppDrawerClose>
       )}
@@ -300,12 +291,12 @@ const ViewFooterAction = ({
               startIcon={deleteButtonStartIcon}
               endIcon={deleteButtonEndIcon}
             >
-              {t("delete-button")}
+              Delete
             </AppButton>
           }
           title={deleteConfirmTitle}
-          cancelButtonLabel={t("no-button")}
-          confirmButtonLabel={t("yes-button")}
+          cancelButtonLabel="No"
+          confirmButtonLabel="Yes"
           onConfirm={onDelete}
         />
       )}
@@ -317,7 +308,7 @@ const ViewFooterAction = ({
           startIcon={editButtonStartIcon}
           endIcon={editButtonEndIcon}
         >
-          {t("edit-button")}
+          Edit
         </AppButton>
       )}
     </div>

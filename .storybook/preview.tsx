@@ -1,16 +1,8 @@
-import type { Preview } from "@storybook/nextjs-vite";
-import { NextIntlClientProvider } from "next-intl";
+import * as React from "react";
 import "../app/globals.css";
-import { storybookMessages } from "./storybook-messages";
 
-const preview: Preview = {
-  decorators: [
-    (Story) => (
-      <NextIntlClientProvider locale="en" messages={storybookMessages}>
-        <Story />
-      </NextIntlClientProvider>
-    ),
-  ],
+const preview = {
+  decorators: [(Story) => <Story />],
   parameters: {
     controls: {
       matchers: {
@@ -23,6 +15,8 @@ const preview: Preview = {
       test: "todo",
     },
   },
-};
+} satisfies NonNullable<
+  import("@storybook/nextjs-vite").StorybookConfig["preview"]
+>;
 
 export default preview;

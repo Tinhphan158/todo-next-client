@@ -1,5 +1,7 @@
-function Label() {
-  return <div>Label page</div>;
+import LabelManagementPage from "@/module/label/pages/LabelManagementPage";
+
+function LabelPage() {
+  return <LabelManagementPage />;
 }
 
-export default Label;
+export default LabelPage;

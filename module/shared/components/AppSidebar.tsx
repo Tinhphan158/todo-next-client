@@ -35,7 +35,7 @@ const ItemSidebar = ({
       className={cn(
         "body-s flex items-center justify-between gap-2 rounded-r p-3 text-neutral-500 group-data-[collapsible=icon]:justify-center group-data-[collapsible=icon]:p-2 hover:bg-neutral-50 hover:text-neutral-950",
         isActive &&
-          "border-primary-500 border-l-3 bg-neutral-50 text-neutral-950",
+          "border-primary-500 border-l-3 bg-neutral-50 font-bold text-neutral-950",
       )}
     >
       <div className="flex items-center gap-2 group-data-[collapsible=icon]:gap-0">

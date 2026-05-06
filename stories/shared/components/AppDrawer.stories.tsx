@@ -1,8 +1,8 @@
-import type { Meta, StoryObj } from "@storybook/nextjs-vite";
+import { AppButton } from "@/module/shared/components/AppButton";
 import AppDrawer, {
   AppDrawerClose,
 } from "@/module/shared/components/AppDrawer";
-import { AppButton } from "@/module/shared/components/AppButton";
+import type { Meta, StoryObj } from "@storybook/nextjs-vite";
 import { useState } from "react";
 
 const meta = {
@@ -89,7 +89,7 @@ export const WithFooterAction: Story = {
     trigger: <AppButton>Open Drawer</AppButton>,
     title: <span>Confirmation</span>,
     footerAction: (
-      <div className="flex gap-2">
+      <div className="flex w-full justify-end gap-2">
         <AppDrawerClose>
           <AppButton variant="secondary">Cancel</AppButton>
         </AppDrawerClose>

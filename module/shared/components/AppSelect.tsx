@@ -36,7 +36,7 @@ export const AppSelectTrigger = ({
   return (
     <div className="flex flex-col gap-1">
       {label}
-      <SelectTrigger className="group body-s bg-base-white flex h-fit items-center justify-between rounded-[8px] border border-neutral-200 py-2 pr-2 pl-3 font-bold text-neutral-950 hover:border-neutral-600 data-disabled:border-neutral-200 data-disabled:bg-neutral-50 data-placeholder:font-medium data-placeholder:text-neutral-500">
+      <SelectTrigger className="group body-s bg-base-white flex h-fit items-center justify-between rounded-[8px] border border-neutral-200 py-2 pr-2 pl-3 leading-none font-bold whitespace-nowrap text-neutral-950 hover:border-neutral-600 data-disabled:border-neutral-200 data-disabled:bg-neutral-50 data-placeholder:font-medium data-placeholder:text-neutral-500">
         <SelectValue placeholder={placeholder}>{children}</SelectValue>
         <ArrowDownIcon className="h-6 w-6 text-neutral-950 transition-all group-data-disabled:text-neutral-300 group-data-[state=open]:rotate-180" />
       </SelectTrigger>

@@ -23,7 +23,10 @@ export const labelApi = baseApi.injectEndpoints({
           : ["Label"],
     }),
 
-    createLabel: builder.mutation<Label, { name: string; color: string }>({
+    createLabel: builder.mutation<
+      Label,
+      { name: string; color: string; background: string }
+    >({
       query: (body) => ({
         url: "/labels",
         method: "POST",
@@ -34,7 +37,7 @@ export const labelApi = baseApi.injectEndpoints({
 
     updateLabel: builder.mutation<
       Label,
-      { id: number; name?: string; color?: string }
+      { id: number; name?: string; color?: string; background?: string }
     >({
       query: ({ id, ...body }) => ({
         url: `/labels/${id}`,
