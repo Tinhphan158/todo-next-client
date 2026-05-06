@@ -1,7 +1,7 @@
 "use client";
 
-import { message } from "@/module/shared/components/AppMessage";
 import { AppCard } from "@/module/shared/components/AppCard";
+import { MESSAGE_TYPE, message } from "@/module/shared/components/AppMessage";
 import {
   useForgotPasswordMutation,
   useResetPasswordMutation,
@@ -37,13 +37,13 @@ const ForgotPasswordPage = () => {
       setEmail(data.email);
       setStep(STEP_FORGOT_PASSWORD.VERIFY_OTP);
       message({
-        type: "success",
+        type: MESSAGE_TYPE.SUCCESS,
         description: "OTP sent to your email for password reset",
       });
     } catch (err: unknown) {
       const error = err as { data?: { message?: string } };
       message({
-        type: "error",
+        type: MESSAGE_TYPE.ERROR,
         description: error.data?.message || "Failed to send reset code",
       });
     }
@@ -57,11 +57,14 @@ const ForgotPasswordPage = () => {
         purpose: "RESET_PASSWORD",
       }).unwrap();
       setStep(STEP_FORGOT_PASSWORD.UPDATE_PASSWORD);
-      message({ type: "success", description: "OTP verified successfully" });
+      message({
+        type: MESSAGE_TYPE.SUCCESS,
+        description: "OTP verified successfully",
+      });
     } catch (err: unknown) {
       const error = err as { data?: { message?: string } };
       message({
-        type: "error",
+        type: MESSAGE_TYPE.ERROR,
         description: error.data?.message || "Invalid or expired code",
       });
     }
@@ -76,11 +79,14 @@ const ForgotPasswordPage = () => {
         newPassword: data.password,
       }).unwrap();
       setStep(STEP_FORGOT_PASSWORD.SUCCESS);
-      message({ type: "success", description: "Password updated successfully" });
+      message({
+        type: MESSAGE_TYPE.SUCCESS,
+        description: "Password updated successfully",
+      });
     } catch (err: unknown) {
       const error = err as { data?: { message?: string } };
       message({
-        type: "error",
+        type: MESSAGE_TYPE.ERROR,
         description: error.data?.message || "Failed to reset password",
       });
     }
@@ -91,13 +97,13 @@ const ForgotPasswordPage = () => {
     try {
       await forgotPassword({ email }).unwrap();
       message({
-        type: "success",
+        type: MESSAGE_TYPE.SUCCESS,
         description: "OTP resent to your email",
       });
     } catch (err: unknown) {
       const error = err as { data?: { message?: string } };
       message({
-        type: "error",
+        type: MESSAGE_TYPE.ERROR,
         description: error.data?.message || "Failed to resend code",
       });
     }

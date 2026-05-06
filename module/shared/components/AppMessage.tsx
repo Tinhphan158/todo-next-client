@@ -16,8 +16,14 @@ export const AppMessage = () => {
     />
   );
 };
-
-export type MessageType = "loading" | "success" | "warning" | "info" | "error";
+export const MESSAGE_TYPE = {
+  LOADING: "loading",
+  SUCCESS: "success",
+  WARNING: "warning",
+  INFO: "info",
+  ERROR: "error",
+} as const;
+export type MessageType = (typeof MESSAGE_TYPE)[keyof typeof MESSAGE_TYPE];
 
 interface AppMessageProps {
   id: string | number;
@@ -47,7 +53,7 @@ const appMessageVariants = cva(
       },
     },
     defaultVariants: {
-      type: "loading",
+      type: MESSAGE_TYPE.LOADING,
     },
   },
 );
@@ -84,14 +90,14 @@ export function message({
 }
 
 const Message = (props: AppMessageProps) => {
-  const { description, type = "info" } = props;
+  const { description, type = MESSAGE_TYPE.INFO } = props;
 
   const typeIconMap: Record<MessageType, React.ReactNode> = {
-    loading: <LoadingIcon className="animate-spin" />,
-    success: <CheckIcon />,
-    warning: <InfoIcon />,
-    info: <InfoIcon />,
-    error: <DeleteCircleIcon />,
+    [MESSAGE_TYPE.LOADING]: <LoadingIcon className="animate-spin" />,
+    [MESSAGE_TYPE.SUCCESS]: <CheckIcon />,
+    [MESSAGE_TYPE.WARNING]: <InfoIcon />,
+    [MESSAGE_TYPE.INFO]: <InfoIcon />,
+    [MESSAGE_TYPE.ERROR]: <DeleteCircleIcon />,
   };
 
   return (

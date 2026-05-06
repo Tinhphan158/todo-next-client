@@ -1,6 +1,6 @@
 "use client";
 
-import { message } from "@/module/shared/components/AppMessage";
+import { MESSAGE_TYPE, message } from "@/module/shared/components/AppMessage";
 import { useDialog } from "@/module/shared/hooks/useDialog";
 import { useUploadImageMutation } from "@/store/api/cloudinaryApi";
 import {
@@ -70,12 +70,12 @@ const DashboardPage = () => {
       );
 
       message({
-        type: "success",
+        type: MESSAGE_TYPE.SUCCESS,
         description: "Profile updated successfully.",
       });
     } catch {
       message({
-        type: "error",
+        type: MESSAGE_TYPE.ERROR,
         description: "Failed to update profile. Please try again.",
       });
     }
@@ -89,12 +89,12 @@ const DashboardPage = () => {
       }).unwrap();
 
       message({
-        type: "success",
+        type: MESSAGE_TYPE.SUCCESS,
         description: result.message || "Password updated successfully.",
       });
     } catch {
       message({
-        type: "error",
+        type: MESSAGE_TYPE.ERROR,
         description: "Failed to update password. Please try again.",
       });
     }

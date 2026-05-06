@@ -5,7 +5,7 @@ import Header from "@/module/label/components/Header";
 import LabelDrawer from "@/module/label/components/LabelDrawer";
 import LabelTable from "@/module/label/components/LabelTable";
 import { LabelFormData } from "@/module/label/schemas/label-form-schema";
-import { message } from "@/module/shared/components/AppMessage";
+import { MESSAGE_TYPE, message } from "@/module/shared/components/AppMessage";
 import {
   useCreateLabelMutation,
   useDeleteLabelMutation,
@@ -64,7 +64,7 @@ const LabelManagementPage = () => {
       if (formMode === "create") {
         await createLabel(data).unwrap();
         message({
-          type: "success",
+          type: MESSAGE_TYPE.SUCCESS,
           description: "Label created successfully.",
         });
       } else if (selectedLabel) {
@@ -73,7 +73,7 @@ const LabelManagementPage = () => {
           ...data,
         }).unwrap();
         message({
-          type: "success",
+          type: MESSAGE_TYPE.SUCCESS,
           description: "Label updated successfully.",
         });
       }
@@ -81,7 +81,7 @@ const LabelManagementPage = () => {
       setSelectedLabel(null);
     } catch {
       message({
-        type: "error",
+        type: MESSAGE_TYPE.ERROR,
         description:
           formMode === "create"
             ? "Failed to create label. Please try again."
@@ -95,12 +95,15 @@ const LabelManagementPage = () => {
 
     try {
       await deleteLabel(labelToDelete.id).unwrap();
-      message({ type: "success", description: "Label deleted successfully." });
+      message({
+        type: MESSAGE_TYPE.SUCCESS,
+        description: "Label deleted successfully.",
+      });
       setIsDeleteDialogOpen(false);
       setLabelToDelete(null);
     } catch {
       message({
-        type: "error",
+        type: MESSAGE_TYPE.ERROR,
         description: "Failed to delete label. This label may still be in use.",
       });
     }

@@ -1,7 +1,7 @@
 "use client";
 
-import { message } from "@/module/shared/components/AppMessage";
 import { AppCard } from "@/module/shared/components/AppCard";
+import { MESSAGE_TYPE, message } from "@/module/shared/components/AppMessage";
 import { useAppDispatch } from "@/store/hooks";
 import { setUser } from "@/store/slices/authSlice";
 import { useRouter } from "next/navigation";
@@ -37,7 +37,7 @@ const LoginPage = () => {
         const description = Array.isArray(msg)
           ? msg.join(", ")
           : msg || "Invalid email or password";
-        message({ type: "error", description });
+        message({ type: MESSAGE_TYPE.ERROR, description });
         return;
       }
 
@@ -50,11 +50,11 @@ const LoginPage = () => {
         }),
       );
 
-      message({ type: "success", description: "Login successful!" });
+      message({ type: MESSAGE_TYPE.SUCCESS, description: "Login successful!" });
       router.push("/dashboard");
     } catch {
       message({
-        type: "error",
+        type: MESSAGE_TYPE.ERROR,
         description: "Invalid email or password",
       });
     }

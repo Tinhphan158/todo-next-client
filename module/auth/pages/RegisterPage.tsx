@@ -1,7 +1,7 @@
 "use client";
 
-import { message } from "@/module/shared/components/AppMessage";
 import { AppCard } from "@/module/shared/components/AppCard";
+import { MESSAGE_TYPE, message } from "@/module/shared/components/AppMessage";
 import {
   useRequestSignupOtpMutation,
   useSignupMutation,
@@ -45,11 +45,11 @@ const RegisterPage = () => {
       });
       setEmail(data.email);
       setStep(STEP_REGISTER.VERIFY);
-      message({ type: "success", description: "OTP sent to your email" });
+      message({ type: MESSAGE_TYPE.SUCCESS, description: "OTP sent to your email" });
     } catch (err: unknown) {
       const error = err as { data?: { message?: string } };
       message({
-        type: "error",
+        type: MESSAGE_TYPE.ERROR,
         description: error.data?.message || "Failed to send OTP",
       });
     }
@@ -66,11 +66,14 @@ const RegisterPage = () => {
       await signup({ email }).unwrap();
 
       setStep(STEP_REGISTER.SUCCESS);
-      message({ type: "success", description: "Registration successful!" });
+      message({
+        type: MESSAGE_TYPE.SUCCESS,
+        description: "Registration successful!",
+      });
     } catch (err: unknown) {
       const error = err as { data?: { message?: string } };
       message({
-        type: "error",
+        type: MESSAGE_TYPE.ERROR,
         description: error.data?.message || "Verification failed",
       });
     }
@@ -80,11 +83,14 @@ const RegisterPage = () => {
     if (!registerData) return;
     try {
       await requestSignupOtp(registerData).unwrap();
-      message({ type: "success", description: "OTP resent to your email" });
+      message({
+        type: MESSAGE_TYPE.SUCCESS,
+        description: "OTP resent to your email",
+      });
     } catch (err: unknown) {
       const error = err as { data?: { message?: string } };
       message({
-        type: "error",
+        type: MESSAGE_TYPE.ERROR,
         description: error.data?.message || "Failed to resend OTP",
       });
     }

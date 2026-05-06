@@ -1,7 +1,7 @@
 "use client";
 
 import AppHeader from "@/module/shared/components/AppHeader";
-import { message } from "@/module/shared/components/AppMessage";
+import { MESSAGE_TYPE, message } from "@/module/shared/components/AppMessage";
 import AppSidebar from "@/module/shared/components/AppSidebar";
 import { MainAuthGate } from "@/module/shared/components/MainAuthGate";
 import { getSidebarItems } from "@/module/shared/constants/sidebar-items";
@@ -37,7 +37,7 @@ const MainLayout = ({ children }: MainLayoutProps) => {
       router.push("/login");
     } catch {
       message({
-        type: "error",
+        type: MESSAGE_TYPE.ERROR,
         description: "Logout failed. Please try again.",
       });
     }
