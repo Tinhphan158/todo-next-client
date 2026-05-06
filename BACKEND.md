@@ -47,7 +47,7 @@ todo-nest-be/
 | **Account** | Người dùng: `name`, `email` (unique), `password`, `refreshToken`, `avatar`, timestamp. Quan hệ: workspaces, tasks, labels, notifications. |
 | **Workspace** | Không gian làm việc: `name`, `accountId`. Xóa workspace cascade tasks. |
 | **Task** | `title`, `description`, `content`, `priority` (enum **Low \| Medium \| High**), `status` (enum **PENDING \| TODO \| DONE \| CANCEL**), `workspaceId`, `accountId`, `startTime`, `endTime`, `completedAt`, timestamp. Quan hệ: workspace, account, notifications; **nhiều-nhiều** với **Label**. |
-| **Label** | Nhãn riêng theo user: `name`, `color`, `accountId`; gắn vào nhiều task. |
+| **Label** | Nhãn riêng theo user: `name`, `color`, `background`, `accountId`; gắn vào nhiều task. |
 | **Notification** | `title`, `description`, `taskId` (nullable), `accountId`, `time`, `viewed`, `type` (chuỗi, ví dụ SYSTEM, COMPLETED, OVERDUE). |
 
 Quan hệ chính: `Account 1—n Workspace / Task / Label / Notification`; `Workspace 1—n Task`; `Task n—n Label`.
@@ -194,9 +194,9 @@ Lỗi thường gặp cho đổi mật khẩu:
 
 | Method | Path | Auth | Request / Query | Response |
 |--------|------|------|-----------------|----------|
-| POST | `/labels` | Bearer | `{ "name", "color" }` | `Label` |
+| POST | `/labels` | Bearer | `{ "name", "color", "background" }` | `Label` |
 | GET | `/labels` | Bearer | `page`, `pageSize` (10\|50\|100), `search?` | `{ "data": Label[], "metadata": PaginationMeta }` |
-| PATCH | `/labels/:id` | Bearer | `{ "name?", "color?" }` | `Label` |
+| PATCH | `/labels/:id` | Bearer | `{ "name?", "color?", "background?" }` | `Label` |
 | DELETE | `/labels/:id` | Bearer | — | Xóa nếu không còn task gắn; ngược lại 400 |
 
 ---
