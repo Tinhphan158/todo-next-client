@@ -1,23 +1,33 @@
 "use client";
 
 import { message } from "@/module/shared/components/AppMessage";
+import { useDialog } from "@/module/shared/hooks/useDialog";
 import { useUploadImageMutation } from "@/store/api/cloudinaryApi";
 import {
   useGetProfileQuery,
+  useUpdatePasswordMutation,
   useUpdateProfileMutation,
 } from "@/store/api/profileApi";
 import { useAppDispatch, useAppSelector } from "@/store/hooks";
 import { setUser } from "@/store/slices/authSlice";
 import Image from "next/image";
 import { useMemo } from "react";
+import ChangePasswordDialog from "../components/ChangePasswordDialog";
 import EditProfileDialog from "../components/EditProfileDialog";
+import { ChangePasswordFormData } from "../schemas/change-password-schema";
 import { EditProfileFormData } from "../schemas/edit-profile-schema";
 
 const DashboardPage = () => {
+  const { isOpen: isEditProfileOpen, setDialog: setEditProfileDialog } =
+    useDialog();
+  const { isOpen: isChangePasswordOpen, setDialog: setChangePasswordDialog } =
+    useDialog();
   const dispatch = useAppDispatch();
   const authUser = useAppSelector((s) => s.auth.user);
   const { data: profile } = useGetProfileQuery();
   const [updateProfile, { isLoading: isUpdating }] = useUpdateProfileMutation();
+  const [updatePassword, { isLoading: isUpdatingPassword }] =
+    useUpdatePasswordMutation();
   const [uploadImage, { isLoading: isUploading }] = useUploadImageMutation();
 
   const currentProfile = useMemo(
@@ -31,6 +41,7 @@ const DashboardPage = () => {
   );
 
   const isSubmitting = isUpdating || isUploading;
+  const isChangingPassword = isUpdatingPassword;
 
   const handleUpdateProfile = async (data: EditProfileFormData) => {
     try {
@@ -62,13 +73,30 @@ const DashboardPage = () => {
         type: "success",
         description: "Profile updated successfully.",
       });
-      return true;
     } catch {
       message({
         type: "error",
         description: "Failed to update profile. Please try again.",
       });
-      return false;
+    }
+  };
+
+  const handleChangePassword = async (data: ChangePasswordFormData) => {
+    try {
+      const result = await updatePassword({
+        currentPassword: data.currentPassword,
+        newPassword: data.newPassword,
+      }).unwrap();
+
+      message({
+        type: "success",
+        description: result.message || "Password updated successfully.",
+      });
+    } catch {
+      message({
+        type: "error",
+        description: "Failed to update password. Please try again.",
+      });
     }
   };
 
@@ -93,12 +121,23 @@ const DashboardPage = () => {
           </div>
         </div>
 
-        <EditProfileDialog
-          currentProfile={currentProfile}
-          isSubmitting={isSubmitting}
-          onSubmit={handleUpdateProfile}
-        />
+        <div className="flex items-center gap-2">
+          <EditProfileDialog
+            open={isEditProfileOpen}
+            onOpenChange={setEditProfileDialog}
+            currentProfile={currentProfile}
+            isSubmitting={isSubmitting}
+            onSubmit={handleUpdateProfile}
+          />
+          <ChangePasswordDialog
+            open={isChangePasswordOpen}
+            onOpenChange={setChangePasswordDialog}
+            isSubmitting={isChangingPassword}
+            onSubmit={handleChangePassword}
+          />
+        </div>
       </div>
+      {/* Thông tin thống kê, chart, stats  */}
     </div>
   );
 };

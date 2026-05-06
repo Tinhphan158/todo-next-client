@@ -1,5 +1,5 @@
 import { baseApi } from "../axios/baseApi";
-import type { Account } from "../types";
+import type { Account, MessageResponse } from "../types";
 
 export const profileApi = baseApi.injectEndpoints({
   endpoints: (builder) => ({
@@ -19,7 +19,21 @@ export const profileApi = baseApi.injectEndpoints({
       }),
       invalidatesTags: ["Profile"],
     }),
+    updatePassword: builder.mutation<
+      MessageResponse,
+      { currentPassword: string; newPassword: string }
+    >({
+      query: (body) => ({
+        url: "/profiles/me/password",
+        method: "PATCH",
+        data: body,
+      }),
+    }),
   }),
 });
 
-export const { useGetProfileQuery, useUpdateProfileMutation } = profileApi;
+export const {
+  useGetProfileQuery,
+  useUpdateProfileMutation,
+  useUpdatePasswordMutation,
+} = profileApi;

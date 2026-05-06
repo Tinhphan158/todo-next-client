@@ -2,9 +2,8 @@
 
 import { AppButton } from "@/module/shared/components/AppButton";
 import AppDialog from "@/module/shared/components/AppDialog";
-import { useState } from "react";
-import EditProfileForm from "./EditProfileForm";
 import { EditProfileFormData } from "../schemas/edit-profile-schema";
+import EditProfileForm from "./EditProfileForm";
 
 interface CurrentProfile {
   name: string;
@@ -13,29 +12,28 @@ interface CurrentProfile {
 }
 
 interface EditProfileDialogProps {
+  open: boolean;
+  onOpenChange: (open: boolean) => void;
   currentProfile: CurrentProfile;
   isSubmitting: boolean;
-  onSubmit: (data: EditProfileFormData) => Promise<boolean>;
+  onSubmit: (data: EditProfileFormData) => Promise<void>;
 }
 
 const EditProfileDialog = ({
+  open,
+  onOpenChange,
   currentProfile,
   isSubmitting,
   onSubmit,
 }: EditProfileDialogProps) => {
-  const [isDialogOpen, setIsDialogOpen] = useState(false);
-
   const handleSubmit = async (data: EditProfileFormData) => {
-    const isSuccess = await onSubmit(data);
-    if (isSuccess) {
-      setIsDialogOpen(false);
-    }
+    await onSubmit(data);
   };
 
   return (
     <AppDialog
-      open={isDialogOpen}
-      onOpenChange={setIsDialogOpen}
+      open={open}
+      onOpenChange={onOpenChange}
       title="Edit profile"
       description="Update your avatar, display name, and email."
       trigger={
@@ -48,7 +46,7 @@ const EditProfileDialog = ({
           currentProfile={currentProfile}
           isSubmitting={isSubmitting}
           onSubmit={handleSubmit}
-          onCancel={() => setIsDialogOpen(false)}
+          onCancel={() => onOpenChange(false)}
         />
       }
     />
