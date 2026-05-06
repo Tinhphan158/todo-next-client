@@ -1,3 +1,5 @@
+import { TaskStatus } from "./task";
+
 export interface DashboardSummary {
   totalTasks: number;
   totalWorkspaces: number;
@@ -5,7 +7,7 @@ export interface DashboardSummary {
   dueToday: number;
   unreadNotifications: number;
   byStatus: Array<{
-    statusId: number;
+    status: TaskStatus;
     _count: { _all: number };
   }>;
 }

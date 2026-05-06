@@ -3,6 +3,7 @@ import type { CloudinaryUploadResponse, MessageResponse } from "../types";
 
 export const cloudinaryApi = baseApi.injectEndpoints({
   endpoints: (builder) => ({
+    // Upload image
     uploadImage: builder.mutation<CloudinaryUploadResponse, FormData>({
       query: (formData) => ({
         url: "/cloudinary/upload/image",
@@ -11,6 +12,7 @@ export const cloudinaryApi = baseApi.injectEndpoints({
       }),
     }),
 
+    // Upload images
     uploadImages: builder.mutation<CloudinaryUploadResponse[], FormData>({
       query: (formData) => ({
         url: "/cloudinary/upload/images",
@@ -19,6 +21,7 @@ export const cloudinaryApi = baseApi.injectEndpoints({
       }),
     }),
 
+    // Delete image
     deleteImage: builder.mutation<
       MessageResponse & { publicId: string },
       { publicId: string }

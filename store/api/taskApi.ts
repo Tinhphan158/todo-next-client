@@ -28,6 +28,7 @@ interface UpdateTaskBody {
 
 export const taskApi = baseApi.injectEndpoints({
   endpoints: (builder) => ({
+    // Get tasks
     getTasks: builder.query<Task[], void>({
       query: () => ({ url: "/task" }),
       providesTags: (result) =>
@@ -36,21 +37,25 @@ export const taskApi = baseApi.injectEndpoints({
           : ["Task"],
     }),
 
+    // Get task by id
     getTaskById: builder.query<Task, number>({
       query: (id) => ({ url: `/task/${id}` }),
       providesTags: (_result, _error, id) => [{ type: "Task", id }],
     }),
 
+    // Get tasks by status
     getTasksByStatus: builder.query<Task[], number>({
       query: (statusId) => ({ url: `/task/status/${statusId}/list` }),
       providesTags: ["Task"],
     }),
 
+    // Search tasks
     searchTasks: builder.query<Task[], { q: string; workspaceId?: number }>({
       query: (params) => ({ url: "/task/search/query", params }),
       providesTags: ["Task"],
     }),
 
+    // Create task
     createTask: builder.mutation<Task, CreateTaskBody>({
       query: (body) => ({
         url: "/task",
@@ -60,6 +65,7 @@ export const taskApi = baseApi.injectEndpoints({
       invalidatesTags: ["Task", "Dashboard"],
     }),
 
+    // Update task
     updateTask: builder.mutation<Task, UpdateTaskBody>({
       query: ({ id, ...body }) => ({
         url: `/task/${id}`,
@@ -72,6 +78,7 @@ export const taskApi = baseApi.injectEndpoints({
       ],
     }),
 
+    // Delete task
     deleteTask: builder.mutation<Task, number>({
       query: (id) => ({
         url: `/task/${id}`,

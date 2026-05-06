@@ -13,6 +13,7 @@ interface GetNotificationsParams {
 
 export const notificationApi = baseApi.injectEndpoints({
   endpoints: (builder) => ({
+    // Get notifications
     getNotifications: builder.query<
       PaginatedResponse<Notification>,
       GetNotificationsParams
@@ -21,6 +22,7 @@ export const notificationApi = baseApi.injectEndpoints({
       providesTags: ["Notification"],
     }),
 
+    // Mark notification as viewed
     markNotificationViewed: builder.mutation<Notification, number>({
       query: (id) => ({
         url: `/notifications/${id}/viewed`,

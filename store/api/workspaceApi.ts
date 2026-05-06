@@ -32,6 +32,7 @@ interface WorkspaceTasksParams {
 
 export const workspaceApi = baseApi.injectEndpoints({
   endpoints: (builder) => ({
+    // Get workspaces
     getWorkspaces: builder.query<Workspace[], void>({
       query: () => ({ url: "/workspaces" }),
       providesTags: (result) =>
@@ -43,6 +44,7 @@ export const workspaceApi = baseApi.injectEndpoints({
           : ["Workspace"],
     }),
 
+    // Create workspace
     createWorkspace: builder.mutation<Workspace, { name: string }>({
       query: (body) => ({
         url: "/workspaces",
@@ -52,6 +54,7 @@ export const workspaceApi = baseApi.injectEndpoints({
       invalidatesTags: ["Workspace", "Dashboard"],
     }),
 
+    // Update workspace
     updateWorkspace: builder.mutation<Workspace, { id: number; name: string }>({
       query: ({ id, ...body }) => ({
         url: `/workspaces/${id}`,
@@ -61,6 +64,7 @@ export const workspaceApi = baseApi.injectEndpoints({
       invalidatesTags: (_result, _error, { id }) => [{ type: "Workspace", id }],
     }),
 
+    // Delete workspace
     deleteWorkspace: builder.mutation<Workspace, number>({
       query: (id) => ({
         url: `/workspaces/${id}`,
@@ -69,6 +73,7 @@ export const workspaceApi = baseApi.injectEndpoints({
       invalidatesTags: ["Workspace", "Task", "Dashboard"],
     }),
 
+    // Get workspace board
     getWorkspaceBoard: builder.query<BoardResponse, BoardQueryParams>({
       query: ({ workspaceId, ...params }) => ({
         url: `/workspaces/${workspaceId}/tasks/board`,
@@ -77,6 +82,7 @@ export const workspaceApi = baseApi.injectEndpoints({
       providesTags: ["Task"],
     }),
 
+    // Get workspace tasks
     getWorkspaceTasks: builder.query<
       PaginatedResponse<Task>,
       WorkspaceTasksParams

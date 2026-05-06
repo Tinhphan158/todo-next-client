@@ -9,6 +9,7 @@ interface GetLabelsParams {
 
 export const labelApi = baseApi.injectEndpoints({
   endpoints: (builder) => ({
+    // Get labels
     getLabels: builder.query<PaginatedResponse<Label>, GetLabelsParams>({
       query: (params) => ({ url: "/labels", params }),
       providesTags: (result) =>
@@ -23,6 +24,7 @@ export const labelApi = baseApi.injectEndpoints({
           : ["Label"],
     }),
 
+    // Create label
     createLabel: builder.mutation<
       Label,
       { name: string; color: string; background: string }
@@ -35,6 +37,7 @@ export const labelApi = baseApi.injectEndpoints({
       invalidatesTags: ["Label"],
     }),
 
+    // Update label
     updateLabel: builder.mutation<
       Label,
       { id: number; name?: string; color?: string; background?: string }
@@ -47,6 +50,7 @@ export const labelApi = baseApi.injectEndpoints({
       invalidatesTags: (_result, _error, { id }) => [{ type: "Label", id }],
     }),
 
+    // Delete label
     deleteLabel: builder.mutation<void, number>({
       query: (id) => ({
         url: `/labels/${id}`,

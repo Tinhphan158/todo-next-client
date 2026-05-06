@@ -4,6 +4,7 @@ import type { Account, MessageResponse, OtpPurpose } from "../types";
 
 export const authApi = baseApi.injectEndpoints({
   endpoints: (builder) => ({
+    // Login
     login: builder.mutation<
       { id: number; name: string; email: string; avatar: string | null },
       { email: string; password: string }
@@ -23,6 +24,7 @@ export const authApi = baseApi.injectEndpoints({
       },
     }),
 
+    // Request signup OTP
     requestSignupOtp: builder.mutation<
       MessageResponse,
       { name: string; email: string; password: string; avatar?: string }
@@ -34,6 +36,7 @@ export const authApi = baseApi.injectEndpoints({
       }),
     }),
 
+    // Signup
     signup: builder.mutation<Account, { email: string }>({
       query: (body) => ({
         url: "/auth/signup",
@@ -42,6 +45,7 @@ export const authApi = baseApi.injectEndpoints({
       }),
     }),
 
+    // Logout
     logout: builder.mutation<MessageResponse, void>({
       query: () => ({
         url: "/auth/logout",
@@ -57,6 +61,7 @@ export const authApi = baseApi.injectEndpoints({
       },
     }),
 
+    // Request forgot password OTP
     forgotPassword: builder.mutation<MessageResponse, { email: string }>({
       query: (body) => ({
         url: "/auth/forgot-password",
@@ -65,6 +70,7 @@ export const authApi = baseApi.injectEndpoints({
       }),
     }),
 
+    // Verify OTP
     verifyOtp: builder.mutation<
       MessageResponse,
       { email: string; otp: string; purpose: OtpPurpose }
@@ -76,6 +82,7 @@ export const authApi = baseApi.injectEndpoints({
       }),
     }),
 
+    // Reset password
     resetPassword: builder.mutation<
       MessageResponse,
       { email: string; newPassword: string }
