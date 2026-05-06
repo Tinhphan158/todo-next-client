@@ -1,9 +1,9 @@
 import * as React from "react";
 import type { Meta, StoryObj } from "@storybook/nextjs-vite";
-import { AppFormInputOTP } from "@/module/shared/components/AppFormInputOTP";
+import { AppFormInputOTP } from "@/modules/shared/components/AppFormInputOTP";
 import { useForm } from "react-hook-form";
 import { Form } from "@/components/ui/form";
-import { AppButton } from "@/module/shared/components/AppButton";
+import { AppButton } from "@/modules/shared/components/AppButton";
 
 const meta = {
   title: "Shared/Components/AppFormInputOTP",

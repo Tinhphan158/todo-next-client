@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from "@storybook/nextjs-vite";
 import { useState } from "react";
-import AppFrameUpload from "@/module/shared/components/AppFrameUpload";
+import AppFrameUpload from "@/modules/shared/components/AppFrameUpload";
 
 const meta = {
   title: "Shared/Components/AppFrameUpload",

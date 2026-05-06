@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from "@storybook/nextjs-vite";
-import { AppCard } from "@/module/shared/components/AppCard";
-import { AppButton } from "@/module/shared/components/AppButton";
+import { AppCard } from "@/modules/shared/components/AppCard";
+import { AppButton } from "@/modules/shared/components/AppButton";
 
 const meta = {
   title: "Shared/Components/AppCard",

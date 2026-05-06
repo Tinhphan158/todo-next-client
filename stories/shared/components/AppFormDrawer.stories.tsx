@@ -1,9 +1,9 @@
 import { Form } from "@/components/ui/form";
 import { BaseFormProps } from "@/lib/form";
-import { AppButton } from "@/module/shared/components/AppButton";
-import AppFormDrawer from "@/module/shared/components/AppFormDrawer";
-import { FormInputFieldV2 } from "@/module/shared/components/AppFormInput";
-import { FormTextAreaField } from "@/module/shared/components/AppFormTextArea";
+import { AppButton } from "@/modules/shared/components/AppButton";
+import AppFormDrawer from "@/modules/shared/components/AppFormDrawer";
+import { FormInputFieldV2 } from "@/modules/shared/components/AppFormInput";
+import { FormTextAreaField } from "@/modules/shared/components/AppFormTextArea";
 import { standardSchemaResolver } from "@hookform/resolvers/standard-schema";
 import type { Meta, StoryObj } from "@storybook/nextjs-vite";
 import { useEffect, useState } from "react";

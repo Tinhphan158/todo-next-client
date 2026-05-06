@@ -1,11 +1,11 @@
 "use client";
 
-import AppHeader from "@/module/shared/components/AppHeader";
-import { MESSAGE_TYPE, message } from "@/module/shared/components/AppMessage";
-import AppSidebar from "@/module/shared/components/AppSidebar";
-import { MainAuthGate } from "@/module/shared/components/MainAuthGate";
-import { getSidebarItems } from "@/module/shared/constants/sidebar-items";
-import { useLogoutApiMutation } from "@/store/api/authApi";
+import AppHeader from "@/modules/shared/components/AppHeader";
+import { MESSAGE_TYPE, message } from "@/modules/shared/components/AppMessage";
+import AppSidebar from "@/modules/shared/components/AppSidebar";
+import { MainAuthGate } from "@/modules/shared/components/MainAuthGate";
+import { getSidebarItems } from "@/modules/shared/constants/sidebar-items";
+import { useLogoutMutation } from "@/store/api/authApi";
 import { baseApi } from "@/store/axios/baseApi";
 import { useAppDispatch, useAppSelector } from "@/store/hooks";
 import { usePathname, useRouter } from "next/navigation";
@@ -28,11 +28,11 @@ const MainLayout = ({ children }: MainLayoutProps) => {
   }, [pathname]);
   const quantityNotification = 0;
 
-  const [logoutApi, { isLoading: isLogoutLoading }] = useLogoutApiMutation();
+  const [logout, { isLoading: isLogoutLoading }] = useLogoutMutation();
 
   const handleLogout = async () => {
     try {
-      await logoutApi().unwrap();
+      await logout().unwrap();
       dispatch(baseApi.util.resetApiState());
       router.push("/login");
     } catch {

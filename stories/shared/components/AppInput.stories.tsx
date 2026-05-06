@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from "@storybook/nextjs-vite";
-import { AppInputV2 } from "@/module/shared/components/AppInput";
-import { InfoIcon } from "@/module/shared/icons";
+import { AppInputV2 } from "@/modules/shared/components/AppInput";
+import { InfoIcon } from "@/modules/shared/icons";
 
 const meta = {
   title: "Shared/Components/AppInput",

@@ -1,4 +1,4 @@
-import LabelManagementPage from "@/module/label/pages/LabelManagementPage";
+import LabelManagementPage from "@/modules/label/pages/LabelManagementPage";
 
 function LabelPage() {
   return <LabelManagementPage />;

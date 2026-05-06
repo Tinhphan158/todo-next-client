@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from "@storybook/nextjs-vite";
 import { useState } from "react";
-import AppPagination from "@/module/shared/components/AppPagination";
+import AppPagination from "@/modules/shared/components/AppPagination";
 
 const meta = {
   title: "Shared/Components/AppPagination",

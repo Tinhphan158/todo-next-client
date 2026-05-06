@@ -1,10 +1,10 @@
 import * as React from "react";
 import type { Meta, StoryObj } from "@storybook/nextjs-vite";
-import { FormInputFieldV2 } from "@/module/shared/components/AppFormInput";
-import { InfoIcon } from "@/module/shared/icons";
+import { FormInputFieldV2 } from "@/modules/shared/components/AppFormInput";
+import { InfoIcon } from "@/modules/shared/icons";
 import { useForm } from "react-hook-form";
 import { Form } from "@/components/ui/form";
-import { AppButton } from "@/module/shared/components/AppButton";
+import { AppButton } from "@/modules/shared/components/AppButton";
 
 const meta = {
   title: "Shared/Components/AppFormInput",

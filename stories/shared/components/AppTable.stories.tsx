@@ -1,9 +1,9 @@
-import { AppButton } from "@/module/shared/components/AppButton";
-import AppEmptyState from "@/module/shared/components/AppEmptyState";
+import { AppButton } from "@/modules/shared/components/AppButton";
+import AppEmptyState from "@/modules/shared/components/AppEmptyState";
 import AppTable, {
   AppColumn,
   SortDirection,
-} from "@/module/shared/components/AppTable";
+} from "@/modules/shared/components/AppTable";
 import type { Meta, StoryObj } from "@storybook/nextjs-vite";
 import * as React from "react";
 

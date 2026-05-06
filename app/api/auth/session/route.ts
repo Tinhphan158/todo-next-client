@@ -32,7 +32,7 @@ function userPayload(u: {
 }
 
 export async function GET(req: NextRequest) {
-  let accessToken = req.cookies.get(ACCESS_TOKEN_COOKIE)?.value ?? null;
+  const accessToken = req.cookies.get(ACCESS_TOKEN_COOKIE)?.value ?? null;
   const refreshToken = req.cookies.get(REFRESH_TOKEN_COOKIE)?.value ?? null;
 
   if (accessToken) {

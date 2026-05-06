@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from "@storybook/nextjs-vite";
-import AppConfirmPopover from "@/module/shared/components/AppConfirmPopover";
-import { AppButton } from "@/module/shared/components/AppButton";
+import AppConfirmPopover from "@/modules/shared/components/AppConfirmPopover";
+import { AppButton } from "@/modules/shared/components/AppButton";
 import { useState } from "react";
 
 const meta = {

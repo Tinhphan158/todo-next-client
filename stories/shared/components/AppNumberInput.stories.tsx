@@ -1,7 +1,7 @@
 import * as React from "react";
 import type { Meta, StoryObj } from "@storybook/nextjs-vite";
-import { AppNumberInput } from "@/module/shared/components/AppNumberInput";
-import { InfoIcon } from "@/module/shared/icons";
+import { AppNumberInput } from "@/modules/shared/components/AppNumberInput";
+import { InfoIcon } from "@/modules/shared/icons";
 
 const meta = {
   title: "Shared/Components/AppNumberInput",

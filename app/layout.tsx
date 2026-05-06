@@ -1,4 +1,4 @@
-import AppLayout from "@/module/shared/components/AppLayout";
+import AppLayout from "@/modules/shared/components/AppLayout";
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";

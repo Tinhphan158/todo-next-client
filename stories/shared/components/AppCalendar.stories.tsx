@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from "@storybook/nextjs-vite";
 import { useState } from "react";
-import AppCalendar from "@/module/shared/components/AppCalendar";
+import AppCalendar from "@/modules/shared/components/AppCalendar";
 
 const meta = {
   title: "Shared/Components/AppCalendar",

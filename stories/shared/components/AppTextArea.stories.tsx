@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from "@storybook/nextjs-vite";
-import { AppTextArea } from "@/module/shared/components/AppTextArea";
+import { AppTextArea } from "@/modules/shared/components/AppTextArea";
 
 const meta = {
   title: "Shared/Components/AppTextArea",

@@ -1,6 +1,6 @@
 import * as React from "react";
 import type { Meta, StoryObj } from "@storybook/nextjs-vite";
-import AppPageSizeSelect from "@/module/shared/components/AppPageSizeSelect";
+import AppPageSizeSelect from "@/modules/shared/components/AppPageSizeSelect";
 
 const meta = {
   title: "Shared/Components/AppPageSizeSelect",

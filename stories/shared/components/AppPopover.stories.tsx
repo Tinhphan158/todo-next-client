@@ -1,7 +1,7 @@
 import * as React from "react";
 import type { Meta, StoryObj } from "@storybook/nextjs-vite";
-import AppPopover from "@/module/shared/components/AppPopover";
-import { AppButton } from "@/module/shared/components/AppButton";
+import AppPopover from "@/modules/shared/components/AppPopover";
+import { AppButton } from "@/modules/shared/components/AppButton";
 
 const meta = {
   title: "Shared/Components/AppPopover",

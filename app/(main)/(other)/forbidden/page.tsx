@@ -1,5 +1,5 @@
 "use client";
-import AppForbidden from "@/module/shared/components/AppForbidden";
+import AppForbidden from "@/modules/shared/components/AppForbidden";
 import { useRouter } from "next/navigation";
 
 const Forbidden = () => {

@@ -1,7 +1,7 @@
-import { AppButton } from "@/module/shared/components/AppButton";
+import { AppButton } from "@/modules/shared/components/AppButton";
 import AppDrawer, {
   AppDrawerClose,
-} from "@/module/shared/components/AppDrawer";
+} from "@/modules/shared/components/AppDrawer";
 import type { Meta, StoryObj } from "@storybook/nextjs-vite";
 import { useState } from "react";
 

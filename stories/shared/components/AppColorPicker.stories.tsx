@@ -1,4 +1,4 @@
-import AppColorPicker from "@/module/shared/components/AppColorPicker";
+import AppColorPicker from "@/modules/shared/components/AppColorPicker";
 import type { Meta, StoryObj } from "@storybook/nextjs-vite";
 import * as React from "react";
 

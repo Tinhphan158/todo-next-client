@@ -1,6 +1,6 @@
 import * as React from "react";
 import type { Meta, StoryObj } from "@storybook/nextjs-vite";
-import AppDateInput from "@/module/shared/components/AppDateInput";
+import AppDateInput from "@/modules/shared/components/AppDateInput";
 
 const meta = {
   title: "Shared/Components/AppDateInput",

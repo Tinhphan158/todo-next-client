@@ -1,7 +1,7 @@
 import type { Meta, StoryObj } from "@storybook/nextjs-vite";
-import AppTooltip from "@/module/shared/components/AppTooltip";
-import { AppButton } from "@/module/shared/components/AppButton";
-import { InfoIcon } from "@/module/shared/icons";
+import AppTooltip from "@/modules/shared/components/AppTooltip";
+import { AppButton } from "@/modules/shared/components/AppButton";
+import { InfoIcon } from "@/modules/shared/icons";
 
 const meta = {
   title: "Shared/Components/AppTooltip",

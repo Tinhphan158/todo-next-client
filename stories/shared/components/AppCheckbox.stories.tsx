@@ -1,6 +1,6 @@
 import * as React from "react";
 import type { Meta, StoryObj } from "@storybook/nextjs-vite";
-import AppCheckBox from "@/module/shared/components/AppCheckbox";
+import AppCheckBox from "@/modules/shared/components/AppCheckbox";
 
 const meta = {
   title: "Shared/Components/AppCheckbox",

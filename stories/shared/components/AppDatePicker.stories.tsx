@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from "@storybook/nextjs-vite";
 import { useState } from "react";
-import AppDatePicker from "@/module/shared/components/AppDatePicker";
+import AppDatePicker from "@/modules/shared/components/AppDatePicker";
 
 const meta = {
   title: "Shared/Components/AppDatePicker",

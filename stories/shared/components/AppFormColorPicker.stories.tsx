@@ -1,6 +1,6 @@
 import { Form } from "@/components/ui/form";
-import { AppButton } from "@/module/shared/components/AppButton";
-import { FormColorPickerField } from "@/module/shared/components/AppFormColorPicker";
+import { AppButton } from "@/modules/shared/components/AppButton";
+import { FormColorPickerField } from "@/modules/shared/components/AppFormColorPicker";
 import type { Meta, StoryObj } from "@storybook/nextjs-vite";
 import * as React from "react";
 import { useForm } from "react-hook-form";

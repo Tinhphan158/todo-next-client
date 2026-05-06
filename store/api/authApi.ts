@@ -1,9 +1,28 @@
 import { baseApi } from "../axios/baseApi";
-import { logout } from "../slices/authSlice";
+import { logout, setUser } from "../slices/authSlice";
 import type { Account, MessageResponse, OtpPurpose } from "../types";
 
 export const authApi = baseApi.injectEndpoints({
   endpoints: (builder) => ({
+    login: builder.mutation<
+      { id: number; name: string; email: string; avatar: string | null },
+      { email: string; password: string }
+    >({
+      query: (body) => ({
+        url: "/auth/login",
+        method: "POST",
+        data: body,
+      }),
+      async onQueryStarted(_arg, { dispatch, queryFulfilled }) {
+        try {
+          const { data } = await queryFulfilled;
+          dispatch(setUser(data));
+        } catch {
+          // Keep error handling in component via unwrap().
+        }
+      },
+    }),
+
     requestSignupOtp: builder.mutation<
       MessageResponse,
       { name: string; email: string; password: string; avatar?: string }
@@ -23,31 +42,17 @@ export const authApi = baseApi.injectEndpoints({
       }),
     }),
 
-    logoutApi: builder.mutation<MessageResponse, void>({
-      async queryFn(_arg, { dispatch }) {
+    logout: builder.mutation<MessageResponse, void>({
+      query: () => ({
+        url: "/auth/logout",
+        method: "POST",
+      }),
+      async onQueryStarted(_arg, { dispatch, queryFulfilled }) {
         try {
-          const res = await fetch("/api/auth/logout", {
-            method: "POST",
-            credentials: "include",
-          });
-          const data = (await res.json()) as MessageResponse;
-          if (!res.ok) {
-            return {
-              error: {
-                status: res.status,
-                data,
-              },
-            };
-          }
+          await queryFulfilled;
           dispatch(logout());
-          return { data };
         } catch {
-          return {
-            error: {
-              status: 500,
-              data: { message: "Logout failed" },
-            },
-          };
+          // Keep error handling in component via unwrap().
         }
       },
     }),
@@ -85,9 +90,10 @@ export const authApi = baseApi.injectEndpoints({
 });
 
 export const {
+  useLoginMutation,
   useRequestSignupOtpMutation,
   useSignupMutation,
-  useLogoutApiMutation,
+  useLogoutMutation,
   useForgotPasswordMutation,
   useVerifyOtpMutation,
   useResetPasswordMutation,

@@ -1,7 +1,7 @@
-import { AppButton } from "@/module/shared/components/AppButton";
-import AppEmptyState from "@/module/shared/components/AppEmptyState";
-import AppPaginationTable from "@/module/shared/components/AppPaginationTable";
-import { AppColumn } from "@/module/shared/components/AppTable";
+import { AppButton } from "@/modules/shared/components/AppButton";
+import AppEmptyState from "@/modules/shared/components/AppEmptyState";
+import AppPaginationTable from "@/modules/shared/components/AppPaginationTable";
+import { AppColumn } from "@/modules/shared/components/AppTable";
 import type { Meta, StoryObj } from "@storybook/nextjs-vite";
 
 // Create a typed version of the component for stories

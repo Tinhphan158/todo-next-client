@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from "@storybook/nextjs-vite";
 import { useState } from "react";
-import AppTabs from "@/module/shared/components/AppTabs";
+import AppTabs from "@/modules/shared/components/AppTabs";
 
 const meta: Meta<typeof AppTabs> = {
   title: "Shared/Components/AppTabs",

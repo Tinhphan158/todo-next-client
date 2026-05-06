@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from "@storybook/nextjs-vite";
-import AppInputTitle from "@/module/shared/components/AppInputTitle";
+import AppInputTitle from "@/modules/shared/components/AppInputTitle";
 
 const meta: Meta<typeof AppInputTitle> = {
   title: "Shared/Components/AppInputTitle",

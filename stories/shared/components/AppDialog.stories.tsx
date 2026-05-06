@@ -1,7 +1,7 @@
 import type { Meta, StoryObj } from "@storybook/nextjs-vite";
 import { useState } from "react";
-import AppDialog from "@/module/shared/components/AppDialog";
-import { AppButton } from "@/module/shared/components/AppButton";
+import AppDialog from "@/modules/shared/components/AppDialog";
+import { AppButton } from "@/modules/shared/components/AppButton";
 
 const meta: Meta<typeof AppDialog> = {
   title: "Shared/Components/AppDialog",

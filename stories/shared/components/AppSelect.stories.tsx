@@ -1,4 +1,4 @@
-import AppSelect from "@/module/shared/components/AppSelect";
+import AppSelect from "@/modules/shared/components/AppSelect";
 import type { Meta, StoryObj } from "@storybook/nextjs-vite";
 import * as React from "react";
 

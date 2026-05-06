@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from "@storybook/nextjs-vite";
-import { notity } from "@/module/shared/components/AppNotification";
-import { AppButton } from "@/module/shared/components/AppButton";
+import { notity } from "@/modules/shared/components/AppNotification";
+import { AppButton } from "@/modules/shared/components/AppButton";
 import { Toaster } from "sonner";
 
 const meta = {

@@ -1,6 +1,6 @@
 import * as React from "react";
 import type { Meta, StoryObj } from "@storybook/nextjs-vite";
-import AppTablePagination from "@/module/shared/components/AppTablePagination";
+import AppTablePagination from "@/modules/shared/components/AppTablePagination";
 
 const meta = {
   title: "Shared/Components/AppTablePagination",

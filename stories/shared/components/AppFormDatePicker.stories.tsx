@@ -1,8 +1,8 @@
 import type { Meta, StoryObj } from "@storybook/nextjs-vite";
-import { FormDatePickerField } from "@/module/shared/components/AppFormDatePicker";
+import { FormDatePickerField } from "@/modules/shared/components/AppFormDatePicker";
 import { useForm } from "react-hook-form";
 import { Form } from "@/components/ui/form";
-import { AppButton } from "@/module/shared/components/AppButton";
+import { AppButton } from "@/modules/shared/components/AppButton";
 import { useState, useEffect } from "react";
 
 const meta = {

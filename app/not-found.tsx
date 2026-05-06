@@ -1,5 +1,5 @@
 "use client";
-import AppNotFound from "@/module/shared/components/AppNotFound";
+import AppNotFound from "@/modules/shared/components/AppNotFound";
 import { useRouter } from "next/navigation";
 
 const NotFound = () => {
