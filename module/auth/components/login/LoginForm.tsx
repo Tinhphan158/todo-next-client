@@ -9,15 +9,13 @@ import { MailIcon } from "@/module/shared/icons";
 import { standardSchemaResolver } from "@hookform/resolvers/standard-schema";
 import Link from "next/link";
 import { useForm } from "react-hook-form";
-import { LoginFormData, useLoginSchema } from "../../schemas";
+import { LoginFormData, loginSchema } from "../../schemas";
 
 export interface LoginFormProps extends BaseFormProps<LoginFormData> {
   disabled?: boolean;
 }
 
 export const LoginForm = ({ id, disabled, onSubmit }: LoginFormProps) => {
-  const loginSchema = useLoginSchema();
-
   const form = useForm<LoginFormData>({
     resolver: standardSchemaResolver(loginSchema),
     defaultValues: { email: "", password: "" },

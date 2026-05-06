@@ -8,7 +8,6 @@ export const cloudinaryApi = baseApi.injectEndpoints({
         url: "/cloudinary/upload/image",
         method: "POST",
         data: formData,
-        headers: { "Content-Type": "multipart/form-data" },
       }),
     }),
 
@@ -17,7 +16,6 @@ export const cloudinaryApi = baseApi.injectEndpoints({
         url: "/cloudinary/upload/images",
         method: "POST",
         data: formData,
-        headers: { "Content-Type": "multipart/form-data" },
       }),
     }),
 

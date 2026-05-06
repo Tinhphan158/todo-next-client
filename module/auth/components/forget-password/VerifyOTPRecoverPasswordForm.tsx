@@ -9,7 +9,7 @@ import Link from "next/link";
 import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { VERIFY_OTP_COOLDOWN_SECONDS } from "../../constants";
-import { VerifyFormData, useVerifySchema } from "../../schemas";
+import { VerifyFormData, verifySchema } from "../../schemas";
 
 export interface VerifyOTPRecoverPasswordFormProps {
   onSubmit?: (data: VerifyFormData) => Promise<void>;
@@ -24,7 +24,6 @@ export function VerifyOTPRecoverPasswordForm({
   resendCooldownSeconds = VERIFY_OTP_COOLDOWN_SECONDS,
   onResendCode,
 }: VerifyOTPRecoverPasswordFormProps) {
-  const verifySchema = useVerifySchema();
   const form = useForm<VerifyFormData>({
     resolver: standardSchemaResolver(verifySchema),
     defaultValues: { code: "" },

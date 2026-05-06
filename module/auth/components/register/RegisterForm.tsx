@@ -8,15 +8,13 @@ import { MailIcon, UserIcon } from "@/module/shared/icons";
 import { standardSchemaResolver } from "@hookform/resolvers/standard-schema";
 import Link from "next/link";
 import { useForm } from "react-hook-form";
-import { RegisterFormData, useRegisterSchema } from "../../schemas";
+import { RegisterFormData, registerSchema } from "../../schemas";
 
 export interface RegisterFormProps extends BaseFormProps<RegisterFormData> {
   disabled?: boolean;
 }
 
 export const RegisterForm = ({ id, disabled, onSubmit }: RegisterFormProps) => {
-  const registerSchema = useRegisterSchema();
-
   const form = useForm<RegisterFormData>({
     resolver: standardSchemaResolver(registerSchema),
     defaultValues: { name: "", email: "", password: "", confirmPassword: "" },

@@ -10,7 +10,7 @@ export const profileApi = baseApi.injectEndpoints({
 
     updateProfile: builder.mutation<
       Account,
-      { name?: string; avatar?: string }
+      { name?: string; email?: string; avatar?: string }
     >({
       query: (body) => ({
         url: "/profiles/me",

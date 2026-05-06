@@ -35,7 +35,6 @@ async function proxyRequest(req: NextRequest, params: { path: string[] }) {
 
   if (req.method !== "GET" && req.method !== "HEAD") {
     if (contentType?.includes("multipart/form-data")) {
-      headers.delete("Content-Type");
       fetchOptions.body = await req.arrayBuffer();
     } else {
       fetchOptions.body = await req.text();

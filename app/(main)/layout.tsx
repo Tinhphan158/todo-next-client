@@ -1,5 +1,6 @@
 "use client";
 
+import AppHeader from "@/module/shared/components/AppHeader";
 import { message } from "@/module/shared/components/AppMessage";
 import AppSidebar from "@/module/shared/components/AppSidebar";
 import { MainAuthGate } from "@/module/shared/components/MainAuthGate";
@@ -7,7 +8,8 @@ import { getSidebarItems } from "@/module/shared/constants/sidebar-items";
 import { useLogoutApiMutation } from "@/store/api/authApi";
 import { baseApi } from "@/store/axios/baseApi";
 import { useAppDispatch, useAppSelector } from "@/store/hooks";
-import { useRouter } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
+import { useMemo } from "react";
 
 interface MainLayoutProps {
   children: React.ReactNode;
@@ -17,9 +19,16 @@ const MainLayout = ({ children }: MainLayoutProps) => {
   const router = useRouter();
   const dispatch = useAppDispatch();
   const user = useAppSelector((s) => s.auth.user);
-  const [logoutApi, { isLoading: isLogoutLoading }] = useLogoutApiMutation();
-
+  const pathname = usePathname();
+  const titleHeader = useMemo(() => {
+    const title = getSidebarItems().find((item) =>
+      pathname.startsWith(item.href),
+    )?.title;
+    return title ?? "Dashboard";
+  }, [pathname]);
   const quantityNotification = 0;
+
+  const [logoutApi, { isLoading: isLogoutLoading }] = useLogoutApiMutation();
 
   const handleLogout = async () => {
     try {
@@ -51,7 +60,10 @@ const MainLayout = ({ children }: MainLayoutProps) => {
               : undefined
           }
         />
-        <main className="flex-1 bg-neutral-50">{children}</main>
+        <main className="flex-1 bg-neutral-50">
+          <AppHeader title={titleHeader} />
+          <div className="p-4">{children}</div>
+        </main>
       </div>
     </MainAuthGate>
   );

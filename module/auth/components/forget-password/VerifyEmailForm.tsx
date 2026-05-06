@@ -10,7 +10,7 @@ import Link from "next/link";
 import { useForm } from "react-hook-form";
 import {
   ForgotPasswordVerifyEmailFormData,
-  useForgotPasswordVerifyEmailSchema,
+  forgotPasswordVerifyEmailSchema,
 } from "../../schemas";
 
 export interface VerifyEmailFormProps extends BaseFormProps<ForgotPasswordVerifyEmailFormData> {
@@ -22,9 +22,8 @@ export function VerifyEmailForm({
   disabled,
   onSubmit,
 }: VerifyEmailFormProps) {
-  const schema = useForgotPasswordVerifyEmailSchema();
   const form = useForm<ForgotPasswordVerifyEmailFormData>({
-    resolver: standardSchemaResolver(schema),
+    resolver: standardSchemaResolver(forgotPasswordVerifyEmailSchema),
     defaultValues: { email: "" },
     mode: "onChange",
   });

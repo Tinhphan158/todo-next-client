@@ -3,6 +3,7 @@ import {
   DialogHeader,
   DialogContent,
   DialogTitle,
+  DialogDescription,
   DialogTrigger,
   DialogClose,
 } from "@/components/ui/dialog";
@@ -14,6 +15,7 @@ export interface AppDialogProps {
   trigger?: React.ReactNode;
   content?: React.ReactNode;
   title?: React.ReactNode;
+  description?: React.ReactNode;
   width?: number;
   contentOnly?: boolean;
 }
@@ -23,6 +25,7 @@ const AppDialog = ({
   trigger,
   content,
   title,
+  description,
   onOpenChange,
   width,
   contentOnly,
@@ -38,6 +41,7 @@ const AppDialog = ({
         }
         showCloseButton={false}
         style={width ? { minWidth: width } : undefined}
+        {...(!description ? { "aria-describedby": undefined } : {})}
       >
         {!contentOnly && title && (
           <DialogHeader className="flex flex-row items-center justify-between">
@@ -48,6 +52,11 @@ const AppDialog = ({
               <DeleteDisabledIcon className="h-8 w-8" />
             </DialogClose>
           </DialogHeader>
+        )}
+        {!contentOnly && description && (
+          <DialogDescription className="body-s text-neutral-500">
+            {description}
+          </DialogDescription>
         )}
         {content}
       </DialogContent>

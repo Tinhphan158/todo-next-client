@@ -19,7 +19,7 @@ export const LoadingSpinnerIcon: React.FC<LoadingSpinnerIconProps> = ({
       xmlns="http://www.w3.org/2000/svg"
       className={cn("animate-spin", className)}
     >
-      <g clip-path="url(#clip0_12523_12926)">
+      <g clipPath="url(#clip0_12523_12926)">
         <circle cx="16" cy="16" r="14.5" stroke="#E7E7E7" strokeWidth="3" />
         <path
           d="M30.5 16C30.5 17.5216 30.2605 19.0337 29.7903 20.4807"

@@ -4,9 +4,6 @@ import axios, { type AxiosError, type AxiosRequestConfig } from "axios";
 export const axiosInstance = axios.create({
   baseURL: "/api/proxy",
   withCredentials: true,
-  headers: {
-    "Content-Type": "application/json",
-  },
 });
 
 async function refreshSession(): Promise<boolean> {

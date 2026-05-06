@@ -8,7 +8,7 @@ import { standardSchemaResolver } from "@hookform/resolvers/standard-schema";
 import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { VERIFY_OTP_COOLDOWN_SECONDS } from "../../constants";
-import { VerifyFormData, useVerifySchema } from "../../schemas";
+import { VerifyFormData, verifySchema } from "../../schemas";
 
 export interface VerifyOTPRegisterFormProps {
   onSubmit?: (data: VerifyFormData) => Promise<void>;
@@ -23,7 +23,6 @@ export const VerifyOTPRegisterForm = ({
   resendCooldownSeconds = VERIFY_OTP_COOLDOWN_SECONDS,
   onResendCode,
 }: VerifyOTPRegisterFormProps) => {
-  const verifySchema = useVerifySchema();
   const form = useForm<VerifyFormData>({
     resolver: standardSchemaResolver(verifySchema),
     defaultValues: { code: "" },

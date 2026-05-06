@@ -1,7 +1,7 @@
 import {
   ACCESS_TOKEN_COOKIE,
-  REFRESH_TOKEN_COOKIE,
   ACCESS_TOKEN_MAX_AGE,
+  REFRESH_TOKEN_COOKIE,
   REFRESH_TOKEN_MAX_AGE,
   cookieBaseOptions,
 } from "@/lib/auth-cookies";
@@ -19,8 +19,8 @@ export async function POST(req: NextRequest) {
 
   if (!tokens) {
     const out = NextResponse.json({ message: "Unauthorized" }, { status: 401 });
-    out.cookies.delete(ACCESS_TOKEN_COOKIE, { path: "/" });
-    out.cookies.delete(REFRESH_TOKEN_COOKIE, { path: "/" });
+    out.cookies.delete({ name: ACCESS_TOKEN_COOKIE, path: "/" });
+    out.cookies.delete({ name: REFRESH_TOKEN_COOKIE, path: "/" });
     return out;
   }
 

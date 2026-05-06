@@ -10,7 +10,7 @@ import Link from "next/link";
 import { useForm } from "react-hook-form";
 import {
   ForgotPasswordNewPasswordFormData,
-  useForgotPasswordNewPasswordSchema,
+  forgotPasswordNewPasswordSchema,
 } from "../../schemas";
 
 export interface UpdateNewPasswordFormProps extends BaseFormProps<ForgotPasswordNewPasswordFormData> {
@@ -22,9 +22,8 @@ export function UpdateNewPasswordForm({
   disabled,
   onSubmit,
 }: UpdateNewPasswordFormProps) {
-  const schema = useForgotPasswordNewPasswordSchema();
   const form = useForm<ForgotPasswordNewPasswordFormData>({
-    resolver: standardSchemaResolver(schema),
+    resolver: standardSchemaResolver(forgotPasswordNewPasswordSchema),
     defaultValues: { password: "", confirmPassword: "" },
     mode: "onChange",
   });
