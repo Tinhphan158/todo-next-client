@@ -40,6 +40,8 @@ todo-nest-be/
 └── docker-compose.yml         # PostgreSQL local (tuỳ chọn)
 ```
 
+![Sơ đồ quan hệ database (ERD)](https://res.cloudinary.com/dmo9y50zo/image/upload/v1778115234/public/4aea7c31453ac4649d2b_jchw4c.jpg)
+
 ## Thiết kế database (Prisma)
 
 | Model | Mô tả |
