@@ -1,5 +1,7 @@
+import NotificationManagementPage from "@/modules/notification/pages/NotificationManagementPage";
+
 const Notification = () => {
-  return <div>Notification page</div>;
+  return <NotificationManagementPage />;
 };
 
 export default Notification;

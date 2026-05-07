@@ -236,9 +236,20 @@ const AppTableCell = ({
   );
 };
 
-const AppTableRow = ({ children }: { children: React.ReactNode }) => {
+const AppTableRow = ({
+  children,
+  className,
+}: {
+  children: React.ReactNode;
+  className?: string;
+}) => {
   return (
-    <TableRow className="h-14 border-b border-neutral-50 hover:bg-transparent hover:bg-none">
+    <TableRow
+      className={cn(
+        "h-14 border-b border-neutral-50 hover:bg-transparent hover:bg-none",
+        className,
+      )}
+    >
       {children}
     </TableRow>
   );
@@ -346,6 +357,7 @@ export interface AppTableProps<T> {
   disabled?: boolean;
   headerBackground?: string;
   bodyBackground?: string;
+  getRowClassName?: (row: WithSubTableSupport<T>) => string | undefined;
 }
 
 const AppTable = <T,>({
@@ -361,6 +373,7 @@ const AppTable = <T,>({
   disabled = false,
   bodyBackground,
   headerBackground,
+  getRowClassName,
 }: AppTableProps<T>) => {
   const stickyMetadata = useMemo(
     () => calculateStickyPositions(columns),
@@ -435,7 +448,7 @@ const AppTable = <T,>({
         ) : (
           data.map((row, rowIndex) => (
             <React.Fragment key={rowIndex}>
-              <AppTableRow key={rowIndex}>
+              <AppTableRow key={rowIndex} className={getRowClassName?.(row)}>
                 {columns.map((col, index) => {
                   const meta = stickyMetadata.get(col.key);
                   return (

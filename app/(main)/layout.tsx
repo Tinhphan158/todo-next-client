@@ -6,6 +6,7 @@ import AppSidebar from "@/modules/shared/components/AppSidebar";
 import { MainAuthGate } from "@/modules/shared/components/MainAuthGate";
 import { getSidebarItems } from "@/modules/shared/constants/sidebar-items";
 import { useLogoutMutation } from "@/store/apis/authApi";
+import { useGetNotificationsQuery } from "@/store/apis/notificationApi";
 import { baseApi } from "@/store/axios/baseApi";
 import { useAppDispatch, useAppSelector } from "@/store/hooks";
 import { usePathname, useRouter } from "next/navigation";
@@ -26,7 +27,12 @@ const MainLayout = ({ children }: MainLayoutProps) => {
     )?.title;
     return title ?? "Dashboard";
   }, [pathname]);
-  const quantityNotification = 0;
+  const { data: unreadNotificationResponse } = useGetNotificationsQuery({
+    page: 1,
+    pageSize: 10000000,
+    viewed: "false",
+  });
+  const quantityNotification = unreadNotificationResponse?.metadata.total ?? 0;
 
   const [logout, { isLoading: isLogoutLoading }] = useLogoutMutation();
 

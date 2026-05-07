@@ -34,7 +34,7 @@ export const getSidebarItems = (quantityNotification: number = 0) => [
     title: "Notification",
     href: "/notification",
     slotRight: (
-      <span className="caption-s bg-primary-500 text-base-white flex h-6 w-6 items-center justify-center rounded-full font-medium">
+      <span className="caption-s bg-negative-600 text-base-white flex h-5 w-5 items-center justify-center rounded-full font-medium">
         {quantityNotification}
       </span>
     ),
