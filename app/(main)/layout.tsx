@@ -5,7 +5,7 @@ import { MESSAGE_TYPE, message } from "@/modules/shared/components/AppMessage";
 import AppSidebar from "@/modules/shared/components/AppSidebar";
 import { MainAuthGate } from "@/modules/shared/components/MainAuthGate";
 import { getSidebarItems } from "@/modules/shared/constants/sidebar-items";
-import { useLogoutMutation } from "@/store/api/authApi";
+import { useLogoutMutation } from "@/store/apis/authApi";
 import { baseApi } from "@/store/axios/baseApi";
 import { useAppDispatch, useAppSelector } from "@/store/hooks";
 import { usePathname, useRouter } from "next/navigation";

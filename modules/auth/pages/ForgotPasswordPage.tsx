@@ -6,7 +6,7 @@ import {
   useForgotPasswordMutation,
   useResetPasswordMutation,
   useVerifyOtpMutation,
-} from "@/store/api/authApi";
+} from "@/store/apis/authApi";
 import { useState } from "react";
 import {
   UpdateNewPasswordForm,

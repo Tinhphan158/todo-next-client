@@ -11,7 +11,7 @@ import {
   useDeleteLabelMutation,
   useGetLabelsQuery,
   useUpdateLabelMutation,
-} from "@/store/api/labelApi";
+} from "@/store/apis/labelApi";
 import { Label } from "@/store/types";
 import { useState } from "react";
 

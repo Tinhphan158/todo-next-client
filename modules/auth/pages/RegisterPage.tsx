@@ -6,7 +6,7 @@ import {
   useRequestSignupOtpMutation,
   useSignupMutation,
   useVerifyOtpMutation,
-} from "@/store/api/authApi";
+} from "@/store/apis/authApi";
 import { useState } from "react";
 import {
   RegisterFormContainer,
@@ -45,7 +45,10 @@ const RegisterPage = () => {
       });
       setEmail(data.email);
       setStep(STEP_REGISTER.VERIFY);
-      message({ type: MESSAGE_TYPE.SUCCESS, description: "OTP sent to your email" });
+      message({
+        type: MESSAGE_TYPE.SUCCESS,
+        description: "OTP sent to your email",
+      });
     } catch (err: unknown) {
       const error = err as { data?: { message?: string } };
       message({

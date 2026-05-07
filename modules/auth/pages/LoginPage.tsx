@@ -2,7 +2,7 @@
 
 import { AppCard } from "@/modules/shared/components/AppCard";
 import { MESSAGE_TYPE, message } from "@/modules/shared/components/AppMessage";
-import { useLoginMutation } from "@/store/api/authApi";
+import { useLoginMutation } from "@/store/apis/authApi";
 import { useRouter } from "next/navigation";
 import { LoginForm } from "../components/login";
 import { LoginFormData } from "../schemas/login-schema";

@@ -2,12 +2,12 @@
 
 import { MESSAGE_TYPE, message } from "@/modules/shared/components/AppMessage";
 import { useDialog } from "@/modules/shared/hooks/useDialog";
-import { useUploadImageMutation } from "@/store/api/cloudinaryApi";
+import { useUploadImageMutation } from "@/store/apis/cloudinaryApi";
 import {
   useGetProfileQuery,
   useUpdatePasswordMutation,
   useUpdateProfileMutation,
-} from "@/store/api/profileApi";
+} from "@/store/apis/profileApi";
 import { useAppDispatch, useAppSelector } from "@/store/hooks";
 import { setUser } from "@/store/slices/authSlice";
 import Image from "next/image";
