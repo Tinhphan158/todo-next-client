@@ -1,6 +1,7 @@
 "use client";
 
 import { AppButton } from "@/modules/shared/components/AppButton";
+import AppConfirmPopover from "@/modules/shared/components/AppConfirmPopover";
 import AppDrawer from "@/modules/shared/components/AppDrawer";
 import type { Notification } from "@/store/types";
 
@@ -26,15 +27,21 @@ const NotificationDrawer = ({
       title="Notification detail"
       footerAction={
         <div className="flex w-full items-center justify-end gap-3">
-          <AppButton
-            type="button"
-            variant="ghost"
-            isLoading={isDeleting}
-            disabled={isDeleting || !notification}
-            onClick={onDelete}
-          >
-            Delete
-          </AppButton>
+          <AppConfirmPopover
+            title="Are you sure you want to delete this notification?"
+            cancelButtonLabel="Cancel"
+            confirmButtonLabel="Delete"
+            isConfirmLoading={isDeleting}
+            closeOnConfirm={false}
+            onConfirm={() => {
+              void onDelete();
+            }}
+            trigger={
+              <AppButton type="button" disabled={isDeleting || !notification}>
+                Delete
+              </AppButton>
+            }
+          />
           <AppButton
             type="button"
             variant="secondary"
@@ -55,7 +62,7 @@ const NotificationDrawer = ({
         </div>
         <div>
           <p className="caption-s text-neutral-500">Description</p>
-          <p className="body-s text-neutral-700 whitespace-pre-wrap">
+          <p className="body-s whitespace-pre-wrap text-neutral-700">
             {notification?.description || "--"}
           </p>
         </div>
@@ -63,7 +70,9 @@ const NotificationDrawer = ({
           <div>
             <p className="caption-s text-neutral-500">Time</p>
             <p className="body-s text-neutral-950">
-              {notification?.time ? new Date(notification.time).toLocaleString() : "--"}
+              {notification?.time
+                ? new Date(notification.time).toLocaleString()
+                : "--"}
             </p>
           </div>
           <div>

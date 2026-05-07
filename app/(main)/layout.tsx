@@ -6,6 +6,7 @@ import AppSidebar from "@/modules/shared/components/AppSidebar";
 import { MainAuthGate } from "@/modules/shared/components/MainAuthGate";
 import { getSidebarItems } from "@/modules/shared/constants/sidebar-items";
 import { useLogoutMutation } from "@/store/apis/authApi";
+import { useGetDashboardSummaryQuery } from "@/store/apis/dashboardApi";
 import { useGetNotificationsQuery } from "@/store/apis/notificationApi";
 import { baseApi } from "@/store/axios/baseApi";
 import { useAppDispatch, useAppSelector } from "@/store/hooks";
@@ -32,7 +33,11 @@ const MainLayout = ({ children }: MainLayoutProps) => {
     pageSize: 10000000,
     viewed: "false",
   });
-  const quantityNotification = unreadNotificationResponse?.metadata.total ?? 0;
+  const { data: dashboardSummary } = useGetDashboardSummaryQuery();
+  const quantityNotification =
+    dashboardSummary?.unreadNotifications ??
+    unreadNotificationResponse?.metadata.total ??
+    0;
 
   const [logout, { isLoading: isLogoutLoading }] = useLogoutMutation();
 

@@ -3,6 +3,7 @@
 import { MESSAGE_TYPE, message } from "@/modules/shared/components/AppMessage";
 import { useDialog } from "@/modules/shared/hooks/useDialog";
 import { useUploadImageMutation } from "@/store/apis/cloudinaryApi";
+import { useGetDashboardSummaryQuery } from "@/store/apis/dashboardApi";
 import {
   useGetProfileQuery,
   useUpdatePasswordMutation,
@@ -13,6 +14,8 @@ import { setUser } from "@/store/slices/authSlice";
 import Image from "next/image";
 import { useMemo } from "react";
 import ChangePasswordDialog from "../components/ChangePasswordDialog";
+import DashboardStatusChart from "../components/DashboardStatusChart";
+import DashboardSummaryStats from "../components/DashboardSummaryStats";
 import EditProfileDialog from "../components/EditProfileDialog";
 import { ChangePasswordFormData } from "../schemas/change-password-schema";
 import { EditProfileFormData } from "../schemas/edit-profile-schema";
@@ -25,6 +28,8 @@ const DashboardPage = () => {
   const dispatch = useAppDispatch();
   const authUser = useAppSelector((s) => s.auth.user);
   const { data: profile } = useGetProfileQuery();
+  const { data: summary, isFetching: isSummaryLoading } =
+    useGetDashboardSummaryQuery();
   const [updateProfile, { isLoading: isUpdating }] = useUpdateProfileMutation();
   const [updatePassword, { isLoading: isUpdatingPassword }] =
     useUpdatePasswordMutation();
@@ -137,7 +142,25 @@ const DashboardPage = () => {
           />
         </div>
       </div>
-      {/* Thông tin thống kê, chart, stats  */}
+      {isSummaryLoading ? (
+        <div className="grid grid-cols-1 gap-3 md:grid-cols-2 xl:grid-cols-5">
+          {Array.from({ length: 5 }).map((_, index) => (
+            <div
+              key={index}
+              className="h-24 animate-pulse rounded-lg border border-neutral-100 bg-neutral-50"
+            />
+          ))}
+        </div>
+      ) : summary ? (
+        <div className="flex flex-col gap-4">
+          <DashboardSummaryStats summary={summary} />
+          <DashboardStatusChart summary={summary} />
+        </div>
+      ) : (
+        <div className="rounded-lg border border-neutral-100 p-6 text-center text-neutral-500">
+          No dashboard summary data.
+        </div>
+      )}
     </div>
   );
 };

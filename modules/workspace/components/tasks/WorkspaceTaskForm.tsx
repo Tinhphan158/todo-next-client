@@ -2,11 +2,11 @@
 
 import { Form, FormField, FormItem } from "@/components/ui/form";
 import { BaseFormProps } from "@/lib/form";
-import AppDateInput from "@/modules/shared/components/AppDateInput";
+import { FormCheckboxsField } from "@/modules/shared/components/AppFormCheckboxs";
+import { FormDateInputField } from "@/modules/shared/components/AppFormDateInput";
 import { FormInputFieldV2 } from "@/modules/shared/components/AppFormInput";
 import { FormSelectField } from "@/modules/shared/components/AppFormSelect";
 import { FormTextAreaField } from "@/modules/shared/components/AppFormTextArea";
-import AppCheckBox from "@/modules/shared/components/AppCheckbox";
 import {
   TaskFormData,
   TaskFormInput,
@@ -133,38 +133,21 @@ const WorkspaceTaskForm = ({
             </FormItem>
           )}
         />
-        <FormField
+        <FormDateInputField
           control={form.control}
           name="startTime"
-          render={({ field }) => {
-            const dateRange = {
-              start: field.value ? new Date(field.value) : undefined,
-              end: endTime ? new Date(endTime) : undefined,
-            };
-            return (
-              <FormItem className="flex flex-col gap-1">
-                <p className="body-s font-medium text-neutral-700">
-                  Start time / End time
-                </p>
-                <AppDateInput
-                  type="range"
-                  value={dateRange}
-                  onChange={(next) => {
-                    const range = next as
-                      | { start?: Date; end?: Date }
-                      | undefined;
-                    field.onChange(range?.start?.toISOString());
-                    form.setValue("endTime", range?.end?.toISOString(), {
-                      shouldDirty: true,
-                      shouldValidate: true,
-                    });
-                  }}
-                  isDisabled={disabled}
-                  startPlaceholder="DD-MM-YYYY"
-                  endPlaceholder="DD-MM-YYYY"
-                />
-              </FormItem>
-            );
+          label="Start time / End time"
+          type="range"
+          endValue={endTime}
+          disabled={disabled}
+          startPlaceholder="DD-MM-YYYY"
+          endPlaceholder="DD-MM-YYYY"
+          onValueChange={(next) => {
+            const range = next as { start?: Date; end?: Date } | undefined;
+            form.setValue("endTime", range?.end?.toISOString(), {
+              shouldDirty: true,
+              shouldValidate: true,
+            });
           }}
         />
         <FormSelectField
@@ -189,42 +172,24 @@ const WorkspaceTaskForm = ({
             children: priority,
           }))}
         />
-        <FormField
+        <FormCheckboxsField
           control={form.control}
           name="labelIds"
-          render={({ field }) => (
-            <FormItem className="flex flex-col gap-2">
-              <p className="body-s font-medium text-neutral-700">Labels</p>
-              <div className="grid grid-cols-2 gap-2">
-                {labels.map((label) => {
-                  const selected = field.value?.includes(label.id) ?? false;
-                  return (
-                    <AppCheckBox
-                      key={label.id}
-                      value={selected}
-                      label={
-                        <span
-                          className="caption-s inline-flex items-center rounded-full px-2 py-0.5 font-medium"
-                          style={{
-                            color: label.color,
-                            background: label.background,
-                          }}
-                        >
-                          {label.name}
-                        </span>
-                      }
-                      onChange={() => {
-                        const next = selected
-                          ? (field.value ?? []).filter((id) => id !== label.id)
-                          : [...(field.value ?? []), label.id];
-                        field.onChange(next);
-                      }}
-                    />
-                  );
-                })}
-              </div>
-            </FormItem>
-          )}
+          label="Labels"
+          options={labels.map((label) => ({
+            value: label.id,
+            label: (
+              <span
+                className="caption-s inline-flex items-center rounded-full px-2 py-0.5 font-medium"
+                style={{
+                  color: label.color,
+                  background: label.background,
+                }}
+              >
+                {label.name}
+              </span>
+            ),
+          }))}
         />
       </form>
     </Form>

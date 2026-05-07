@@ -1,9 +1,10 @@
 "use client";
 
+import { FormState } from "@/lib/form";
 import { AppButton } from "@/modules/shared/components/AppButton";
+import AppConfirmPopover from "@/modules/shared/components/AppConfirmPopover";
 import AppDrawer from "@/modules/shared/components/AppDrawer";
 import { MESSAGE_TYPE, message } from "@/modules/shared/components/AppMessage";
-import { FormState } from "@/lib/form";
 import {
   useDeleteTaskMutation,
   useUpdateTaskMutation,
@@ -47,11 +48,13 @@ const WorkspaceTaskDetailDrawer = ({
           },
     [task],
   );
-  const [formState, setFormState] = useState<FormState<WorkspaceTaskFormValue>>({
-    isDirty: false,
-    isValid: false,
-    isSubmitting: false,
-  });
+  const [formState, setFormState] = useState<FormState<WorkspaceTaskFormValue>>(
+    {
+      isDirty: false,
+      isValid: false,
+      isSubmitting: false,
+    },
+  );
 
   const handleUpdate = async (data: WorkspaceTaskFormValue) => {
     if (!task) return;
@@ -104,15 +107,21 @@ const WorkspaceTaskDetailDrawer = ({
       title={task ? `Task #${task.id}` : "Task detail"}
       footerAction={
         <div className="flex w-full items-center justify-end gap-3">
-          <AppButton
-            type="button"
-            variant="ghost"
-            isLoading={isDeleting}
-            disabled={isUpdating || isDeleting}
-            onClick={handleDelete}
-          >
-            Delete
-          </AppButton>
+          <AppConfirmPopover
+            title="Are you sure you want to delete this task?"
+            cancelButtonLabel="Cancel"
+            confirmButtonLabel="Delete"
+            isConfirmLoading={isDeleting}
+            closeOnConfirm={false}
+            onConfirm={() => {
+              void handleDelete();
+            }}
+            trigger={
+              <AppButton type="button" disabled={isUpdating || isDeleting}>
+                Delete
+              </AppButton>
+            }
+          />
           <AppButton
             type="button"
             variant="secondary"

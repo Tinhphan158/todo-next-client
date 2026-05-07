@@ -172,7 +172,7 @@ Lỗi thường gặp cho đổi mật khẩu:
 | GET | `/workspaces/:workspaceId/tasks/board` | Bearer | Query (tuỳ chọn): `search`, `labelIds` (mảng id), `startTimeFrom`, `startTimeTo`, `endTimeFrom`, `endTimeTo`, `priorities` (mảng `Low` \| `Medium` \| `High`) | `{ "columns": [ { "status": "PENDING"\|"TODO"\|"DONE"\|"CANCEL", "tasks": Task[] } ] }` — mỗi task có field `status` (enum), `labels` |
 | GET | `/workspaces/:workspaceId/tasks` | Bearer | Phân trang: `page`, `pageSize` (10 \| 50 \| 100); cùng bộ filter như board | `{ "data": Task[], "metadata": PaginationMeta }` |
 | PATCH | `/workspaces/:id` | Bearer | `{ "name" }` | `Workspace` đã sửa |
-| DELETE | `/workspaces/:id` | Bearer | — | `Workspace` đã xóa; đồng thời cố xóa ảnh Cloudinary tham chiếu trong `content` task |
+| DELETE | `/workspaces/:id` | Bearer | — | `Workspace` đã xóa; **xóa cascade toàn bộ task** trong workspace (trong cùng transaction) và cố xóa ảnh Cloudinary tham chiếu trong `content` task |
 
 `PaginationMeta`: `{ "page", "pageSize", "totalPage", "total", "hasPreviousPage", "hasNextPage" }`.
 
@@ -217,6 +217,7 @@ Lỗi thường gặp cho đổi mật khẩu:
 |--------|------|------|-----------------|----------|
 | GET | `/notifications` | Bearer | `page`, `pageSize`, `search?`, `viewed?` (boolean string), `type?`, `from?`, `to?` (ISO date) | `{ "data": Notification[], "metadata": PaginationMeta }` |
 | PATCH | `/notifications/:id/viewed` | Bearer | — | `Notification` với `viewed: true` |
+| DELETE | `/notifications/:id` | Bearer | — | Bản ghi `Notification` đã xóa; 404 nếu không tồn tại / không thuộc user |
 | GET (SSE) | `/notifications/stream` | Bearer | SSE — client cần gửi được header Bearer | Sự kiện: `{ "type": "notification", "data": { "accountId", "title", "description" } }` (đồng bộ với push realtime; chi tiết đầy đủ lấy qua `GET /notifications`) |
 
 ---
