@@ -42,7 +42,7 @@ const AppSearchBar = ({
   };
 
   return (
-    <div className="w-full max-w-[320px]">
+    <div className="w-full max-w-[480px]">
       <AppInputV2
         value={inputValue}
         onChange={(event) => handleChange(event.target.value)}

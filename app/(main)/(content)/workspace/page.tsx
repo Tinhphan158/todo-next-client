@@ -1,5 +1,7 @@
+import WorkspaceManagementPage from "@/modules/workspace/pages/WorkspaceManagementPage";
+
 function Workspace() {
-  return <div>Workspace page</div>;
+  return <WorkspaceManagementPage />;
 }
 
 export default Workspace;

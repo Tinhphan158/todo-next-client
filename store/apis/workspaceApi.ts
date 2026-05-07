@@ -3,6 +3,7 @@ import type {
   BoardResponse,
   PaginatedResponse,
   Task,
+  TaskPriority,
   Workspace,
 } from "../types";
 
@@ -14,7 +15,7 @@ interface BoardQueryParams {
   startTimeTo?: string;
   endTimeFrom?: string;
   endTimeTo?: string;
-  priorities?: Array<"Low" | "Medium" | "High">;
+  priorities?: TaskPriority[];
 }
 
 interface WorkspaceTasksParams {
@@ -27,7 +28,58 @@ interface WorkspaceTasksParams {
   startTimeTo?: string;
   endTimeFrom?: string;
   endTimeTo?: string;
-  priorities?: Array<"Low" | "Medium" | "High">;
+  priorities?: TaskPriority[];
+}
+
+/** Nest expects repeated keys (e.g. labelIds=1&labelIds=2), not bracket notation. */
+function workspaceTasksQueryToSearchParams(
+  params: Omit<WorkspaceTasksParams, "workspaceId">,
+): URLSearchParams {
+  const usp = new URLSearchParams();
+  const {
+    page,
+    pageSize,
+    search,
+    labelIds,
+    startTimeFrom,
+    startTimeTo,
+    endTimeFrom,
+    endTimeTo,
+    priorities,
+  } = params;
+  if (page != null) usp.set("page", String(page));
+  if (pageSize != null) usp.set("pageSize", String(pageSize));
+  if (search) usp.set("search", search);
+  labelIds?.forEach((id) => usp.append("labelIds", String(id)));
+  if (startTimeFrom) usp.set("startTimeFrom", startTimeFrom);
+  if (startTimeTo) usp.set("startTimeTo", startTimeTo);
+  if (endTimeFrom) usp.set("endTimeFrom", endTimeFrom);
+  if (endTimeTo) usp.set("endTimeTo", endTimeTo);
+  priorities?.forEach((p) => usp.append("priorities", p));
+  return usp;
+}
+
+function workspaceBoardQueryToSearchParams(
+  params: Omit<BoardQueryParams, "workspaceId">,
+): URLSearchParams {
+  const usp = new URLSearchParams();
+  const {
+    search,
+    labelIds,
+    startTimeFrom,
+    startTimeTo,
+    endTimeFrom,
+    endTimeTo,
+    priorities,
+  } = params;
+  if (search) usp.set("search", search);
+  labelIds?.forEach((id) => usp.append("labelIds", String(id)));
+  if (startTimeFrom) usp.set("startTimeFrom", startTimeFrom);
+  if (startTimeTo) usp.set("startTimeTo", startTimeTo);
+  if (endTimeFrom) usp.set("endTimeFrom", endTimeFrom);
+  if (endTimeTo) usp.set("endTimeTo", endTimeTo);
+  priorities?.forEach((p) => usp.append("priorities", p));
+  return usp;
 }
 
 export const workspaceApi = baseApi.injectEndpoints({
@@ -77,7 +129,7 @@ export const workspaceApi = baseApi.injectEndpoints({
     getWorkspaceBoard: builder.query<BoardResponse, BoardQueryParams>({
       query: ({ workspaceId, ...params }) => ({
         url: `/workspaces/${workspaceId}/tasks/board`,
-        params,
+        params: workspaceBoardQueryToSearchParams(params),
       }),
       providesTags: ["Task"],
     }),
@@ -89,7 +141,7 @@ export const workspaceApi = baseApi.injectEndpoints({
     >({
       query: ({ workspaceId, ...params }) => ({
         url: `/workspaces/${workspaceId}/tasks`,
-        params,
+        params: workspaceTasksQueryToSearchParams(params),
       }),
       providesTags: ["Task"],
     }),

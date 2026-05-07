@@ -36,7 +36,6 @@ const AppDrawer = ({
   headerAction,
   footerAction,
   customCloseButton,
-  handleOnly = false,
   shouldBlur = true,
 }: AppDrawerProps) => {
   return (
@@ -44,11 +43,12 @@ const AppDrawer = ({
       open={open}
       onOpenChange={onOpenChange}
       direction="right"
-      handleOnly={handleOnly}
+      handleOnly
     >
       {trigger && <DrawerTrigger asChild>{trigger}</DrawerTrigger>}
       <DrawerContent
-        className="magic bg-base-white flex min-w-[630px] flex-col transition-transform"
+        className="magic bg-base-white flex flex-col transition-transform"
+        style={{ width: "33.3333vw", maxWidth: "none" }}
         shouldBlur={shouldBlur}
       >
         <DrawerHeader className="bg-base-white flex flex-row items-center gap-1 border-b border-neutral-100 p-4">

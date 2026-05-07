@@ -1,10 +1,10 @@
 import { baseApi } from "../axios/baseApi";
-import type { Task, TaskPriority } from "../types";
+import type { Task, TaskPriority, TaskStatus } from "../types";
 
 interface CreateTaskBody {
   title: string;
   content: string;
-  statusId: number;
+  status: TaskStatus;
   workspaceId: number;
   description?: string;
   priority?: TaskPriority;
@@ -19,7 +19,7 @@ interface UpdateTaskBody {
   content?: string;
   description?: string;
   priority?: TaskPriority;
-  statusId?: number;
+  status?: TaskStatus;
   workspaceId?: number;
   startTime?: string;
   endTime?: string;
@@ -44,8 +44,8 @@ export const taskApi = baseApi.injectEndpoints({
     }),
 
     // Get tasks by status
-    getTasksByStatus: builder.query<Task[], number>({
-      query: (statusId) => ({ url: `/task/status/${statusId}/list` }),
+    getTasksByStatus: builder.query<Task[], TaskStatus>({
+      query: (status) => ({ url: `/task/status/${status}/list` }),
       providesTags: ["Task"],
     }),
 
@@ -74,6 +74,7 @@ export const taskApi = baseApi.injectEndpoints({
       }),
       invalidatesTags: (_result, _error, { id }) => [
         { type: "Task", id },
+        "Task",
         "Dashboard",
       ],
     }),

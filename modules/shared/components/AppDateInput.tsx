@@ -13,19 +13,19 @@ interface AppDateInputProps {
 }
 
 const formatDate = (date: Date): string => {
-  const year = date.getFullYear();
-  const month = String(date.getMonth() + 1).padStart(2, "0");
   const day = String(date.getDate()).padStart(2, "0");
-  return `${year}-${month}-${day}`;
+  const month = String(date.getMonth() + 1).padStart(2, "0");
+  const year = date.getFullYear();
+  return `${day}-${month}-${year}`;
 };
 
 const parseDate = (value: string): Date | null => {
-  const datePattern = /^\d{4}-\d{2}-\d{2}$/;
+  const datePattern = /^\d{2}-\d{2}-\d{4}$/;
   if (!datePattern.test(value)) {
     return null;
   }
 
-  const [year, month, day] = value.split("-").map(Number);
+  const [day, month, year] = value.split("-").map(Number);
   const date = new Date(year, month - 1, day);
 
   if (
@@ -41,6 +41,15 @@ const parseDate = (value: string): Date | null => {
 
 const isValidDateString = (value: string): boolean => {
   return parseDate(value) !== null;
+};
+
+const formatDateInputValue = (value: string): string => {
+  const digits = value.replace(/\D/g, "").slice(0, 8);
+  if (digits.length < 2) return digits;
+  if (digits.length === 2) return `${digits}-`;
+  if (digits.length < 4) return `${digits.slice(0, 2)}-${digits.slice(2)}`;
+  if (digits.length === 4) return `${digits.slice(0, 2)}-${digits.slice(2)}-`;
+  return `${digits.slice(0, 2)}-${digits.slice(2, 4)}-${digits.slice(4)}`;
 };
 
 function controlledFieldKey(
@@ -112,7 +121,7 @@ const AppDateInputInner = ({
   const [endInput, setEndInput] = useState(() => initialInputs(type, value)[1]);
 
   const handleStartChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const newValue = e.target.value;
+    const newValue = formatDateInputValue(e.target.value);
     setStartInput(newValue);
 
     if (newValue === "") {
@@ -146,7 +155,7 @@ const AppDateInputInner = ({
   };
 
   const handleEndChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const newValue = e.target.value;
+    const newValue = formatDateInputValue(e.target.value);
     setEndInput(newValue);
 
     if (newValue === "") {
